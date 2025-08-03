@@ -1,0 +1,730 @@
+{
+  "veriler": [
+    {
+      "Program Adı": "Acil Yardım ve Afet Yönetimi",
+      "2024 Taban Başarı Sırası": 730017,
+      "En Son Öğrenci Alan Üniversite Adı": "ARDAHAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Adli Bilimler",
+      "2024 Taban Başarı Sırası": 213992,
+      "En Son Öğrenci Alan Üniversite Adı": "KÜTAHYA SAĞLIK BİLİMLERİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Adli Bilişim Mühendisliği",
+      "2024 Taban Başarı Sırası": 211313,
+      "En Son Öğrenci Alan Üniversite Adı": "FIRAT ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Ağaç İşleri Endüstri Mühendisliği",
+      "2024 Taban Başarı Sırası": 554478,
+      "En Son Öğrenci Alan Üniversite Adı": "DÜZCE ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Aktüerya Bilimleri",
+      "2024 Taban Başarı Sırası": 1185314,
+      "En Son Öğrenci Alan Üniversite Adı": "KARABÜK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Astronomi ve Uzay Bilimleri",
+      "2024 Taban Başarı Sırası": 483953,
+      "En Son Öğrenci Alan Üniversite Adı": "ATATÜRK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Bahçe Bitkileri",
+      "2024 Taban Başarı Sırası": 874132,
+      "En Son Öğrenci Alan Üniversite Adı": "ŞIRNAK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Balıkçılık Teknolojisi Mühendisliği",
+      "2024 Taban Başarı Sırası": 789374,
+      "En Son Öğrenci Alan Üniversite Adı": "ORDU ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Basım Teknolojileri",
+      "2024 Taban Başarı Sırası": 355733,
+      "En Son Öğrenci Alan Üniversite Adı": "MARMARA ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Beslenme ve Diyetetik",
+      "2024 Taban Başarı Sırası": 432208,
+      "En Son Öğrenci Alan Üniversite Adı": "IĞDIR ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Bilgi Güvenliği Teknolojisi",
+      "2024 Taban Başarı Sırası": 308908,
+      "En Son Öğrenci Alan Üniversite Adı": "ADANA ALPARSLAN TÜRKEŞ BİLİM VE TEKNOLOJİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Bilgisayar Bilimleri",
+      "2024 Taban Başarı Sırası": 229614,
+      "En Son Öğrenci Alan Üniversite Adı": "KARADENİZ TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Bilgisayar Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "KARABÜK ÜNİVERSİTESİ - ŞIRNAK ÜNİVERSİTESİ - SİİRT ÜNİVERSİTESİ - MUNZUR ÜNİVERSİTESİ (TUNCELİ) - KARABÜK ÜNİVERSİTESİ - IĞDIR ÜNİVERSİTESİ - BİTLİS EREN ÜNİVERSİTESİ - BATMAN ÜNİVERSİTESİ - ARDAHAN ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Bilgisayar Teknolojisi ve Bilişim Sistemleri",
+      "2024 Taban Başarı Sırası": 314760,
+      "En Son Öğrenci Alan Üniversite Adı": "BARTIN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Bilgisayar ve Öğretim Teknolojileri Öğretmenliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "ÇUKUROVA ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Bilişim Sistemleri Mühendisliği",
+      "2024 Taban Başarı Sırası": 254052,
+      "En Son Öğrenci Alan Üniversite Adı": "BURDUR MEHMET AKİF ERSOY ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Bilişim Sistemleri ve Teknolojileri",
+      "2024 Taban Başarı Sırası": 476158,
+      "En Son Öğrenci Alan Üniversite Adı": "MUŞ ALPARSLAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Bitki Koruma",
+      "2024 Taban Başarı Sırası": 716401,
+      "En Son Öğrenci Alan Üniversite Adı": "IĞDIR ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Bitkisel Üretim ve Teknolojileri",
+      "2024 Taban Başarı Sırası": 867441,
+      "En Son Öğrenci Alan Üniversite Adı": "MUŞ ALPARSLAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Biyokimya",
+      "2024 Taban Başarı Sırası": 495947,
+      "En Son Öğrenci Alan Üniversite Adı": "SİVAS CUMHURİYET ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Biyoloji",
+      "2024 Taban Başarı Sırası": 690305,
+      "En Son Öğrenci Alan Üniversite Adı": "KAFKAS ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Biyoloji Öğretmenliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "VAN YÜZÜNCÜ YIL ÜNİVERSİTESİ - ONDOKUZ MAYIS ÜNİVERSİTESİ - NECMETTİN ERBAKAN ÜNİVERSİTESİ - DOKUZ EYLÜL ÜNİVERSİTESİ - BALIKESİR ÜNİVERSİTESİ - ATATÜRK ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Biyomedikal Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "ZONGULDAK BÜLENT ECEVİT ÜNİVERSİTESİ - KASTAMONU ÜNİVERSİTESİ - KARABÜK ÜNİVERSİTESİ - İSKENDERUN TEKNİK ÜNİVERSİTESİ - İNÖNÜ ÜNİVERSİTESİ - ÇUKUROVA ÜNİVERSİTESİ - AFYON KOCATEPE ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Biyomühendislik",
+      "2024 Taban Başarı Sırası": 244541,
+      "En Son Öğrenci Alan Üniversite Adı": "ABDULLAH GÜL ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Biyosistem Mühendisliği",
+      "2024 Taban Başarı Sırası": 808737,
+      "En Son Öğrenci Alan Üniversite Adı": "IĞDIR ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Biyoteknoloji",
+      "2024 Taban Başarı Sırası": 601466,
+      "En Son Öğrenci Alan Üniversite Adı": "NİĞDE ÖMER HALİSDEMİR ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Cevher Hazırlama Mühendisliği",
+      "2024 Taban Başarı Sırası": 90425,
+      "En Son Öğrenci Alan Üniversite Adı": "İSTANBUL TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Çevre Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "ÇANAKKALE ONSEKİZ MART ÜNİVERSİTESİ - TEKİRDAĞ NAMIK KEMAL ÜNİVERSİTESİ - SÜLEYMAN DEMİREL ÜNİVERSİTESİ - SAKARYA ÜNİVERSİTESİ - PAMUKKALE ÜNİVERSİTESİ - ONDOKUZ MAYIS ÜNİVERSİTESİ - NİĞDE ÖMER HALİSDEMİR ÜNİVERSİTESİ - HARRAN ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ - ERCİYES ÜNİVERSİTESİ - ÇUKUROVA ÜNİVERSİTESİ - BURSA ULUDAĞ ÜNİVERSİTESİ - BURSA TEKNİK ÜNİVERSİTESİ - BALIKESİR ÜNİVERSİTESİ - ATATÜRK ÜNİVERSİTESİ - AKDENİZ ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Deniz Ulaştırma İşletme Mühendisliği",
+      "2024 Taban Başarı Sırası": 198007,
+      "En Son Öğrenci Alan Üniversite Adı": "RECEP TAYYİP ERDOĞAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Deri Mühendisliği",
+      "2024 Taban Başarı Sırası": 279894,
+      "En Son Öğrenci Alan Üniversite Adı": "EGE ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Dijital Oyun Tasarımı",
+      "2024 Taban Başarı Sırası": 373166,
+      "En Son Öğrenci Alan Üniversite Adı": "KAHRAMANMARAŞ İSTİKLAL ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Dil ve Konuşma Terapisi",
+      "2024 Taban Başarı Sırası": 126686,
+      "En Son Öğrenci Alan Üniversite Adı": "KÜTAHYA SAĞLIK BİLİMLERİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Diş Hekimliği",
+      "2024 Taban Başarı Sırası": 45064,
+      "En Son Öğrenci Alan Üniversite Adı": "KAFKAS ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Diş Hekimliği Askeri",
+      "2024 Taban Başarı Sırası": 49145,
+      "En Son Öğrenci Alan Üniversite Adı": "SAĞLIK BİLİMLERİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Ebelik",
+      "2024 Taban Başarı Sırası": 250815,
+      "En Son Öğrenci Alan Üniversite Adı": "KAFKAS ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Eczacılık",
+      "2024 Taban Başarı Sırası": 60130,
+      "En Son Öğrenci Alan Üniversite Adı": "AĞRI İBRAHİM ÇEÇEN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Eczacılık Askeri",
+      "2024 Taban Başarı Sırası": 50642,
+      "En Son Öğrenci Alan Üniversite Adı": "SAĞLIK BİLİMLERİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Elektrik Mühendisliği",
+      "2024 Taban Başarı Sırası": 295999,
+      "En Son Öğrenci Alan Üniversite Adı": "AFYON KOCATEPE ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Elektrik-Elektronik Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "YOZGAT BOZOK ÜNİVERSİTESİ - VAN YÜZÜNCÜ YIL ÜNİVERSİTESİ - SİİRT ÜNİVERSİTESİ - OSMANİYE KORKUT ATA ÜNİVERSİTESİ - MUNZUR ÜNİVERSİTESİ - MALATYA TURGUT ÖZAL ÜNİVERSİTESİ - KİLİS 7 ARALIK ÜNİVERSİTESİ - KARAMANOĞLU MEHMETBEY ÜNİVERSİTESİ - KAHRAMANMARAŞ SÜTÇÜ İMAM ÜNİVERSİTESİ - KAFKAS ÜNİVERSİTESİ - HARRAN ÜNİVERSİTESİ - GÜMÜŞHANE ÜNİVERSİTESİ - ERZİNCAN BİNALİ YILDIRIM ÜNİVERSİTESİ - BİTLİS EREN ÜNİVERSİTESİ - BİNGÖL ÜNİVERSİTESİ - BATMAN ÜNİVERSİTESİ - ARTVİN ÇORUH ÜNİVERSİTESİ - AKSARAY ÜNİVERSİTESİ - ADIYAMAN ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Elektronik Mühendisliği",
+      "2024 Taban Başarı Sırası": 40203,
+      "En Son Öğrenci Alan Üniversite Adı": "GEBZE TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Elektronik ve Haberleşme Mühendisliği",
+      "2024 Taban Başarı Sırası": 238939,
+      "En Son Öğrenci Alan Üniversite Adı": "KARADENİZ TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Endüstri Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "OSMANİYE KORKUT ATA ÜNİVERSİTESİ - İSKENDERUN TEKNİK ÜNİVERSİTESİ - HARRAN ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Endüstriyel Tasarım",
+      "2024 Taban Başarı Sırası": 652966,
+      "En Son Öğrenci Alan Üniversite Adı": "KARABÜK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Endüstriyel Tasarım Mühendisliği",
+      "2024 Taban Başarı Sırası": 296066,
+      "En Son Öğrenci Alan Üniversite Adı": "ERCİYES ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Enerji Bilimi ve Teknolojileri",
+      "2024 Taban Başarı Sırası": 74040,
+      "En Son Öğrenci Alan Üniversite Adı": "TÜRK-ALMAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Enerji Sistemleri Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "RECEP TAYYİP ERDOĞAN ÜNİVERSİTESİ - KARADENİZ TEKNİK ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Ergoterapi",
+      "2024 Taban Başarı Sırası": 299264,
+      "En Son Öğrenci Alan Üniversite Adı": "ÇANKIRI KARATEKİN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Fen Bilgisi Öğretmenliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "ZONGULDAK BÜLENT ECEVİT ÜNİVERSİTESİ - YOZGAT BOZOK ÜNİVERSİTESİ - VAN YÜZÜNCÜ YIL ÜNİVERSİTESİ - UŞAK ÜNİVERSİTESİ - TRAKYA ÜNİVERSİTESİ - TRABZON ÜNİVERSİTESİ - TOKAT GAZİOSMANPAŞA ÜNİVERSİTESİ - SÜLEYMAN DEMİREL ÜNİVERSİTESİ - SİVAS CUMHURİYET ÜNİVERSİTESİ - SİNOP ÜNİVERSİTESİ - SİİRT ÜNİVERSİTESİ - SAKARYA ÜNİVERSİTESİ - RECEP TAYYİP ERDOĞAN ÜNİVERSİTESİ - PAMUKKALE ÜNİVERSİTESİ - ORDU ÜNİVERSİTESİ - ONDOKUZ MAYIS ÜNİVERSİTESİ - NİĞDE ÖMER HALİSDEMİR ÜNİVERSİTESİ - NEVŞEHİR HACI BEKTAŞ VELİ ÜNİVERSİTESİ - NECMETTİN ERBAKAN ÜNİVERSİTESİ - MUŞ ALPARSLAN ÜNİVERSİTESİ - MUĞLA SITKI KOÇMAN ÜNİVERSİTESİ - MERSİN ÜNİVERSİTESİ - MARMARA ÜNİVERSİTESİ - MANİSA CELÂL BAYAR ÜNİVERSİTESİ - KÜTAHYA DUMLUPINAR ÜNİVERSİTESİ - KOCAELİ ÜNİVERSİTESİ - KİLİS 7 ARALIK ÜNİVERSİTESİ - KIRŞEHİR AHİ EVRAN ÜNİVERSİTESİ - KIRIKKALE ÜNİVERSİTESİ - KASTAMONU ÜNİVERSİTESİ - KARAMANOĞLU MEHMETBEY ÜNİVERSİTESİ - KAHRAMANMARAŞ SÜTÇÜ İMAM ÜNİVERSİTESİ - KAFKAS ÜNİVERSİTESİ - İNÖNÜ ÜNİVERSİTESİ - HATAY MUSTAFA KEMAL ÜNİVERSİTESİ - HARRAN ÜNİVERSİTESİ - HAKKARİ ÜNİVERSİTESİ - HACETTEPE ÜNİVERSİTESİ - GİRESUN ÜNİVERSİTESİ - GAZİ ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ - ESKİŞEHİR OSMANGAZİ ÜNİVERSİTESİ - ERZİNCAN BİNALİ YILDIRIM ÜNİVERSİTESİ - ERCİYES ÜNİVERSİTESİ - EGE ÜNİVERSİTESİ - DÜZCE ÜNİVERSİTESİ - DOKUZ EYLÜL ÜNİVERSİTESİ - DİCLE ÜNİVERSİTESİ - ÇUKUROVA ÜNİVERSİTESİ - ÇANAKKALE ONSEKİZ MART ÜNİVERSİTESİ - BURSA ULUDAĞ ÜNİVERSİTESİ - BURDUR MEHMET AKİF ERSOY ÜNİVERSİTESİ - BOLU ABANT İZZET BAYSAL ÜNİVERSİTESİ - BAYBURT ÜNİVERSİTESİ - BARTIN ÜNİVERSİTESİ - BALIKESİR ÜNİVERSİTESİ - AYDIN ADNAN MENDERES ÜNİVERSİTESİ - ATATÜRK ÜNİVERSİTESİ - AMASYA ÜNİVERSİTESİ - ALANYA ALAADDİN KEYKUBAT ÜNİVERSİTESİ - AKSARAY ÜNİVERSİTESİ - AKDENİZ ÜNİVERSİTESİ - AĞRI İBRAHİM ÇEÇEN ÜNİVERSİTESİ - AFYON KOCATEPE ÜNİVERSİTESİ - ADIYAMAN ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Fizik",
+      "2024 Taban Başarı Sırası": 712379,
+      "En Son Öğrenci Alan Üniversite Adı": "KAFKAS ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Fizik Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "GAZİANTEP ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Fizik Öğretmenliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "NECMETTİN ERBAKAN ÜNİVERSİTESİ - ONDOKUZ MAYIS ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Fizyoterapi ve Rehabilitasyon",
+      "2024 Taban Başarı Sırası": 413699,
+      "En Son Öğrenci Alan Üniversite Adı": "IĞDIR ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Fotonik",
+      "2024 Taban Başarı Sırası": 266468,
+      "En Son Öğrenci Alan Üniversite Adı": "GAZİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Gemi İnşaatı ve Gemi Makineleri Mühendisliği",
+      "2024 Taban Başarı Sırası": 179919,
+      "En Son Öğrenci Alan Üniversite Adı": "İSKENDERUN TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Gemi Makineleri İşletme Mühendisliği",
+      "2024 Taban Başarı Sırası": 131110,
+      "En Son Öğrenci Alan Üniversite Adı": "BANDIRMA ONYEDİ EYLÜL ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Gemi ve Deniz Teknolojisi Mühendisliği",
+      "2024 Taban Başarı Sırası": 105407,
+      "En Son Öğrenci Alan Üniversite Adı": "İZMİR KATİP ÇELEBİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Genetik ve Biyomühendislik",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "TRAKYA ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Gerontoloji",
+      "2024 Taban Başarı Sırası": 463937,
+      "En Son Öğrenci Alan Üniversite Adı": "MUŞ ALPARSLAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Gıda Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "ADANA ALPARSLAN TÜRKEŞ BİLİM VE TEKNOLOJİ ÜNİVERSİTESİ - UŞAK ÜNİVERSİTESİ - TOKAT GAZİOSMANPAŞA ÜNİVERSİTESİ - TEKİRDAĞ NAMIK KEMAL ÜNİVERSİTESİ - SÜLEYMAN DEMİREL ÜNİVERSİTESİ - SELÇUK ÜNİVERSİTESİ - SELÇUK ÜNİVERSİTESİ - ORDU ÜNİVERSİTESİ - NİĞDE ÖMER HALİSDEMİR ÜNİVERSİTESİ - NEVŞEHİR HACI BEKTAŞ VELİ ÜNİVERSİTESİ - NECMETTİN ERBAKAN ÜNİVERSİTESİ - MERSİN ÜNİVERSİTESİ - KAHRAMANMARAŞ SÜTÇÜ İMAM ÜNİVERSİTESİ - KAFKAS ÜNİVERSİTESİ - İNÖNÜ ÜNİVERSİTESİ - ERCİYES ÜNİVERSİTESİ - ÇUKUROVA ÜNİVERSİTESİ - ÇANKIRI KARATEKİN ÜNİVERSİTESİ - BOLU ABANT İZZET BAYSAL ÜNİVERSİTESİ - ATATÜRK ÜNİVERSİTESİ - AFYON KOCATEPE ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Gıda Teknolojisi",
+      "2024 Taban Başarı Sırası": 980758,
+      "En Son Öğrenci Alan Üniversite Adı": "GİRESUN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Harita Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "İZMİR KATİP ÇELEBİ ÜNİVERSİTESİ - ZONGULDAK BÜLENT ECEVİT ÜNİVERSİTESİ - TOKAT GAZİOSMANPAŞA ÜNİVERSİTESİ - OSMANİYE KORKUT ATA ÜNİVERSİTESİ - ONDOKUZ MAYIS ÜNİVERSİTESİ - NİĞDE ÖMER HALİSDEMİR ÜNİVERSİTESİ - NECMETTİN ERBAKAN ÜNİVERSİTESİ - MERSİN ÜNİVERSİTESİ - KONYA TEKNİK ÜNİVERSİTESİ - KARADENİZ TEKNİK ÜNİVERSİTESİ - HARRAN ÜNİVERSİTESİ - ERCİYES ÜNİVERSİTESİ - ÇANAKKALE ONSEKİZ MART ÜNİVERSİTESİ - AFYON KOCATEPE ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Havacılık Elektrik ve Elektroniği",
+      "2024 Taban Başarı Sırası": 305300,
+      "En Son Öğrenci Alan Üniversite Adı": "İSKENDERUN TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Havacılık ve Uzay Mühendisliği",
+      "2024 Taban Başarı Sırası": 221485,
+      "En Son Öğrenci Alan Üniversite Adı": "İSKENDERUN TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Hayvansal Üretim ve Teknolojileri",
+      "2024 Taban Başarı Sırası": 1022861,
+      "En Son Öğrenci Alan Üniversite Adı": "AĞRI İBRAHİM ÇEÇEN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Hemşirelik",
+      "2024 Taban Başarı Sırası": 220601,
+      "En Son Öğrenci Alan Üniversite Adı": "ARDAHAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Hidrojeoloji Mühendisliği",
+      "2024 Taban Başarı Sırası": 189471,
+      "En Son Öğrenci Alan Üniversite Adı": "HACETTEPE ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "İç Mimarlık",
+      "2024 Taban Başarı Sırası": 401083,
+      "En Son Öğrenci Alan Üniversite Adı": "MALATYA TURGUT ÖZAL ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "İklim Bilimi ve Meteoroloji Mühendisliği",
+      "2024 Taban Başarı Sırası": 64918,
+      "En Son Öğrenci Alan Üniversite Adı": "İSTANBUL TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "İlköğretim Matematik Öğretmenliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "İZMİR DEMOKRASİ ÜNİVERSİTESİ - ZONGULDAK BÜLENT ECEVİT ÜNİVERSİTESİ - YOZGAT BOZOK ÜNİVERSİTESİ - VAN YÜZÜNCÜ YIL ÜNİVERSİTESİ - UŞAK ÜNİVERSİTESİ - TRAKYA ÜNİVERSİTESİ - TRABZON ÜNİVERSİTESİ - TOKAT GAZİOSMANPAŞA ÜNİVERSİTESİ - SÜLEYMAN DEMİREL ÜNİVERSİTESİ - SİVAS CUMHURİYET ÜNİVERSİTESİ - SİNOP ÜNİVERSİTESİ - SİİRT ÜNİVERSİTESİ - SAKARYA ÜNİVERSİTESİ - RECEP TAYYİP ERDOĞAN ÜNİVERSİTESİ - ORDU ÜNİVERSİTESİ - NİĞDE ÖMER HALİSDEMİR ÜNİVERSİTESİ - NEVŞEHİR HACI BEKTAŞ VELİ ÜNİVERSİTESİ - NECMETTİN ERBAKAN ÜNİVERSİTESİ - MUŞ ALPARSLAN ÜNİVERSİTESİ - MUĞLA SITKI KOÇMAN ÜNİVERSİTESİ - MANİSA CELÂL BAYAR ÜNİVERSİTESİ - KÜTAHYA DUMLUPINAR ÜNİVERSİTESİ - KOCAELİ ÜNİVERSİTESİ - KİLİS 7 ARALIK ÜNİVERSİTESİ - KIRŞEHİR AHİ EVRAN ÜNİVERSİTESİ - KIRIKKALE ÜNİVERSİTESİ - KASTAMONU ÜNİVERSİTESİ - KARAMANOĞLU MEHMETBEY ÜNİVERSİTESİ - KAHRAMANMARAŞ SÜTÇÜ İMAM ÜNİVERSİTESİ - KAFKAS ÜNİVERSİTESİ - İSTANBUL MEDENİYET ÜNİVERSİTESİ - HAKKARİ ÜNİVERSİTESİ - GİRESUN ÜNİVERSİTESİ - GAZİANTEP ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ - ESKİŞEHİR OSMANGAZİ ÜNİVERSİTESİ - ERZİNCAN BİNALİ YILDIRIM ÜNİVERSİTESİ - DÜZCE ÜNİVERSİTESİ - ÇANAKKALE ONSEKİZ MART ÜNİVERSİTESİ - BURDUR MEHMET AKİF ERSOY ÜNİVERSİTESİ - BOLU ABANT İZZET BAYSAL ÜNİVERSİTESİ - BAYBURT ÜNİVERSİTESİ - BARTIN ÜNİVERSİTESİ - BALIKESİR ÜNİVERSİTESİ - AYDIN ADNAN MENDERES ÜNİVERSİTESİ - ARTVİN ÇORUH ÜNİVERSİTESİ - AMASYA ÜNİVERSİTESİ - ALANYA ALAADDİN KEYKUBAT ÜNİVERSİTESİ - AKSARAY ÜNİVERSİTESİ - AĞRI İBRAHİM ÇEÇEN ÜNİVERSİTESİ - AFYON KOCATEPE ÜNİVERSİTESİ - ADIYAMAN ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "İmalat Mühendisliği",
+      "2024 Taban Başarı Sırası": 198318,
+      "En Son Öğrenci Alan Üniversite Adı": "GAZİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "İnşaat Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "ZONGULDAK BÜLENT ECEVİT ÜNİVERSİTESİ - YOZGAT BOZOK ÜNİVERSİTESİ - UŞAK ÜNİVERSİTESİ - TOKAT GAZİOSMANPAŞA ÜNİVERSİTESİ - ŞIRNAK ÜNİVERSİTESİ - SİVAS CUMHURİYET ÜNİVERSİTESİ - SİİRT ÜNİVERSİTESİ - RECEP TAYYİP ERDOĞAN ÜNİVERSİTESİ - OSMANİYE KORKUT ATA ÜNİVERSİTESİ - NİĞDE ÖMER HALİSDEMİR ÜNİVERSİTESİ - NEVŞEHİR HACI BEKTAŞ VELİ ÜNİVERSİTESİ - NECMETTİN ERBAKAN ÜNİVERSİTESİ - MUNZUR ÜNİVERSİTESİ - MALATYA TURGUT ÖZAL ÜNİVERSİTESİ - KİLİS 7 ARALIK ÜNİVERSİTESİ - KIRŞEHİR AHİ EVRAN ÜNİVERSİTESİ - KIRKLARELİ ÜNİVERSİTESİ - KASTAMONU ÜNİVERSİTESİ - KARAMANOĞLU MEHMETBEY ÜNİVERSİTESİ - KARADENİZ TEKNİK ÜNİVERSİTESİ - KARABÜK ÜNİVERSİTESİ - KAHRAMANMARAŞ SÜTÇÜ İMAM ÜNİVERSİTESİ - KAFKAS ÜNİVERSİTESİ - İSKENDERUN TEKNİK ÜNİVERSİTESİ - İNÖNÜ ÜNİVERSİTESİ - ISPARTA UYGULAMALI BİLİMLER ÜNİVERSİTESİ - IĞDIR ÜNİVERSİTESİ - HARRAN ÜNİVERSİTESİ - HAKKARİ ÜNİVERSİTESİ - GÜMÜŞHANE ÜNİVERSİTESİ - GİRESUN ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ - ERZURUM TEKNİK ÜNİVERSİTESİ - ERZİNCAN BİNALİ YILDIRIM ÜNİVERSİTESİ - ÇANKIRI KARATEKİN ÜNİVERSİTESİ - BİTLİS EREN ÜNİVERSİTESİ - BİNGÖL ÜNİVERSİTESİ - BİLECİK ŞEYH EDEBALİ ÜNİVERSİTESİ - BAYBURT ÜNİVERSİTESİ - BATMAN ÜNİVERSİTESİ - BARTIN ÜNİVERSİTESİ - AKSARAY ÜNİVERSİTESİ - AFYON KOCATEPE ÜNİVERSİTESİ - ADIYAMAN ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "İstatistik",
+      "2024 Taban Başarı Sırası": 504215,
+      "En Son Öğrenci Alan Üniversite Adı": "ÇANKIRI KARATEKİN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "İstatistik ve Bilgisayar Bilimleri",
+      "2024 Taban Başarı Sırası": 347078,
+      "En Son Öğrenci Alan Üniversite Adı": "BİLECİK ŞEYH EDEBALİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "İş Sağlığı ve Güvenliği",
+      "2024 Taban Başarı Sırası": 866832,
+      "En Son Öğrenci Alan Üniversite Adı": "MUŞ ALPARSLAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "İşletme Mühendisliği",
+      "2024 Taban Başarı Sırası": 5947,
+      "En Son Öğrenci Alan Üniversite Adı": "İSTANBUL TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Jeofizik Mühendisliği",
+      "2024 Taban Başarı Sırası": 297029,
+      "En Son Öğrenci Alan Üniversite Adı": "DOKUZ EYLÜL ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Jeoloji Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "NİĞDE ÖMER HALİSDEMİR ÜNİVERSİTESİ - KARADENİZ TEKNİK ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ - ÇUKUROVA ÜNİVERSİTESİ - AKDENİZ ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Kanatlı Hayvan Yetiştiriciliği",
+      "2024 Taban Başarı Sırası": 698388,
+      "En Son Öğrenci Alan Üniversite Adı": "BOLU ABANT İZZET BAYSAL ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Kentsel Tasarım ve Peyzaj Mimarlığı",
+      "2024 Taban Başarı Sırası": 595089,
+      "En Son Öğrenci Alan Üniversite Adı": "AMASYA ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Kimya",
+      "2024 Taban Başarı Sırası": 695803,
+      "En Son Öğrenci Alan Üniversite Adı": "SİİRT ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Kimya Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "SİVAS BİLİM VE TEKNOLOJİ ÜNİVERSİTESİ - UŞAK ÜNİVERSİTESİ - SİVAS CUMHURİYET ÜNİVERSİTESİ - SİİRT ÜNİVERSİTESİ - KAFKAS ÜNİVERSİTESİ - İNÖNÜ ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ - ÇANKIRI KARATEKİN ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Kimya Öğretmenliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "VAN YÜZÜNCÜ YIL ÜNİVERSİTESİ - NECMETTİN ERBAKAN ÜNİVERSİTESİ - ÇANAKKALE ONSEKİZ MART ÜNİVERSİTESİ - BALIKESİR ÜNİVERSİTESİ - ATATÜRK ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Kontrol ve Otomasyon Mühendisliği",
+      "2024 Taban Başarı Sırası": 16371,
+      "En Son Öğrenci Alan Üniversite Adı": "YILDIZ TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Maden Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "MUĞLA SITKI KOÇMAN ÜNİVERSİTESİ - ZONGULDAK BÜLENT ECEVİT ÜNİVERSİTESİ - NİĞDE ÖMER HALİSDEMİR ÜNİVERSİTESİ - KARADENİZ TEKNİK ÜNİVERSİTESİ - İNÖNÜ ÜNİVERSİTESİ - ÇUKUROVA ÜNİVERSİTESİ - AFYON KOCATEPE ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Makine Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "YOZGAT BOZOK ÜNİVERSİTESİ - VAN YÜZÜNCÜ YIL ÜNİVERSİTESİ - TOKAT GAZİOSMANPAŞA ÜNİVERSİTESİ - SİİRT ÜNİVERSİTESİ - RECEP TAYYİP ERDOĞAN ÜNİVERSİTESİ - OSMANİYE KORKUT ATA ÜNİVERSİTESİ - MUŞ ALPARSLAN ÜNİVERSİTESİ - MUNZUR ÜNİVERSİTESİ - KIRŞEHİR AHİ EVRAN ÜNİVERSİTESİ - KARAMANOĞLU MEHMETBEY ÜNİVERSİTESİ - KAHRAMANMARAŞ SÜTÇÜ İMAM ÜNİVERSİTESİ - İSKENDERUN TEKNİK ÜNİVERSİTESİ - İNÖNÜ ÜNİVERSİTESİ - HİTİT ÜNİVERSİTESİ - HARRAN ÜNİVERSİTESİ - GÜMÜŞHANE ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ - ERZİNCAN BİNALİ YILDIRIM ÜNİVERSİTESİ - ÇANKIRI KARATEKİN ÜNİVERSİTESİ - BİNGÖL ÜNİVERSİTESİ - BATMAN ÜNİVERSİTESİ - AMASYA ÜNİVERSİTESİ - AKSARAY ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Malzeme Bilimi ve Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "ADANA ALPARSLAN TÜRKEŞ BİLİM VE TEKNOLOJİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Malzeme Bilimi ve Nanoteknoloji Mühendisliği",
+      "2024 Taban Başarı Sırası": 146879,
+      "En Son Öğrenci Alan Üniversite Adı": "ABDULLAH GÜL ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Malzeme Bilimi ve Teknolojileri",
+      "2024 Taban Başarı Sırası": 68439,
+      "En Son Öğrenci Alan Üniversite Adı": "TÜRK-ALMAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Matematik",
+      "2024 Taban Başarı Sırası": 697563,
+      "En Son Öğrenci Alan Üniversite Adı": "KARABÜK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Matematik Mühendisliği",
+      "2024 Taban Başarı Sırası": 13125,
+      "En Son Öğrenci Alan Üniversite Adı": "YILDIZ TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Matematik Öğretmenliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "VAN YÜZÜNCÜ YIL ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Matematik ve Bilgisayar Bilimleri",
+      "2024 Taban Başarı Sırası": 295426,
+      "En Son Öğrenci Alan Üniversite Adı": "NECMETTİN ERBAKAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Mekatronik Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "SİVAS CUMHURİYET ÜNİVERSİTESİ - KARABÜK ÜNİVERSİTESİ - İSKENDERUN TEKNİK ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Metalurji ve Malzeme Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "KARABÜK ÜNİVERSİTESİ - KARAMANOĞLU MEHMETBEY ÜNİVERSİTESİ - İSKENDERUN TEKNİK ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ - BİLECİK ŞEYH EDEBALİ ÜNİVERSİTESİ - BARTIN ÜNİVERSİTESİ - ATATÜRK ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Meteoroloji Mühendisliği",
+      "2024 Taban Başarı Sırası": 188181,
+      "En Son Öğrenci Alan Üniversite Adı": "SAMSUN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Mimarlık",
+      "2024 Taban Başarı Sırası": "250000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "ADANA ALPARSLAN TÜRKEŞ BİLİM VE TEKNOLOJİ ÜNİVERSİTESİ - YOZGAT BOZOK ÜNİVERSİTESİ - UŞAK ÜNİVERSİTESİ - TOKAT GAZİOSMANPAŞA ÜNİVERSİTESİ - SİVAS CUMHURİYET ÜNİVERSİTESİ - RECEP TAYYİP ERDOĞAN ÜNİVERSİTESİ - NİĞDE ÖMER HALİSDEMİR ÜNİVERSİTESİ - NECMETTİN ERBAKAN ÜNİVERSİTESİ - MARDİN ARTUKLU ÜNİVERSİTESİ - KIRKLARELİ ÜNİVERSİTESİ - KARABÜK ÜNİVERSİTESİ - İSKENDERUN TEKNİK ÜNİVERSİTESİ - HATAY MUSTAFA KEMAL ÜNİVERSİTESİ - HARRAN ÜNİVERSİTESİ - FIRAT ÜNİVERSİTESİ - ERZURUM TEKNİK ÜNİVERSİTESİ - DÜZCE ÜNİVERSİTESİ - DİCLE ÜNİVERSİTESİ - BURDUR MEHMET AKİF ERSOY ÜNİVERSİTESİ - BİNGÖL ÜNİVERSİTESİ - ATATÜRK ÜNİVERSİTESİ - AMASYA ÜNİVERSİTESİ - AKSARAY ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Moleküler Biyoloji ve Genetik",
+      "2024 Taban Başarı Sırası": 628289,
+      "En Son Öğrenci Alan Üniversite Adı": "KİLİS 7 ARALIK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Moleküler Biyoteknoloji",
+      "2024 Taban Başarı Sırası": 42319,
+      "En Son Öğrenci Alan Üniversite Adı": "TÜRK-ALMAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Nanobilim ve Nanoteknoloji",
+      "2024 Taban Başarı Sırası": 470519,
+      "En Son Öğrenci Alan Üniversite Adı": "BURDUR MEHMET AKİF ERSOY ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Nanoteknoloji Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "SİVAS CUMHURİYET ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Nükleer Enerji Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "SİNOP ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Odyoloji",
+      "2024 Taban Başarı Sırası": 367636,
+      "En Son Öğrenci Alan Üniversite Adı": "İNÖNÜ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Optik ve Akustik Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "GAZİANTEP ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Orman Endüstrisi Mühendisliği",
+      "2024 Taban Başarı Sırası": 613169,
+      "En Son Öğrenci Alan Üniversite Adı": "ARTVİN ÇORUH ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Orman Mühendisliği",
+      "2024 Taban Başarı Sırası": 399304,
+      "En Son Öğrenci Alan Üniversite Adı": "ARTVİN ÇORUH ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Ortez ve Protez",
+      "2024 Taban Başarı Sırası": 368976,
+      "En Son Öğrenci Alan Üniversite Adı": "ONDOKUZ MAYIS ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Otomotiv Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "FIRAT ÜNİVERSİTESİ - KARABÜK ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Petrol ve Doğalgaz Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "İSKENDERUN TEKNİK ÜNİVERSİTESİ - BATMAN ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Peyzaj Mimarlığı",
+      "2024 Taban Başarı Sırası": 758166,
+      "En Son Öğrenci Alan Üniversite Adı": "SİİRT ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Pilotaj",
+      "2024 Taban Başarı Sırası": 2519,
+      "En Son Öğrenci Alan Üniversite Adı": "ESKİŞEHİR TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Polimer Malzeme Mühendisliği",
+      "2024 Taban Başarı Sırası": 271505,
+      "En Son Öğrenci Alan Üniversite Adı": "YALOVA ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Raylı Sistemler Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "KARABÜK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Robotik ve Otonom Sistemleri Mühendisliği",
+      "2024 Taban Başarı Sırası": 5109,
+      "En Son Öğrenci Alan Üniversite Adı": "İSTANBUL TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Siber Güvenlik Mühendisliği",
+      "2024 Taban Başarı Sırası": 5361,
+      "En Son Öğrenci Alan Üniversite Adı": "İSTANBUL TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Su Bilimleri ve Mühendisliği",
+      "2024 Taban Başarı Sırası": 334401,
+      "En Son Öğrenci Alan Üniversite Adı": "İSTANBUL ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Su Ürünleri Endüstrisi Mühendisliği",
+      "2024 Taban Başarı Sırası": 603115,
+      "En Son Öğrenci Alan Üniversite Adı": "ÇANAKKALE ONSEKİZ MART ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Su Ürünleri Mühendisliği",
+      "2024 Taban Başarı Sırası": 899029,
+      "En Son Öğrenci Alan Üniversite Adı": "MUNZUR ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Süt Teknolojisi",
+      "2024 Taban Başarı Sırası": 514824,
+      "En Son Öğrenci Alan Üniversite Adı": "EGE ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Şehir ve Bölge Planlama",
+      "2024 Taban Başarı Sırası": 868605,
+      "En Son Öğrenci Alan Üniversite Adı": "SİİRT ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Tarım Makineleri ve Teknolojileri Mühendisliği",
+      "2024 Taban Başarı Sırası": 566544,
+      "En Son Öğrenci Alan Üniversite Adı": "DİCLE ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Tarımsal Biyoteknoloji",
+      "2024 Taban Başarı Sırası": 847831,
+      "En Son Öğrenci Alan Üniversite Adı": "VAN YÜZÜNCÜ YIL ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Tarımsal Genetik Mühendisliği",
+      "2024 Taban Başarı Sırası": 440118,
+      "En Son Öğrenci Alan Üniversite Adı": "NİĞDE ÖMER HALİSDEMİR ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Tarımsal Yapılar ve Sulama",
+      "2024 Taban Başarı Sırası": 802243,
+      "En Son Öğrenci Alan Üniversite Adı": "HARRAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Tarla Bitkileri",
+      "2024 Taban Başarı Sırası": 852071,
+      "En Son Öğrenci Alan Üniversite Adı": "ŞIRNAK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Tekstil Mühendisliği",
+      "2024 Taban Başarı Sırası": "300000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "ADIYAMAN ÜNİVERSİTESİ - UŞAK ÜNİVERSİTESİ - TEKİRDAĞ NAMIK KEMAL ÜNİVERSİTESİ - SÜLEYMAN DEMİREL ÜNİVERSİTESİ - KAHRAMANMARAŞ SÜTÇÜ İMAM ÜNİVERSİTESİ - ÇUKUROVA ÜNİVERSİTESİ"
+    },
+    {
+      "Program Adı": "Tıp",
+      "2024 Taban Başarı Sırası": 29190,
+      "En Son Öğrenci Alan Üniversite Adı": "AĞRI İBRAHİM ÇEÇEN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Tıp Askeri",
+      "2024 Taban Başarı Sırası": "50000-Dolmadı",
+      "En Son Öğrenci Alan Üniversite Adı": "SAĞLIK BİLİMLERİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Tohum Bilimi ve Teknolojisi",
+      "2024 Taban Başarı Sırası": 652685,
+      "En Son Öğrenci Alan Üniversite Adı": "BOLU ABANT İZZET BAYSAL ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Toprak Bilimi ve Bitki Besleme",
+      "2024 Taban Başarı Sırası": 849594,
+      "En Son Öğrenci Alan Üniversite Adı": "BİNGÖL ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Tütün Eksperliği",
+      "2024 Taban Başarı Sırası": 580866,
+      "En Son Öğrenci Alan Üniversite Adı": "MANİSA CELÂL BAYAR ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Uçak Bakım ve Onarım",
+      "2024 Taban Başarı Sırası": 265233,
+      "En Son Öğrenci Alan Üniversite Adı": "FIRAT ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Uçak Gövde ve Motor Bakımı",
+      "2024 Taban Başarı Sırası": 139732,
+      "En Son Öğrenci Alan Üniversite Adı": "SELÇUK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Uçak Mühendisliği",
+      "2024 Taban Başarı Sırası": 53925,
+      "En Son Öğrenci Alan Üniversite Adı": "NECMETTİN ERBAKAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Uzay Bilimleri ve Teknolojileri",
+      "2024 Taban Başarı Sırası": 302012,
+      "En Son Öğrenci Alan Üniversite Adı": "ÇANAKKALE ONSEKİZ MART ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Uzay Mühendisliği",
+      "2024 Taban Başarı Sırası": 137662,
+      "En Son Öğrenci Alan Üniversite Adı": "ERCİYES ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Veri Bilimi ve Analitiği",
+      "2024 Taban Başarı Sırası": 410527,
+      "En Son Öğrenci Alan Üniversite Adı": "HARRAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Veterinerlik",
+      "2024 Taban Başarı Sırası": 247121,
+      "En Son Öğrenci Alan Üniversite Adı": "SİİRT ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Yaban Hayatı Ekolojisi ve Yönetimi",
+      "2024 Taban Başarı Sırası": 809048,
+      "En Son Öğrenci Alan Üniversite Adı": "KARADENİZ TEKNİK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Yapay Zeka Mühendisliği",
+      "2024 Taban Başarı Sırası": 114115,
+      "En Son Öğrenci Alan Üniversite Adı": "TRABZON ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Yapay Zeka ve Makine Öğrenmesi",
+      "2024 Taban Başarı Sırası": 227045,
+      "En Son Öğrenci Alan Üniversite Adı": "ATATÜRK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Yapay Zeka ve Veri Mühendisliği",
+      "2024 Taban Başarı Sırası": 102488,
+      "En Son Öğrenci Alan Üniversite Adı": "ATATÜRK ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Yazılım Geliştirme",
+      "2024 Taban Başarı Sırası": 171188,
+      "En Son Öğrenci Alan Üniversite Adı": "ONDOKUZ MAYIS ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Yazılım Mühendisliği",
+      "2024 Taban Başarı Sırası": 298379,
+      "En Son Öğrenci Alan Üniversite Adı": "MUŞ ALPARSLAN ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Ziraat Mühendisliği Programları",
+      "2024 Taban Başarı Sırası": 492447,
+      "En Son Öğrenci Alan Üniversite Adı": "BİLECİK ŞEYH EDEBALİ ÜNİVERSİTESİ  "
+    },
+    {
+      "Program Adı": "Zootekni",
+      "2024 Taban Başarı Sırası": 917160,
+      "En Son Öğrenci Alan Üniversite Adı": "IĞDIR ÜNİVERSİTESİ  "
+    }
+  ],
+  "aciklama": "*Bu çalışma, Devlet Üniversitelerinin lisans programları arasından;\n\n    KKTC uyruklu öğrenci kabul eden programlar,\n    UOLP programları,\n    KKTC’de yer alan fakültelerdeki programlar,\n    Açıköğretim ve Uzaktan Öğretim programları ile\n    Türk-Alman Üniversitesi’nin yalnızca belirli liselerden mezun öğrenci kabul eden programları\n\nhariç tutularak hazırlanmıştır."
+}
