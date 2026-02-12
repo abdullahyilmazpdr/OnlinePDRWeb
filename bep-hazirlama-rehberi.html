@@ -86,16 +86,17 @@
     }
 
     /* Mevcut .container stilini silin, yerine bunu ekleyin */
-.article-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-/* Feature kartların telefonda alt alta yapışmasını engellemek için */
-.features {
-    gap: 20px;
-    margin-bottom: 30px;
-}
+    .article-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Feature kartların telefonda alt alta yapışmasını engellemek için */
+    .features {
+      gap: 20px;
+      margin-bottom: 30px;
+    }
 
     .hero {
       background: white;
@@ -189,6 +190,25 @@
       margin: 20px 0;
       border: 1px dashed #ccc;
     }
+
+    /* Doküman kartları için hover efekti */
+    .hover-up {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-up:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Örnek BEP resimleri için zoom efekti */
+    .hover-zoom img {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-zoom:hover img {
+      transform: scale(1.05);
+    }
   </style>
 
 </head>
@@ -239,8 +259,11 @@
     </div>
 
     <div class="article-container">
-      
-      <section class="content-box text-center"> <h2 class="text-primary mb-3">Bireyselleştirilmiş Eğitim Planı (BEP) Robotu</h2> <p class="mb-4">Yenilenen arayüzü, proje kaydetme özelliği ve akıllı sihirbazı ile Türkiye'nin en kapsamlı MEB uyumlu BEP hazırlama aracı yayında.</p>
+
+      <section class="content-box text-center">
+        <h2 class="text-primary mb-3">Bireyselleştirilmiş Eğitim Planı (BEP) Robotu</h2>
+        <p class="mb-4">Yenilenen arayüzü, proje kaydetme özelliği ve akıllı sihirbazı ile Türkiye'nin en kapsamlı MEB
+          uyumlu BEP hazırlama aracı yayında.</p>
         <a href="/bep" class="cta-button"><i class="fas fa-rocket me-2"></i> BEP Programını Başlat</a>
       </section>
 
@@ -250,7 +273,9 @@
 
       <article class="content-box">
         <h2>BEP Nedir?</h2>
-        <p>Bireyselleştirilmiş Eğitim Programı (BEP), özel eğitim ihtiyacı olan bireylerin gelişim özellikleri, eğitim performansları ve öncelikli ihtiyaçları doğrultusunda hazırlanan; hedeflenen amaçlara ulaşılması için verilecek destek eğitim hizmetlerini içeren özel bir programdır.</p>
+        <p>Bireyselleştirilmiş Eğitim Programı (BEP), özel eğitim ihtiyacı olan bireylerin gelişim özellikleri, eğitim
+          performansları ve öncelikli ihtiyaçları doğrultusunda hazırlanan; hedeflenen amaçlara ulaşılması için
+          verilecek destek eğitim hizmetlerini içeren özel bir programdır.</p>
 
         <h2 class="mt-5">OnlinePDR BEP Robotu v2.0 Özellikleri</h2>
         <p>Sizlerin geri bildirimleriyle tamamen yenilenen sürümümüzde işinizi kolaylaştıracak özellikler:</p>
@@ -274,13 +299,18 @@
         </div>
 
         <h3>Kimler Kullanabilir?</h3>
-        <ul class="list-group list-group-flush mb-4"> <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Özel Eğitim Öğretmenleri</li>
-          <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Rehber Öğretmenler / Psikolojik Danışmanlar</li>
-          <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Kaynaştırma öğrencisi bulunan Sınıf ve Branş Öğretmenleri</li>
+        <ul class="list-group list-group-flush mb-4">
+          <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Özel Eğitim Öğretmenleri
+          </li>
+          <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Rehber Öğretmenler /
+            Psikolojik Danışmanlar</li>
+          <li class="list-group-item"><i class="bi bi-check-circle-fill text-success me-2"></i>Kaynaştırma öğrencisi
+            bulunan Sınıf ve Branş Öğretmenleri</li>
         </ul>
 
         <div class="text-center mt-4">
-          <a href="/bep" class="cta-button" style="background-color: #10B981;"><i class="fas fa-play me-2"></i> Hemen BEP Oluştur</a>
+          <a href="/bep" class="cta-button" style="background-color: #10B981;"><i class="fas fa-play me-2"></i> Hemen
+            BEP Oluştur</a>
         </div>
       </article>
 
@@ -296,134 +326,336 @@
           <div class="col-lg-10">
             <div class="card shadow border-0">
               <div class="card-body p-4 p-md-5">
-                
+
                 <h2 class="mb-4 text-primary fw-bold">Bireyselleştirilmiş Eğitim Programı (BEP) Hakkında Her Şey</h2>
-                
+
                 <p class="lead text-muted">
-                  Kaynaştırma/bütünleştirme öğrencileri için yasal bir zorunluluk olan BEP süreci hakkında bilmeniz gereken tüm detayları, mevzuata uygun şekilde derledik. 
-                  <a href="/bep" class="fw-bold text-decoration-none">OnlinePDR BEP Hazırlama Robotu</a> ile planınızı oluşturmadan önce bu rehberden faydalanabilirsiniz.
+                  Kaynaştırma/bütünleştirme öğrencileri için yasal bir zorunluluk olan BEP süreci hakkında bilmeniz
+                  gereken tüm detayları, mevzuata uygun şekilde derledik.
+                  <a href="/bep" class="fw-bold text-decoration-none">OnlinePDR BEP Hazırlama Robotu</a> ile planınızı
+                  oluşturmadan önce bu rehberden faydalanabilirsiniz.
                 </p>
                 <hr class="my-4">
 
                 <article class="blog-details">
-                  
+
                   <div class="mb-5">
-                    <h3 class="fw-bold text-dark"><i class="bi bi-question-circle-fill text-primary me-2"></i>BEP Nedir ve Neden Zorunludur?</h3>
+                    <h3 class="fw-bold text-dark"><i class="bi bi-question-circle-fill text-primary me-2"></i>BEP Nedir
+                      ve Neden Zorunludur?</h3>
                     <p>
-                      Kısaca <strong>BEP</strong> olarak adlandırılan <strong>Bireyselleştirilmiş Eğitim Programı</strong>; özel eğitim ihtiyacı olan bireylerin gelişim özellikleri, 
-                      ilgi ve yetenekleri ile mevcut eğitsel performansları doğrultusunda hazırlanan özel bir yol haritasıdır.
+                      Kısaca <strong>BEP</strong> olarak adlandırılan <strong>Bireyselleştirilmiş Eğitim
+                        Programı</strong>; özel eğitim ihtiyacı olan bireylerin gelişim özellikleri,
+                      ilgi ve yetenekleri ile mevcut eğitsel performansları doğrultusunda hazırlanan özel bir yol
+                      haritasıdır.
                     </p>
                     <p>
-                      Bu program, öğrencinin destek eğitim hizmetlerinden en üst düzeyde yararlanmasını amaçlayan, aile, öğretmen ve uzman iş birliğiyle oluşturulan yazılı bir dokümandır. 
-                      BEP hazırlamak sadece pedagojik bir tercih değil, <strong>573 sayılı Kanun Hükmünde Kararname</strong> ve MEB yönetmelikleri gereği <u>yasal bir zorunluluktur</u>.
+                      Bu program, öğrencinin destek eğitim hizmetlerinden en üst düzeyde yararlanmasını amaçlayan, aile,
+                      öğretmen ve uzman iş birliğiyle oluşturulan yazılı bir dokümandır.
+                      BEP hazırlamak sadece pedagojik bir tercih değil, <strong>573 sayılı Kanun Hükmünde
+                        Kararname</strong> ve MEB yönetmelikleri gereği <u>yasal bir zorunluluktur</u>.
                     </p>
                   </div>
 
                   <div class="mb-5">
-                    <h3 class="fw-bold text-dark"><i class="bi bi-people-fill text-primary me-2"></i>BEP Geliştirme Birimi Kimlerden Oluşur?</h3>
-                    <p>BEP süreci tek bir öğretmenin sorumluluğunda değildir. Okul müdürü veya görevlendireceği müdür yardımcısı başkanlığında kurulan <strong>BEP Geliştirme Birimi</strong> tarafından yönetilir. Yönetmeliğe göre bu birimin daimi üyeleri şunlardır:</p>
-                    
+                    <h3 class="fw-bold text-dark"><i class="bi bi-people-fill text-primary me-2"></i>BEP Geliştirme
+                      Birimi Kimlerden Oluşur?</h3>
+                    <p>BEP süreci tek bir öğretmenin sorumluluğunda değildir. Okul müdürü veya görevlendireceği müdür
+                      yardımcısı başkanlığında kurulan <strong>BEP Geliştirme Birimi</strong> tarafından yönetilir.
+                      Yönetmeliğe göre bu birimin daimi üyeleri şunlardır:</p>
+
                     <div class="row g-3 mt-2">
                       <div class="col-md-6">
                         <ul class="list-group list-group-flush shadow-sm rounded">
-                          <li class="list-group-item bg-white"><i class="bi bi-person-badge text-warning me-2"></i> <strong>Birim Başkanı:</strong> Okul Müdürü veya Müdür Yardımcısı</li>
-                          <li class="list-group-item bg-white"><i class="bi bi-person-heart text-danger me-2"></i> <strong>Veli:</strong> Öğrencinin ailesi</li>
-                          <li class="list-group-item bg-white"><i class="bi bi-person-video3 text-info me-2"></i> <strong>Rehberlik Servisi:</strong> Psikolojik Danışman / Rehber Öğretmen</li>
+                          <li class="list-group-item bg-white"><i class="bi bi-person-badge text-warning me-2"></i>
+                            <strong>Birim Başkanı:</strong> Okul Müdürü veya Müdür Yardımcısı
+                          </li>
+                          <li class="list-group-item bg-white"><i class="bi bi-person-heart text-danger me-2"></i>
+                            <strong>Veli:</strong> Öğrencinin ailesi
+                          </li>
+                          <li class="list-group-item bg-white"><i class="bi bi-person-video3 text-info me-2"></i>
+                            <strong>Rehberlik Servisi:</strong> Psikolojik Danışman / Rehber Öğretmen
+                          </li>
                         </ul>
                       </div>
                       <div class="col-md-6">
                         <ul class="list-group list-group-flush shadow-sm rounded">
-                          <li class="list-group-item bg-white"><i class="bi bi-easel text-success me-2"></i> <strong>Öğretmenler:</strong> Sınıf Öğretmeni ve Alan Öğretmenleri</li>
-                          <li class="list-group-item bg-white"><i class="bi bi-person-check text-primary me-2"></i> <strong>Öğrenci:</strong> Bireyin kendisi (Uygunsa)</li>
-                          <li class="list-group-item bg-white"><i class="bi bi-building text-secondary me-2"></i> <strong>Uzman:</strong> Gerektiğinde RAM Temsilcisi</li>
+                          <li class="list-group-item bg-white"><i class="bi bi-easel text-success me-2"></i>
+                            <strong>Öğretmenler:</strong> Sınıf Öğretmeni ve Alan Öğretmenleri
+                          </li>
+                          <li class="list-group-item bg-white"><i class="bi bi-person-check text-primary me-2"></i>
+                            <strong>Öğrenci:</strong> Bireyin kendisi (Uygunsa)
+                          </li>
+                          <li class="list-group-item bg-white"><i class="bi bi-building text-secondary me-2"></i>
+                            <strong>Uzman:</strong> Gerektiğinde RAM Temsilcisi
+                          </li>
                         </ul>
                       </div>
                     </div>
                   </div>
 
                   <div class="mb-5">
-                    <h3 class="fw-bold text-dark"><i class="bi bi-sort-numeric-down text-primary me-2"></i>6 Adımda Etkili BEP Hazırlama Süreci</h3>
-                    <p>MEB standartlarına uygun, işlevsel bir BEP hazırlamak için izlenmesi gereken yol haritası şu şekildedir:</p>
-                    
+                    <h3 class="fw-bold text-dark"><i class="bi bi-sort-numeric-down text-primary me-2"></i>6 Adımda
+                      Etkili BEP Hazırlama Süreci</h3>
+                    <p>MEB standartlarına uygun, işlevsel bir BEP hazırlamak için izlenmesi gereken yol haritası şu
+                      şekildedir:</p>
+
                     <div class="row mt-3">
                       <div class="col-md-6 mb-3">
                         <div class="d-flex p-3 bg-white rounded border h-100 align-items-start">
                           <span class="badge bg-primary rounded-circle p-2 me-3">1</span>
                           <div>
                             <strong class="d-block text-dark">Bilgi Toplama</strong>
-                            Öğrencinin sağlık raporları, akademik geçmişi ve gelişimsel verilerinin eksiksiz toplanması.
+                            Öğrencinin sağlık raporları, akademik geçmişi ve verilerinin toplanması.
                           </div>
                         </div>
                       </div>
-                      
                       <div class="col-md-6 mb-3">
                         <div class="d-flex p-3 bg-white rounded border h-100 align-items-start">
                           <span class="badge bg-primary rounded-circle p-2 me-3">2</span>
                           <div>
                             <strong class="d-block text-dark">Eğitsel Performans Düzeyi</strong>
-                            Öğrencinin halihazırda yapabildiklerinin "ölçülebilir ve gözlenebilir" ifadelerle yazılması (Örn: "Rakamları tanır" yerine "1'den 10'a kadar olan rakamları gösterir").
+                            Öğrencinin yapabildiklerinin "ölçülebilir ve gözlenebilir" ifadelerle yazılması.
                           </div>
                         </div>
                       </div>
-
                       <div class="col-md-6 mb-3">
                         <div class="d-flex p-3 bg-white rounded border h-100 align-items-start">
                           <span class="badge bg-primary rounded-circle p-2 me-3">3</span>
                           <div>
                             <strong class="d-block text-dark">İhtiyaçların Belirlenmesi</strong>
-                            Öğrencinin öncelikli olarak kazanması gereken becerilerin ve öğrenme hedeflerinin seçilmesi.
+                            Öğrencinin öncelikli olarak kazanması gereken becerilerin seçilmesi.
                           </div>
                         </div>
                       </div>
-
                       <div class="col-md-6 mb-3">
                         <div class="d-flex p-3 bg-white rounded border h-100 align-items-start">
                           <span class="badge bg-primary rounded-circle p-2 me-3">4</span>
                           <div>
                             <strong class="d-block text-dark">Amaçların Yazılması</strong>
-                            Seçilen ihtiyaçlara yönelik Uzun Dönemli Amaçlar ve Kısa Dönemli Amaçların (Hedef Davranışlar) oluşturulması.
+                            Uzun ve Kısa Dönemli Amaçların oluşturulması.
                           </div>
                         </div>
                       </div>
-
                       <div class="col-md-6 mb-3">
                         <div class="d-flex p-3 bg-white rounded border h-100 align-items-start">
                           <span class="badge bg-primary rounded-circle p-2 me-3">5</span>
                           <div>
                             <strong class="d-block text-dark">Strateji ve Materyaller</strong>
-                            Hangi öğretim yöntemlerinin, materyallerin ve uyarlamaların kullanılacağının planlanması.
+                            Öğretim yöntemlerinin ve materyallerin planlanması.
                           </div>
                         </div>
                       </div>
-
                       <div class="col-md-6 mb-3">
                         <div class="d-flex p-3 bg-white rounded border h-100 align-items-start">
                           <span class="badge bg-primary rounded-circle p-2 me-3">6</span>
                           <div>
                             <strong class="d-block text-dark">Değerlendirme</strong>
-                            Başarının nasıl ölçüleceğinin, değerlendirme zamanının ve kriterlerinin takvime bağlanması.
+                            Başarının nasıl ölçüleceğinin takvime bağlanması.
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
 
+                  <div class="mt-5 mb-5">
+
+                    <h3 class="fw-bold text-dark mb-4 border-bottom pb-2">
+                      <i class="bi bi-file-earmark-arrow-down-fill text-primary me-2"></i>Resmi BEP Dokümanları ve
+                      Formlar
+                    </h3>
+                    <div class="row row-cols-2 row-cols-md-4 g-3 mb-5">
+
+                      <div class="col">
+                        <a href="https://orgm.meb.gov.tr/meb_iys_dosyalar/2022_09/20140845_BYREYSELLEYTYRYLMYY_EYYTYM_PROGRAMI_TUM_OYRETMENLER_YCYN_YOL_HARITASI.pdf"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card h-100 border-0 shadow-sm hover-up">
+                            <img
+                              src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/BEP%20(6).png"
+                              class="card-img-top p-2 rounded" alt="MEB BEP Yol Haritası">
+                            <div class="card-body p-2 text-center">
+                              <small class="fw-bold text-dark d-block">MEB Yol Haritası</small>
+                              <span class="badge bg-danger mt-1">PDF İndir</span>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+
+                      <div class="col">
+                        <a href="https://orgm.meb.gov.tr/meb_iys_dosyalar/2022_09/20141302_BEP_Word.docx"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card h-100 border-0 shadow-sm hover-up">
+                            <img
+                              src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/BEP%20(1).png"
+                              class="card-img-top p-2 rounded" alt="Boş BEP Formu">
+                            <div class="card-body p-2 text-center">
+                              <small class="fw-bold text-dark d-block">Boş BEP Formu</small>
+                              <span class="badge bg-primary mt-1">Word İndir</span>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+
+                      <div class="col">
+                        <a href="https://sites.google.com/view/abdullahyilmazpdr/bep-haz%C4%B1rlama-program%C4%B1-kullan%C4%B1m-k%C4%B1lavuzu"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card h-100 border-0 shadow-sm hover-up">
+                            <img
+                              src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/BEP%20(11).png"
+                              class="card-img-top p-2 rounded" alt="Kullanım Kılavuzu">
+                            <div class="card-body p-2 text-center">
+                              <small class="fw-bold text-dark d-block">Kullanım Kılavuzu</small>
+                              <span class="badge bg-info text-dark mt-1">İncele</span>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+
+                      <div class="col">
+                        <a href="https://orgm.meb.gov.tr/meb_iys_dosyalar/2022_09/20140845_BYREYSELLEYTYRYLMYY_EYYTYM_PROGRAMI_TUM_OYRETMENLER_YCYN_YOL_HARITASI.pdf#page=79"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card h-100 border-0 shadow-sm hover-up">
+                            <img
+                              src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/KabaDegerlendirmeFormu.png"
+                              class="card-img-top p-2 rounded" alt="Kaba Değerlendirme Formu">
+                            <div class="card-body p-2 text-center">
+                              <small class="fw-bold text-dark d-block">Kaba Değerlendirme</small>
+                              <span class="badge bg-warning text-dark mt-1">Formu Gör</span>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+
+                    <h3 class="fw-bold text-dark mb-4 border-bottom pb-2">
+                      <i class="bi bi-collection-fill text-success me-2"></i>MEB Örnek BEP Planları
+                    </h3>
+                    <p class="small text-muted mb-3">Örnekleri incelemek için üzerine tıklayınız.</p>
+
+                    <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 g-3">
+                      <div class="col">
+                        <a href="https://orgm.meb.gov.tr/meb_iys_dosyalar/2022_09/20140845_BYREYSELLEYTYRYLMYY_EYYTYM_PROGRAMI_TUM_OYRETMENLER_YCYN_YOL_HARITASI.pdf#page=28"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card border-0 shadow-sm hover-zoom overflow-hidden">
+                            <img src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/BEP.png"
+                              class="card-img-top" alt="Örnek BEP 1">
+                            <div class="card-footer bg-white border-0 text-center py-1"><small class="text-muted">Örnek
+                                Plan 1</small></div>
+                          </div>
+                        </a>
+                      </div>
+                      <div class="col">
+                        <a href="https://orgm.meb.gov.tr/meb_iys_dosyalar/2022_09/20140845_BYREYSELLEYTYRYLMYY_EYYTYM_PROGRAMI_TUM_OYRETMENLER_YCYN_YOL_HARITASI.pdf#page=34"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card border-0 shadow-sm hover-zoom overflow-hidden">
+                            <img
+                              src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/BEP%20(3).png"
+                              class="card-img-top" alt="Örnek BEP 2">
+                            <div class="card-footer bg-white border-0 text-center py-1"><small class="text-muted">Örnek
+                                Plan 2</small></div>
+                          </div>
+                        </a>
+                      </div>
+                      <div class="col">
+                        <a href="https://orgm.meb.gov.tr/meb_iys_dosyalar/2022_09/20140845_BYREYSELLEYTYRYLMYY_EYYTYM_PROGRAMI_TUM_OYRETMENLER_YCYN_YOL_HARITASI.pdf#page=40"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card border-0 shadow-sm hover-zoom overflow-hidden">
+                            <img
+                              src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/BEP%20(7).png"
+                              class="card-img-top" alt="Örnek BEP 3">
+                            <div class="card-footer bg-white border-0 text-center py-1"><small class="text-muted">Örnek
+                                Plan 3</small></div>
+                          </div>
+                        </a>
+                      </div>
+                      <div class="col">
+                        <a href="https://orgm.meb.gov.tr/meb_iys_dosyalar/2022_09/20140845_BYREYSELLEYTYRYLMYY_EYYTYM_PROGRAMI_TUM_OYRETMENLER_YCYN_YOL_HARITASI.pdf#page=46"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card border-0 shadow-sm hover-zoom overflow-hidden">
+                            <img
+                              src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/BEP%20(2).png"
+                              class="card-img-top" alt="Örnek BEP 4">
+                            <div class="card-footer bg-white border-0 text-center py-1"><small class="text-muted">Örnek
+                                Plan 4</small></div>
+                          </div>
+                        </a>
+                      </div>
+                      <div class="col">
+                        <a href="https://orgm.meb.gov.tr/meb_iys_dosyalar/2022_09/20140845_BYREYSELLEYTYRYLMYY_EYYTYM_PROGRAMI_TUM_OYRETMENLER_YCYN_YOL_HARITASI.pdf#page=54"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card border-0 shadow-sm hover-zoom overflow-hidden">
+                            <img
+                              src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/BEP%20(4).png"
+                              class="card-img-top" alt="Örnek BEP 5">
+                            <div class="card-footer bg-white border-0 text-center py-1"><small class="text-muted">Örnek
+                                Plan 5</small></div>
+                          </div>
+                        </a>
+                      </div>
+                      <div class="col">
+                        <a href="https://orgm.meb.gov.tr/meb_iys_dosyalar/2022_09/20140845_BYREYSELLEYTYRYLMYY_EYYTYM_PROGRAMI_TUM_OYRETMENLER_YCYN_YOL_HARITASI.pdf#page=60"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card border-0 shadow-sm hover-zoom overflow-hidden">
+                            <img
+                              src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/BEP%20(8).png"
+                              class="card-img-top" alt="Örnek BEP 6">
+                            <div class="card-footer bg-white border-0 text-center py-1"><small class="text-muted">Örnek
+                                Plan 6</small></div>
+                          </div>
+                        </a>
+                      </div>
+                      <div class="col">
+                        <a href="https://orgm.meb.gov.tr/meb_iys_dosyalar/2022_09/20140845_BYREYSELLEYTYRYLMYY_EYYTYM_PROGRAMI_TUM_OYRETMENLER_YCYN_YOL_HARITASI.pdf#page=67"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card border-0 shadow-sm hover-zoom overflow-hidden">
+                            <img
+                              src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/BEP%20(9).png"
+                              class="card-img-top" alt="Örnek BEP 7">
+                            <div class="card-footer bg-white border-0 text-center py-1"><small class="text-muted">Örnek
+                                Plan 7</small></div>
+                          </div>
+                        </a>
+                      </div>
+                      <div class="col">
+                        <a href="https://orgm.meb.gov.tr/meb_iys_dosyalar/2022_09/20140845_BYREYSELLEYTYRYLMYY_EYYTYM_PROGRAMI_TUM_OYRETMENLER_YCYN_YOL_HARITASI.pdf#page=73"
+                          target="_blank" class="text-decoration-none">
+                          <div class="card border-0 shadow-sm hover-zoom overflow-hidden">
+                            <img
+                              src="https://raw.githubusercontent.com/abdullahyilmazpdr/BEPResimler/main/BEP%20(5).png"
+                              class="card-img-top" alt="Örnek BEP 8">
+                            <div class="card-footer bg-white border-0 text-center py-1"><small class="text-muted">Örnek
+                                Plan 8</small></div>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                      <a href="https://onlinepdr.com/bep-emegi-gecenler" target="_blank"
+                        class="text-muted small text-decoration-none">
+                        <i class="bi bi-info-circle me-1"></i>Emeği Geçenler
+                      </a>
+                    </div>
+
+                  </div>
                   <div class="alert alert-warning border-start border-warning border-4" role="alert">
                     <h5 class="alert-heading"><i class="bi bi-exclamation-triangle-fill me-2"></i>Önemli Hatırlatma</h5>
                     <p class="mb-0">
-                      Aileler çocukları hakkında en detaylı bilgiye sahip olan kişilerdir. Ailenin onayı ve aktif katılımı olmadan hazırlanan bir BEP kağıt üzerinde kalmaya mahkumdur ve eksiktir.
+                      Aileler çocukları hakkında en detaylı bilgiye sahip olan kişilerdir. Ailenin onayı ve aktif
+                      katılımı olmadan hazırlanan bir BEP kağıt üzerinde kalmaya mahkumdur ve eksiktir.
                     </p>
                   </div>
 
                   <div class="mt-4 pt-3 border-top">
                     <p class="text-muted fst-italic small">
-                      <i class="bi bi-journal-bookmark-fill me-1"></i> Kaynak: T.C. Millî Eğitim Bakanlığı Özel Eğitim ve Rehberlik Hizmetleri Genel Müdürlüğü, "Bireyselleştirilmiş Eğitim Programı: Tüm Öğretmenler İçin Yol Haritası", 2022.
+                      <i class="bi bi-journal-bookmark-fill me-1"></i> Kaynak: T.C. Millî Eğitim Bakanlığı Özel Eğitim
+                      ve Rehberlik Hizmetleri Genel Müdürlüğü, "Bireyselleştirilmiş Eğitim Programı: Tüm Öğretmenler
+                      İçin Yol Haritası", 2022.
                     </p>
                     <div class="text-center mt-4">
-                        <p class="fw-bold text-dark">Bu adımları manuel olarak yapmak zorunda değilsiniz.</p>
-                        <a href="/bep" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">
-                            <i class="fas fa-magic me-2"></i>BEP Robotunu Kullan
-                        </a>
+                      <p class="fw-bold text-dark">Bu adımları manuel olarak yapmak zorunda değilsiniz.</p>
+                      <a href="/bep" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">
+                        <i class="fas fa-magic me-2"></i>BEP Robotunu Kullan
+                      </a>
                     </div>
                   </div>
 
