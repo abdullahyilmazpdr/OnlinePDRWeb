@@ -2,286 +2,85 @@
 <html lang="tr">
 
 <head>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XVH8NX75JE"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
     gtag('config', 'G-XVH8NX75JE');
   </script>
-  <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-PFZ4T344');</script>
-  <!-- End Google Tag Manager -->
-
-  <!-- Adsense -->
-  <meta name="google-adsense-account" content="ca-pub-6640600529852358">
   
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>BEP Hazırlama Programı | Online PDR</title>
-  <meta name="description"
-    content="Online PDR BEP Hazırlama Programı ile öğrenciler için bireyselleştirilmiş eğitim planlarını kolayca hazırlayın ve ister word formatında indirin isterseniz de çıktı alın.">
-  <meta name="keywords"
-    content="BEP hazırlama, BEP programı, bireyselleştirilmiş eğitim planı, online PDR, özel eğitim, öğrenci planlama">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Online BEP Hazırlama Robotu v2.0 | OnlinePDR</title>
+  <meta name="description" content="MEB uyumlu, güncel kazanımlarla Bireyselleştirilmiş Eğitim Planı (BEP) hazırlayın. Kaydetme özellikli, ücretsiz online BEP sihirbazı.">
+  <meta name="keywords" content="bep robotu, bep hazırlama programı, online bep, meb bep hazırlama, bep v2, BEP hazırlama, BEP programı, bireyselleştirilmiş eğitim planı, online PDR, özel eğitim,">
 
-  <!-- Favicons -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://onlinepdr.com/bep">
+  <meta property="og:title" content="Online BEP Hazırlama Robotu v2.0">
+  <meta property="og:description" content="Projelerinizi kaydedin, dilediğiniz zaman devam edin. Türkiye'nin en gelişmiş BEP aracı.">
+  <meta property="og:image" content="https://onlinepdr.com/assets/img/bep-tanitim-kapak.jpg">
+
   <link href="assets/img/favicon.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-    rel="stylesheet">
+  <script type="text/javascript" async src="https://static.cdn.admatic.com.tr/dist/gpt.min.js?id=NID-171446397753"></script>
 
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <style>
+    /* Tüm Sayfayı Kaplama Ayarları */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%; /* Yükseklik %100 */
+      width: 100%;  /* Genişlik %100 */
+      overflow: hidden; /* Sayfanın kendi scroll barını gizle (iframe içinden kaydırılır) */
+      background-color: #fff;
+    }
 
-  <!-- Main CSS File -->
-  <link href="assets/css/main.css" rel="stylesheet">
+    /* Iframe Ayarları */
+    #bep-frame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block; /* Alt kısımdaki boşluğu engeller */
+      z-index: 10; /* En üstte durması için */
+    }
 
-  <!-- Admatic BACKFILL ads START -->
-<script type="text/javascript" async src="https://static.cdn.admatic.com.tr/dist/gpt.min.js?id=NID-171446397753"></script>
-<!-- Admatic BACKFILL ads END -->
+    /* Reklam Alanı (Opsiyonel - Eğer popup/interstitial ise görünür, banner ise iframe altında kalabilir) */
+    .ad-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0; /* Görünmez yapar ama kod çalışır */
+      z-index: 1; 
+      overflow: hidden;
+    }
+  </style>
 
 </head>
 
-<body class="blog-page">
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFZ4T344" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+<body>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFZ4T344"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-  <header id="header" class="header d-flex align-items-center fixed-top">
-    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+  <iframe 
+      id="bep-frame"
+      src="https://script.google.com/macros/s/AKfycbyHGE5p3sVJ_QKSFupTpuWEjMDtcTJXClwUEqII3xWY8eXxivhilMxEZoPWjojgY5Ak/exec" 
+      title="Online BEP Robotu"
+      allowfullscreen>
+  </iframe>
 
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <h1 class="sitename">OnlinePDR</h1>
-      </a>
-
-      <nav id="navmenu" class="navmenu">
-        <ul>
-          <li><a href="index.html">Ana Sayfa</a></li>
-          <li><a href="about.html">Hakkımızda</a></li>
-          <li><a href="services.html">Hizmetlerimiz</a></li>
-          <li><a href="rehberlik.html">Rehberlik</a></li>
-          <li><a href="ozelegitim.html">Özel Eğitim</a></li>
-          <li><a href="test-anket-olcek.html">Test,Anket ve Ölçek</a></li>
-          <li><a href="contact.html">İletişim</a></li>
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-      </nav>
-
-    </div>
-  </header>
-
-  <main class="main">
-
-    <!-- Page Title -->
-    <div class="page-title dark-background" style="padding:100px 0 25px;">
-      <div class="container position-relative">
-        <h1>BEP Hazırlama Programı</h1>
-        <p style="display:none">Öğrencileriniz için kolayca BEP hazırlamanızı sağlayacak bir program</p>
-        <nav class="breadcrumbs">
-          <ol>
-            <li><a href="index.html">Ana Sayfa</a></li>
-            <li><a href="ozelegitim.html">Özel Eğitim</a></li>
-            <li class="current">BEP Hazırlama Programı</li>
-          </ol>
-        </nav>
-      </div>
-    </div><!-- End Page Title -->
-
-    <!-- Blog Posts Section -->
-    <!--  <section id="akillibep" class="blog-posts section"> -->
-
-    <iframe id="bep"
-      src="https://script.google.com/macros/s/AKfycbzuCPbfN4WxqlrN-SqmtUAn0-CilhUYWzo5TC9u-6npnRXVG3T1Pi4awHavlIFGLFdY/exec"
-      width="100%" height="800" style="border:none; overflow:hidden;" allow="clipboard-write">
-    </iframe>
-
-    <section id="bep-bilgi" class="section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body p-4 p-md-5">
-                        <h2 class="mb-4 text-primary">Bireyselleştirilmiş Eğitim Programı (BEP) Hakkında Her Şey</h2>
-                        <p class="lead">OnlinePDR BEP Hazırlama programı ile yasal mevzuata uygun planlar hazırlarken
-                            ihtiyacınız olan teorik bilgileri aşağıda bulabilirsiniz.</p>
-                        <hr class="my-4">
-                        <article class="blog-details">
-                            <h3>BEP Nedir ve Neden Hazırlanmalıdır?</h3>
-                            <p>Bireyselleştirilmiş eğitim programı (BEP); özel eğitim ihtiyacı olan bireylerin gelişim
-                                özellikleri, ilgi ve yetenekleri ile eğitsel performansları doğrultusunda hazırlanan
-                                özel bir programdır.Bu program, öğrencinin destek eğitim hizmetlerinden en üst düzeyde
-                                yararlanmasını amaçlayan, aile, öğretmen ve uzman iş birliğiyle oluşturulan yazılı bir
-                                dokümandır.</p>
-                            <p>BEP hazırlamak sadece pedagojik bir gereklilik değil, aynı zamanda 573 sayılı Kanun
-                                Hükmünde Kararname ve MEB yönetmelikleri gereği yasal bir zorunluluktur.BEP sayesinde
-                                öğrencinin güçlü yönlerine odaklanılarak gelişimi izlenir.</p>
-                            <h3 class="mt-4">BEP Hazırlama Sürecinde Kimler Görev Alır?</h3>
-                            <p>BEP süreci, okul müdürü veya yardımcısı başkanlığında kurulan <strong>BEP Geliştirme
-                                    Birimi</strong> tarafından yönetilir.Yönetmeliğe göre bu birim şu üyelerden oluşur:
-                            </p>
-                            <ul>
-                                <li>Birim Başkanı (Okul Müdürü/Müdür Yardımcısı)</li>
-                                <li>Öğrencinin Velisi, Sınıf Öğretmeni ve Alan Öğretmenleri</li>
-                                <li>Rehber Öğretmen/Psikolojik Danışman</li>
-                                <li>Gerektiğinde Özel Eğitim Değerlendirme Kurulundan bir üye</li>
-                            </ul>
-                            <h3 class="mt-4">Adım Adım BEP Hazırlama Süreci</h3>
-                            <p>Etkili bir BEP süreci 6 temel adımdan oluşur:</p>
-                            <ol>
-                                <li><strong>Bilgi Toplama:</strong> Öğrencinin sağlık, akademik ve gelişimsel
-                                    verilerinin toplanması.</li>
-                                <li><strong>Eğitsel Performans:</strong> Öğrencinin yapabildikleri ve destek
-                                    ihtiyaçlarının "ölçülebilir ve gözlenebilir" ifadelerle belirlenmesi (Örn: "Toplama
-                                    işlemini anlar" yerine "İki basamaklı sayıları toplar").</li>
-                                <li><strong>İhtiyaçların Belirlenmesi:</strong> Öncelikli öğrenme hedeflerinin
-                                    seçilmesi.</li>
-                                <li><strong>Amaçların Yazılması:</strong> Uzun ve kısa dönemli amaçların öğrenci adına
-                                    özgülenerek yazılması.</li>
-                                <li><strong>Strateji ve Kaynaklar:</strong> Hangi öğretim yöntemlerinin kullanılacağının
-                                    planlanması.</li>
-                                <li><strong>Değerlendirme:</strong> Başarının nasıl ve ne zaman ölçüleceğinin takvime
-                                    bağlanması.</li>
-                            </ol>
-                            <div class="alert alert-info mt-4" role="alert"> <i class="bi bi-info-circle-fill me-2"></i>
-                                <strong>Unutmayın:</strong> Aileler çocukları hakkında en detaylı bilgiye sahip olan
-                                kişilerdir.Ailenin onayı ve katılımı olmadan hazırlanan bir BEP eksik kalacaktır. </div>
-                            <p class="text-muted small mt-4"> <em>Kaynak: T.C. Millî Eğitim Bakanlığı Özel Eğitim ve
-                                    Rehberlik Hizmetleri Genel Müdürlüğü, "Bireyselleştirilmiş Eğitim Programı: Tüm
-                                    Öğretmenler İçin Yol Haritası", 2022.</em> </p>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- </section> -->
-    <!-- /Blog Pagination Section -->
-
-  </main>
-
-  <footer id="footer" class="footer dark-background">
-
-    <div class="container footer-top">
-      <div class="row gy-4">
-        <div class="col-lg-4 col-md-6 footer-about">
-          <a href="index.html" class="d-flex align-items-center">
-            <span class="sitename">OnlinePDR</span>
-          </a>
-          <div class="footer-contact pt-3">
-            <p>Selçuklu</p>
-            <p>KONYA</p>
-            <p class="mt-3"><strong>Telefon:</strong> <span>+90 0505 536 38 42</span></p>
-            <p><strong>Email:</strong> <span>abdullahyilmazpdr@gmail.com</span></p>
-          </div>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Site Haritası</h4>
-          <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="#">Ana Sayfa</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="about.html">Hakkımızda</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="services.html">Hizmetlerimiz</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="rehberlik.html">Rehberlik</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="ozelegitim.html">Özel Eğitim</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="contact.html">İletişim</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Hizmetlerimiz</h4>
-          <ul>
-            <li><i class="bi bi-chevron-right"></i> <a href="tercih-robotu.html">Tercih Robotları</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a
-                href="bep.html"
-                target="_blank">BEP Hazırlama Programı</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="yerel-hedefler.html">Yerel Hedefler</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a
-                href="https://script.google.com/macros/s/AKfycbySJIjmCXs0hFytmF4gxxSOuqz1fWHV_ZxNwzo1xVrAoC9o99k1JDmkKKu4Gd2QEjW2/exec"
-                target="_blank">Okul Risk Haritası Programı</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="test-anket-olcek.html">Test, Anket ve Ölçekler</a></li>
-            <li><i class="bi bi-chevron-right"></i> <a href="privacy.html">Gizlilik Politikası</a></li>
-          </ul>
-        </div>
-
-        <div class="col-lg-4 col-md-12">
-          <h4>Bizi Takip Edin</h4>
-          <p>Sosyal medya hesaplarımızı takip ederek gelişmelerden anında haberdar olun</p>
-          <div class="social-links d-flex">
-            <a href="https://www.facebook.com/infonlinepdr" target="_blank"><i class="bi bi-facebook"></i></a>
-            <a href="https://www.instagram.com/infonlinepdr" target="_blank"><i class="bi bi-instagram"></i></a>
-            <a href="https://www.youtube.com/@infonlinepdr" target="_blank"><i class="bi bi-youtube"></i></a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">OnlinePDR</strong> <span>Tüm hakları saklıdır</span></p>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-
-  </footer>
-
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
-      class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-  <!-- Admatic AUTO ads START -->
-<ins data-publisher="adm-pub-171446397753" data-ad-network="6920a686110e7df8ed558bf5" class="adm-ads-area"></ins>
-<script type="text/javascript" src="https://static.cdn.admatic.com.tr/showad/showad.min.js"></script>
-<!-- Admatic AUTO ads END -->
+  <div class="ad-container">
+      <ins data-publisher="adm-pub-171446397753" data-ad-network="6920a686110e7df8ed558bf5" class="adm-ads-area"></ins>
+      <script type="text/javascript" src="https://static.cdn.admatic.com.tr/showad/showad.min.js"></script>
+  </div>
 
 </body>
-
-
 </html>
-
-
-
-
-
-
