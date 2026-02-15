@@ -85,6 +85,30 @@
       allowfullscreen>
   </iframe>
 
+  <script>
+        // Sayfa Yüklendiğinde URL'de Veri Var mı Kontrol Et
+        window.onload = function() {
+            var hash = window.location.hash;
+            if (hash && hash.includes("#load=")) {
+                // Veriyi temizle (#load= kısmını at)
+                var data = hash.substring(6); // "#load=" 6 karakter
+                
+                // İframe'in tamamen yüklenmesini bekle, sonra veriyi gönder
+                var iframe = document.getElementById('bepFrame');
+                
+                // İframe yüklendikten sonra mesaj gönder
+                iframe.onload = function() {
+                    // Güvenlik için hedef domain olarak "*" kullanıyoruz ama 
+                    // canlıda script.google.com adresini belirtmek daha iyidir.
+                    iframe.contentWindow.postMessage({ type: 'LOAD_PROJECT', payload: data }, '*');
+                    
+                    // URL'yi temizle ki kullanıcı F5 atınca tekrar yüklemeye çalışmasın
+                    history.replaceState(null, null, ' ');
+                };
+            }
+        };
+    </script>
+
   <div class="ad-container">
       <ins data-publisher="adm-pub-171446397753" data-ad-network="6920a686110e7df8ed558bf5" class="adm-ads-area"></ins>
       <script type="text/javascript" src="https://static.cdn.admatic.com.tr/showad/showad.min.js"></script>
@@ -92,5 +116,6 @@
 
 </body>
 </html>
+
 
 
