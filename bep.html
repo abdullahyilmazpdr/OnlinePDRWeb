@@ -86,32 +86,47 @@
   </iframe>
 
   <script>
-        // Sadece iframe'den mesaj gelmesini dinle
-        window.addEventListener('message', function(e) {
-            
-            // 1. Uygulama "Ben Hazırım" (APP_READY) dedi mi?
-            if (e.data && e.data.type === 'APP_READY') {
-                console.log("✅ Uygulama hazır, URL kontrol ediliyor...");
+        // SİZİN GOOGLE SCRIPT URL'NİZİ BURAYA YAPIŞTIRIN
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby.../exec"; // <-- GÜNCELLEYİN
 
-                // 2. URL'de veri (#load=...) var mı diye ŞİMDİ bak
-                var hash = window.location.hash;
-                if (hash && hash.includes("#load=")) {
-                    
-                    var data = hash.substring(6); // "#load=" kısmını at
-                    var iframe = document.getElementById('bepFrame');
-                    
-                    // 3. Veriyi Uygulamaya Fırlat
-                    console.log("📦 Veri iframe'e gönderiliyor...");
-                    iframe.contentWindow.postMessage({ 
-                        type: 'LOAD_PROJECT', 
-                        payload: data 
-                    }, '*');
-                    
-                    // 4. URL'yi ANCAK ŞİMDİ TEMİZLE (Veri gönderildiğinden eminiz)
-                    history.replaceState(null, null, ' ');
-                }
+        window.onload = function() {
+            var iframe = document.getElementById('bepFrame');
+            var hash = window.location.hash;
+
+            // 1. URL'de veri var mı? (#load=...)
+            if (hash && hash.includes("#load=")) {
+                console.log("📦 Veri algılandı, POST işlemi başlatılıyor...");
+                
+                // Veriyi temizle
+                var data = hash.substring(6); 
+
+                // Görünmez Form Oluştur
+                var form = document.createElement("form");
+                form.setAttribute("method", "POST");
+                form.setAttribute("action", GOOGLE_SCRIPT_URL);
+                form.setAttribute("target", "bepTargetFrame"); // Formu Iframe'in içine gönder
+
+                // Veriyi forma ekle
+                var hiddenField = document.createElement("input");
+                hiddenField.setAttribute("type", "hidden");
+                hiddenField.setAttribute("name", "projectData");
+                hiddenField.setAttribute("value", data);
+                form.appendChild(hiddenField);
+
+                // Formu gönder
+                document.body.appendChild(form);
+                form.submit();
+                document.body.removeChild(form);
+
+                // URL'yi temizle
+                history.replaceState(null, null, ' ');
+
+            } else {
+                // 2. Veri yoksa normal aç
+                console.log("ℹ️ Normal açılış yapılıyor...");
+                iframe.src = GOOGLE_SCRIPT_URL;
             }
-        });
+        };
     </script>
 
   <div class="ad-container">
@@ -121,6 +136,7 @@
 
 </body>
 </html>
+
 
 
 
