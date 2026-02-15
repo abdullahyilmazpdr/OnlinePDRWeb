@@ -79,15 +79,16 @@
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <iframe 
-      id="bep-frame"
-      src="https://script.google.com/macros/s/AKfycbyHGE5p3sVJ_QKSFupTpuWEjMDtcTJXClwUEqII3xWY8eXxivhilMxEZoPWjojgY5Ak/exec" 
+      id="bepFrame" 
+        name="bepTargetFrame" 
+        class="app-frame"
       title="Online BEP Robotu"
       allowfullscreen>
   </iframe>
 
   <script>
         // SİZİN GOOGLE SCRIPT URL'NİZİ BURAYA YAPIŞTIRIN
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby.../exec"; // <-- GÜNCELLEYİN
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyHGE5p3sVJ_QKSFupTpuWEjMDtcTJXClwUEqII3xWY8eXxivhilMxEZoPWjojgY5Ak/exec"; // <-- GÜNCELLEYİN
 
         window.onload = function() {
             var iframe = document.getElementById('bepFrame');
@@ -136,6 +137,7 @@
 
 </body>
 </html>
+
 
 
 
