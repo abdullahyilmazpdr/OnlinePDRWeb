@@ -86,34 +86,29 @@
   </iframe>
 
   <script>
-        // Sayfa Yüklendiğinde URL'deki Veriyi Hafızaya Al
-        var pendingProjectData = null;
-
-        window.onload = function() {
-            var hash = window.location.hash;
-            if (hash && hash.includes("#load=")) {
-                // Veriyi çek ve değişkene at (Henüz gönderme!)
-                pendingProjectData = hash.substring(6); 
-                
-                // URL'yi temizle (Görüntü kirliliğini önle)
-                history.replaceState(null, null, ' ');
-            }
-        };
-
-        // İframe'den (Uygulamadan) Mesaj Bekle
+        // Sadece iframe'den mesaj gelmesini dinle
         window.addEventListener('message', function(e) {
-            // Eğer Uygulama "Ben Hazırım" derse ve elimizde veri varsa gönder
+            
+            // 1. Uygulama "Ben Hazırım" (APP_READY) dedi mi?
             if (e.data && e.data.type === 'APP_READY') {
-                if (pendingProjectData) {
-                    console.log("Uygulama hazır, veri gönderiliyor...");
+                console.log("✅ Uygulama hazır, URL kontrol ediliyor...");
+
+                // 2. URL'de veri (#load=...) var mı diye ŞİMDİ bak
+                var hash = window.location.hash;
+                if (hash && hash.includes("#load=")) {
+                    
+                    var data = hash.substring(6); // "#load=" kısmını at
                     var iframe = document.getElementById('bepFrame');
+                    
+                    // 3. Veriyi Uygulamaya Fırlat
+                    console.log("📦 Veri iframe'e gönderiliyor...");
                     iframe.contentWindow.postMessage({ 
                         type: 'LOAD_PROJECT', 
-                        payload: pendingProjectData 
+                        payload: data 
                     }, '*');
                     
-                    // Veriyi gönderdikten sonra değişkeni temizle (Tekrar göndermesin)
-                    pendingProjectData = null;
+                    // 4. URL'yi ANCAK ŞİMDİ TEMİZLE (Veri gönderildiğinden eminiz)
+                    history.replaceState(null, null, ' ');
                 }
             }
         });
@@ -126,6 +121,7 @@
 
 </body>
 </html>
+
 
 
 
