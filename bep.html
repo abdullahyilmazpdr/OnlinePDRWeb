@@ -86,27 +86,37 @@
   </iframe>
 
   <script>
-        // Sayfa Yüklendiğinde URL'de Veri Var mı Kontrol Et
+        // Sayfa Yüklendiğinde URL'deki Veriyi Hafızaya Al
+        var pendingProjectData = null;
+
         window.onload = function() {
             var hash = window.location.hash;
             if (hash && hash.includes("#load=")) {
-                // Veriyi temizle (#load= kısmını at)
-                var data = hash.substring(6); // "#load=" 6 karakter
+                // Veriyi çek ve değişkene at (Henüz gönderme!)
+                pendingProjectData = hash.substring(6); 
                 
-                // İframe'in tamamen yüklenmesini bekle, sonra veriyi gönder
-                var iframe = document.getElementById('bepFrame');
-                
-                // İframe yüklendikten sonra mesaj gönder
-                iframe.onload = function() {
-                    // Güvenlik için hedef domain olarak "*" kullanıyoruz ama 
-                    // canlıda script.google.com adresini belirtmek daha iyidir.
-                    iframe.contentWindow.postMessage({ type: 'LOAD_PROJECT', payload: data }, '*');
-                    
-                    // URL'yi temizle ki kullanıcı F5 atınca tekrar yüklemeye çalışmasın
-                    history.replaceState(null, null, ' ');
-                };
+                // URL'yi temizle (Görüntü kirliliğini önle)
+                history.replaceState(null, null, ' ');
             }
         };
+
+        // İframe'den (Uygulamadan) Mesaj Bekle
+        window.addEventListener('message', function(e) {
+            // Eğer Uygulama "Ben Hazırım" derse ve elimizde veri varsa gönder
+            if (e.data && e.data.type === 'APP_READY') {
+                if (pendingProjectData) {
+                    console.log("Uygulama hazır, veri gönderiliyor...");
+                    var iframe = document.getElementById('bepFrame');
+                    iframe.contentWindow.postMessage({ 
+                        type: 'LOAD_PROJECT', 
+                        payload: pendingProjectData 
+                    }, '*');
+                    
+                    // Veriyi gönderdikten sonra değişkeni temizle (Tekrar göndermesin)
+                    pendingProjectData = null;
+                }
+            }
+        });
     </script>
 
   <div class="ad-container">
@@ -116,6 +126,7 @@
 
 </body>
 </html>
+
 
 
 
