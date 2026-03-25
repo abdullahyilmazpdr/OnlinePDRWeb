@@ -367,6 +367,18 @@ iframe-wrapper {
 
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+<script>
+  // Render'dan gelen 'boyum değişti' mesajlarını dinle
+  window.addEventListener('message', function(event) {
+    if (event.data && event.data.type === 'resize_iframe') {
+      const iframeElement = document.getElementById('bep-iframe');
+      if (iframeElement) {
+        // İframe'in boyunu gelen değere göre ayarla (altı kesilmesin diye +40px pay veriyoruz)
+        iframeElement.style.height = (event.data.height + 40) + 'px';
+      }
+    }
+  });
+</script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
