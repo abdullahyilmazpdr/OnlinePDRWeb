@@ -371,7 +371,7 @@ iframe-wrapper {
   // Render'dan gelen 'boyum değişti' mesajlarını dinle
   window.addEventListener('message', function(event) {
     if (event.data && event.data.type === 'resize_iframe') {
-      const iframeElement = document.getElementById('bep-iframe');
+      const iframeElement = document.getElementById('akillibep');
       if (iframeElement) {
         // İframe'in boyunu gelen değere göre ayarla (altı kesilmesin diye +40px pay veriyoruz)
         iframeElement.style.height = (event.data.height + 40) + 'px';
