@@ -180,25 +180,47 @@
       overflow-y: auto;
     }
 
-    .iframe-wrapper {
-  position: relative;
-  width: 100%;
-  /* YÜKSEKLİK SINIRI EKLENDİ: Ekran yüksekliğinin %80'ini geçmesin */
-  max-height: 80vh; 
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  overflow-y: auto; /* İçerik 80vh'yi aşarsa bu kutuda scroll çıkar */
-  border: 1px solid rgba(0,0,0,0.05);
-}
+iframe-wrapper {
 
-.iframe-wrapper iframe {
-  width: 100%;
-  /* İframe yine devasa olabilir ama wrapper onu sınırladığı için kesilme olmaz, kaydırılır */
-  height: 2200px; 
-  border: none;
-  display: block; 
-}
+      position: relative;
+
+      width: 100%;
+
+      /* Yükseklik kısıtlaması kaldırıldı, içeriğe göre uzayacak */
+
+      height: auto; 
+
+      background: #fff;
+
+      border-radius: 12px;
+
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+
+      /* Overflow hidden, iframe taşarsa kesmesin diye kaldırılabilir ama 
+
+         köşe yuvarlatmalar için tutuyoruz. İçerik zaten sığacak. */
+
+      overflow-y: auto;
+
+      border: 1px solid rgba(0,0,0,0.05);
+
+    }
+
+
+
+    .iframe-wrapper iframe {
+
+      width: 100%;
+
+      /* BURASI KRİTİK: Çok uzun bir yükseklik veriyoruz ki scroll çıkmasın */
+
+      height: 2200px; 
+
+      border: none;
+
+      display: block; /* Alt kısımdaki boşluğu engellemek için */
+
+    }
     
     /* Mobilde formlar daha da uzayabilir */
     @media (max-width: 768px) {
