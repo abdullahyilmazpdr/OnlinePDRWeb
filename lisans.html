@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Lisans Tercih Robotu | OnlinePDR</title>
+    <meta name="description" content="YKS Lisans (4 Yıllık) tercih robotu. Güncel üniversite taban puanları, başarı sıralamaları ve kontenjanları.">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; overflow-y: auto; }
+
+        header { background-color: var(--card-bg); border-bottom: 1px solid var(--border-color); z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.05); position: sticky; top: 0; }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
+        .logo { font-size: 1.4rem; font-weight: 800; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 6px; }
+        .nav-menu { display: flex; gap: 20px; }
+        .nav-menu a { text-decoration: none; color: var(--text-light); font-weight: 600; font-size: 0.95rem; transition: color 0.2s; padding: 5px 0; }
+        .nav-menu a:hover, .nav-menu a.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
+
+        main { flex: 1; display: flex; flex-direction: column; max-width: 1400px; margin: 15px auto 40px; width: 100%; padding: 0 15px; height: auto; }
+        
+        .page-header { margin-bottom: 15px; }
+        .page-header h1 { font-size: 1.5rem; color: var(--text-main); margin-bottom: 5px; font-weight: 700; }
+        .page-header p { color: var(--text-light); font-size: 0.9rem; }
+
+        .filter-section {
+            background: var(--card-bg); padding: 15px 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 15px;
+            display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 10px; align-items: end;
+        }
+        .input-group { display: flex; flex-direction: column; gap: 4px; }
+        .input-group label { font-size: 0.8rem; font-weight: 600; color: var(--text-light); }
+        .input-group input[type="text"], .input-group input[type="number"], .input-group select { padding: 8px 10px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; transition: border-color 0.2s; font-family: inherit; font-size: 0.9rem;}
+        .input-group input:focus, .input-group select:focus { border-color: var(--primary); }
+
+        .checkbox-group { grid-column: 1 / -1; display: flex; gap: 15px; flex-wrap: wrap; background: #f8fafc; padding: 8px 12px; border-radius: 8px; border: 1px dashed #cbd5e1; margin-top: 5px;}
+        .checkbox-item { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 0.8rem; font-weight: 600; color: var(--primary-dark); }
+        .checkbox-item input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: var(--primary); }
+
+        .toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 10px; }
+        .info-text { font-size: 0.85rem; color: var(--text-light); }
+        .btn { padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; border: none; font-size: 0.85rem; display: flex; align-items: center; justify-content: center; gap: 6px; transition: background 0.2s; }
+        .btn-print { background-color: #f1f5f9; color: var(--text-main); border: 1px solid var(--border-color); }
+        .btn-print:hover { background-color: #e2e8f0; }
+        .btn-primary { background-color: var(--primary); color: white; }
+        .btn-primary:hover { background-color: var(--primary-dark); }
+
+        .table-container {
+            background: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
+            overflow-x: auto; -webkit-overflow-scrolling: touch; position: relative; margin-bottom: 20px;
+        }
+
+        table { width: 100%; border-collapse: collapse; text-align: left; min-width: 1100px; }
+        thead { background-color: #f8fafc; position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        th { padding: 10px; font-size: 0.8rem; font-weight: 600; color: var(--text-light); white-space: nowrap; border-bottom: 2px solid var(--border-color); }
+        td { padding: 10px; font-size: 0.85rem; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+        
+        .main-row { cursor: pointer; transition: background-color 0.2s; }
+        .main-row:hover { background-color: #f1f5f9; }
+        .detail-row { display: none; background-color: #f8fafc; }
+        .detail-row.open { display: table-row; }
+        .detail-table { width: 100%; margin: 5px 0; border: 1px solid var(--border-color); background: #fff; border-radius: 8px; overflow: hidden; }
+        .detail-table th, .detail-table td { padding: 6px 10px; font-size: 0.8rem; text-align: center; border: 1px solid var(--border-color); min-width: auto; }
+        .detail-table th { background: #e2e8f0; color: #334155; }
+
+        .badge { background-color: #dbeafe; color: var(--primary-dark); padding: 4px 8px; border-radius: 6px; font-weight: 600; }
+        .kosul-badge { background: #f1f5f9; color: var(--text-main); padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; cursor: help; border: 1px solid var(--border-color); display: inline-block; margin: 2px;}
+        
+        /* PROGRAM KODU YENİ TASARIMI */
+        .btn-sepet-ekle { background: transparent; color: var(--text-light); border: 1px solid var(--text-light); padding: 6px 10px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; cursor: pointer; width: 100%; white-space: nowrap; }
+        .btn-sepet-ekle.added { background: var(--success); color: white; border-color: var(--success); }
+        .btn-sepet-sil { background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; width: 100%; font-size: 0.8rem; font-weight: 600;}
+        .btn-sepet-sil:hover { background: #dc2626; }
+        
+        .print-only { display: none; }
+        /* ÇİFT TIKLA KOPYALA - YENİ KOD TASARIMI VE BİLDİRİMİ */
+        .prog-kodu-ekran { display: block; font-size: 0.70rem; color: var(--text-light); margin-top: 4px; text-align: center; font-family: 'Courier New', Courier, monospace; letter-spacing: 0.5px; cursor: pointer; user-select: none; transition: color 0.2s; font-weight: 600; }
+        .prog-kodu-ekran:hover { color: var(--primary); }
+        
+        .toast-kutu { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: var(--text-main); color: #fff; padding: 12px 25px; border-radius: 30px; font-size: 0.9rem; font-weight: 600; opacity: 0; transition: opacity 0.3s ease, bottom 0.3s ease; z-index: 3000; pointer-events: none; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); }
+        .toast-kutu.show { opacity: 1; bottom: 100px; }
+
+        .floating-cart { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; padding: 15px 25px; border-radius: 50px; font-weight: 600; box-shadow: 0 10px 15px -3px rgba(37,99,235,0.3); cursor: pointer; z-index: 1000; display: flex; align-items: center; gap: 8px; transition: transform 0.2s; border: none; font-size: 1rem; }
+        .floating-cart:hover { transform: translateY(-3px); }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; display: none; justify-content: center; align-items: center; }
+        .modal-content { background: var(--card-bg); width: 95%; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); }
+        .modal-header { padding: 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .modal-body { padding: 20px; overflow-y: auto; flex: 1; }
+        .close-modal { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-light); }
+
+        .kosul-detay-liste::-webkit-scrollbar { width: 6px; }
+        .kosul-detay-liste::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        #sepetModal .modal-content { max-width: 1300px; max-height: 90vh; }
+        #confirmModal .modal-content { max-width: 450px; text-align: center; }
+        #updateNoticeModal .modal-content { max-width: 450px; text-align: center; border-top: 5px solid var(--success); }
+        #printOptionsModal .modal-content { max-width: 500px; }
+
+        /* TERCİH SÖZLÜĞÜ (REHBER) CSS */
+        .rehber-btn { background: var(--bg-color); border: 1px solid var(--border-color); color: var(--text-light); }
+        .rehber-btn.active { background: #dbeafe; border-color: var(--primary); color: var(--primary-dark); }
+        .rehber-badge {
+            background: #f8fafc; border: 1px solid #cbd5e1; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; 
+            color: var(--primary-dark); cursor: pointer; transition: all 0.2s; white-space: normal; display: inline-block;
+        }
+        .rehber-badge:hover { background: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 6px rgba(37,99,235,0.2); }
+        #rehberListe::-webkit-scrollbar { width: 6px; }
+        #rehberListe::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        @media (max-width: 992px) {
+            .nav-container { flex-direction: column; }
+            .nav-menu { width: 100%; justify-content: center; flex-wrap: wrap; gap: 10px; }
+            .filter-section { grid-template-columns: 1fr 1fr; padding: 15px; }
+            .search-group { grid-column: 1 / -1; }
+            .floating-cart { bottom: 20px; right: 20px; padding: 12px 20px; font-size: 0.9rem; }
+            
+            .table-container { max-height: 65vh; overflow-y: auto; }
+            ::-webkit-scrollbar { height: 8px; width: 8px; }
+            ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        }
+
+        /* YAZDIRMA AYARLARI */
+        @media print {
+            @page { size: landscape; margin: 10mm; } 
+            body { background: white; font-size: 10pt; overflow: visible; display: block;}
+            
+            /* Ekrana Özel Öğeleri Gizle, Yazıcıya Özelleri Göster */
+            .screen-only { display: none !important; }
+            .print-only { display: block !important; font-weight: bold; text-align: center; }
+            .btn-sepet-ekle, .btn-sepet-sil { display: none !important; }
+            /* Bunu @media print { içine ekleyin */
+            .prog-kodu-ekran { font-size: 9pt !important; color: #000 !important; margin-top: 0 !important; font-family: inherit !important; letter-spacing: 0 !important; font-weight: bold; }
+            body.printing-sepet main, body.printing-sepet header, body.printing-sepet footer, body.printing-sepet .floating-cart { display: none !important; }
+            body.printing-sepet #sepetModal { position: static; display: block !important; width: 100%; background: white; }
+            body.printing-sepet .modal-header .btn, body.printing-sepet .close-modal { display: none !important; }
+            body.printing-sepet .modal-content { max-height: none; overflow: visible; box-shadow: none; width: 100%; }
+            body.printing-sepet .modal-body { padding: 0; overflow: visible; }
+            
+            body:not(.printing-sepet) header, body:not(.printing-sepet) .filter-section, body:not(.printing-sepet) .floating-cart, body:not(.printing-sepet) .btn-print, body:not(.printing-sepet) .modal-overlay { display: none !important; }
+            
+            .table-container { box-shadow: none; border: none; overflow: visible !important; max-height: none !important; }
+            table { min-width: 100%; border: 1px solid #000; }
+            th, td { border: 1px solid #000; padding: 4px; font-size: 9pt; }
+            .detail-table { margin: 2px 0; border: 1px solid #000; }
+            
+            /* Kullanıcı Seçimine Göre Detay Gizleme/Gösterme */
+            .detail-row { display: none !important; }
+            body.print-with-details .detail-row { display: table-row !important; page-break-inside: avoid; }
+
+            .badge { background: none; color: #000; font-weight: bold; padding: 0; }
+            .kosul-badge { background: none; border: none; color: #000; font-weight: normal; }
+            * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                OnlinePDR
+            </a>
+            <nav class="nav-menu">
+                <a href="index.html">Ana Sayfa</a>
+                <a href="lisans.html" class="active">Lisans (4 Yıllık)</a>
+                <a href="onlisans.html">Önlisans (2 Yıllık)</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1>Lisans (4 Yıllık) Tercih Robotu</h1>
+            <p>En güncel üniversite taban puanları, başarı sıralamaları ve kontenjanları.</p>
+        </div>
+
+        <div class="filter-section">
+            <div class="input-group search-group">
+                <label for="search">Bölüm, Üniversite, Şehir Ara</label>
+                <input type="text" id="search" placeholder="Örn: Psikoloji, İstanbul...">
+            </div>
+            <div class="input-group">
+                <label for="puanTuru">Puan Türü</label>
+                <select id="puanTuru">
+                    <option value="">Tümü</option>
+                    <option value="SAY">SAY</option>
+                    <option value="EA">EA</option>
+                    <option value="SÖZ">SÖZ</option>
+                    <option value="DİL">DİL</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="uniTuru">Üniversite Türü</label>
+                <select id="uniTuru">
+                    <option value="">Tümü</option>
+                    <option value="1Devlet">Devlet</option>
+                    <option value="2Vakıf">Vakıf</option>
+                    <option value="3KKTC">KKTC</option>
+                    <option value="4Yabancı">Yabancı</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="minSira">Min. Sıralama</label>
+                <input type="number" id="minSira" placeholder="Örn: 10000">
+            </div>
+            <div class="input-group">
+                <label for="maxSira">Max. Sıralama</label>
+                <input type="number" id="maxSira" placeholder="Örn: 150000">
+            </div>
+
+            <div class="checkbox-group">
+                <label class="checkbox-item" title="Geçen yıl kontenjanı dolmayan bölümleri aralık filtresi dışında da listeye ekler.">
+                    <input type="checkbox" id="checkDolmayan" checked> Dolmayan Programları Ekle
+                </label>
+                <label class="checkbox-item" title="Bu yıl ilk defa öğrenci alacak olan bölümleri listeye ekler.">
+                    <input type="checkbox" id="checkYeniAcilan" checked> Yeni Açılan Programları Ekle
+                </label>
+            </div>
+        </div>
+
+        <div class="toolbar">
+            <div class="info-text" id="sonucBilgisi">Sistem hazırlanıyor...</div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn" style="background-color: var(--success); color: white;" onclick="rehberModalAc()">📚 Tercih Sözlüğü</button>
+                <button class="btn btn-print" onclick="yazdirmaSecenekleriAc()">🖨️ Sayfayı Yazdır</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th style="width: 80px; text-align: center;">
+                            <div class="screen-only">
+                                <label style="cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; color: var(--primary);">
+                                    <input type="checkbox" id="checkTumunuSec" style="width: 16px; height: 16px; cursor: pointer;" onclick="tumunuSecToggle(this)">
+                                    Tümü
+                                </label>
+                            </div>
+                            <div class="print-only">Prg. Kod</div>
+                        </th>
+                        <th>Üniversite & Bölüm</th>
+                        <th>Şehir</th>
+                        <th>Türü</th>
+                        <th>Puan</th>
+                        <th><span class="yil-guncel">...</span> Kont.</th>
+                        <th><span class="yil-gecmis">...</span> Sıralama</th>
+                        <th><span class="yil-gecmis">...</span> Puan</th>
+                        <th class="screen-only">Özel Koşullar</th>
+                        <th>Detay</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr><td colspan="10" style="text-align:center; padding: 20px;">Sistem hazırlanıyor...</td></tr>
+                </tbody>
+            </table>
+            
+            <div id="loadingIndicator" style="text-align:center; padding: 15px; display:none; color: var(--text-light); font-size: 0.85rem;">
+                Daha fazla veri yükleniyor...
+            </div>
+        </div>
+    </main>
+
+    <button class="floating-cart" onclick="sepetModalAc()">
+        ⭐ Sepetim <span id="sepetSayac" style="background: white; color: var(--primary); padding: 2px 8px; border-radius: 20px; margin-left: 5px;">0</span>
+    </button>
+
+    <div class="modal-overlay" id="sepetModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Tercih Sepetim</h2>
+                <div>
+                    <button class="btn btn-print" style="display:inline-flex; margin-right: 15px;" onclick="sepetiYazdir()">🖨️ Yatay Çıktı Al</button>
+                    <button class="close-modal" onclick="sepetModalKapat()">&times;</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="table-container" style="box-shadow: none; margin-bottom: 0;">
+                    <table style="min-width: 100%;">
+                        <thead>
+                            <tr>
+                                <th style="width: 80px; text-align: center;">
+                                    <span class="screen-only">İşlem</span>
+                                    <span class="print-only">Prg. Kod</span>
+                                </th>
+                                <th>Üniversite & Bölüm</th>
+                                <th>Şehir</th>
+                                <th>Tür</th>
+                                <th>P. Türü</th>
+                                <th><span class="yil-guncel">...</span> Kont.</th>
+                                <th><span class="yil-gecmis">...</span> Sıralama</th>
+                                <th><span class="yil-gecmis">...</span> Puan</th>
+                                <th class="screen-only" style="max-width: 150px;">Koşullar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sepetBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="confirmModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color: var(--warning);">İşlem Onayı</h3>
+                <button class="close-modal" onclick="confirmKapat()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage" style="font-size: 0.95rem; line-height: 1.5;"></p>
+                <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center;">
+                    <button class="btn btn-print" style="flex:1;" onclick="confirmKapat()">İptal</button>
+                    <button class="btn btn-primary" style="flex:1;" id="btnConfirmOk">Devam Et</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="updateNoticeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color: var(--success);">🎉 Veriler Güncellendi</h3>
+                <button class="close-modal" onclick="updateModalKapat()">&times;</button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p style="font-size: 0.95rem; margin-bottom: 20px;">
+                    YKS tercih robotu verileri başarıyla güncellenmiştir! Yeni verilere göre işlemlerinize devam edebilirsiniz.
+                </p>
+                <label style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.85rem; cursor: pointer; color: var(--text-light);">
+                    <input type="checkbox" id="chkDontShowUpdate"> 
+                    Yeni bir güncelleme olana kadar bu mesajı tekrar gösterme
+                </label>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" id="btnUpdateOk">Anladım</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="printOptionsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 style="color: var(--text-main);">🖨️ Yazdırma Seçenekleri</h3>
+                <button class="close-modal" onclick="printOptionsKapat()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.95rem; font-weight: 600;">
+                        <input type="checkbox" id="printOzelDetay" checked style="width: 18px; height: 18px; accent-color: var(--primary);">
+                        Geçmiş Yıl Detaylarını (Açılır Tabloyu) Göster
+                    </label>
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-left: 28px; margin-top: 5px;">Çıktıda her bölümün altına geçmiş yılların kontenjan ve sıralama kıyaslama tablosu eklenir.</p>
+                </div>
+                <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 15px 0;">
+                <div style="margin-bottom: 25px;">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.95rem; font-weight: 600;">
+                        <input type="radio" name="printKapsam" value="tum" checked style="width: 18px; height: 18px; accent-color: var(--primary);">
+                        Tüm Filtrelenmiş Sonuçları Yazdır (<span id="printFiltreSayi" style="color: var(--primary);">0</span> Bölüm)
+                    </label>
+                    <p style="font-size: 0.8rem; color: var(--text-light); margin-left: 28px; margin-top: 5px; margin-bottom: 15px;">Sonsuz kaydırma ile henüz ekrana gelmemiş olanlar dahil, listedeki tüm bölümleri kağıda döker.</p>
+                    
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.95rem; font-weight: 600;">
+                        <input type="radio" name="printKapsam" value="gorunen" style="width: 18px; height: 18px; accent-color: var(--primary);">
+                        Sadece Ekranda Yüklü Olanı Yazdır (<span id="printGorunenSayi" style="color: var(--primary);">0</span> Bölüm)
+                    </label>
+                </div>
+                <button class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 1rem;" onclick="sayfayiYazdirIslem()">Yazdırmayı Başlat</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="rehberModal">
+        <div class="modal-content" style="max-width: 600px; height: 80vh;">
+            <div class="modal-header">
+                <h3 style="color: var(--text-main);">📚 Tercih Sözlüğü</h3>
+                <button class="close-modal" onclick="rehberModalKapat()">&times;</button>
+            </div>
+            <div class="modal-body" style="display: flex; flex-direction: column;">
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 15px;">Listeden aramak istediğiniz kelimeye tıklayın. Otomatik olarak arama kutusuna eklenecektir.</p>
+                
+                <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-shrink: 0;">
+                    <button class="btn rehber-btn active" style="flex:1;" onclick="rehberListele('sehir')" id="btnRehber_sehir">Şehirler</button>
+                    <button class="btn rehber-btn" style="flex:1;" onclick="rehberListele('uni')" id="btnRehber_uni">Üniversiteler</button>
+                    <button class="btn rehber-btn" style="flex:1;" onclick="rehberListele('bolum')" id="btnRehber_bolum">Bölümler</button>
+                </div>
+                
+                <div class="input-group" style="margin-bottom: 15px; flex-shrink: 0;">
+                    <input type="text" id="rehberAraInput" placeholder="Aşağıdaki listede hızlıca bul..." onkeyup="rehberIciAra()" style="border-color: var(--primary);">
+                </div>
+                
+                <div id="rehberListe" style="display: flex; flex-wrap: wrap; gap: 8px; flex: 1; overflow-y: auto; align-content: flex-start; padding-right: 5px;">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const JSON_URL = 'https://raw.githubusercontent.com/abdullahyilmazpdr/tercih-verileri/refs/heads/main/Lisans_veriler.json';
+        const KOSULLAR_URL = 'https://raw.githubusercontent.com/abdullahyilmazpdr/tercih-verileri/refs/heads/main/kosullar.json';
+        
+        let tumVeriler = [];
+        let filtrelenmisVeriler = [];
+        let kosulVerileri = {};
+        
+        let yilGuncel = "2026"; let yilGecmis = "2025"; let yilEski = "2024"; let yilDahaEski = "2023";
+
+        let tercihSepetiKodlari = [];
+        let tercihSepeti = [];
+        
+        const eskiSepet = JSON.parse(localStorage.getItem('tercihSepeti_v2'));
+        if (eskiSepet && eskiSepet.length > 0 && typeof eskiSepet[0] === 'object') {
+            tercihSepetiKodlari = eskiSepet.map(p => p['Program Kodu']);
+            localStorage.removeItem('tercihSepeti_v2');
+            localStorage.setItem('tercihSepetiKodlari_v3', JSON.stringify(tercihSepetiKodlari));
+        } else {
+            tercihSepetiKodlari = JSON.parse(localStorage.getItem('tercihSepetiKodlari_v3')) || [];
+        }
+        
+        let gosterilenAdet = 0;
+        const ARTIS_MIKTARI = 50; 
+        let confirmAction = null;
+
+        function basitHashOlustur(metin) {
+            let hash = 0; if (metin.length === 0) return hash;
+            for (let i = 0; i < metin.length; i++) {
+                let char = metin.charCodeAt(i); hash = ((hash << 5) - hash) + char; hash = hash & hash; 
+            } return hash.toString();
+        }
+
+        window.onload = async () => {
+            try {
+                const veriResponse = await fetch(JSON_URL);
+                if (!veriResponse.ok) throw new Error("JSON Ulaşılamıyor.");
+                const veriText = await veriResponse.text();
+                
+                tumVeriler = JSON.parse(veriText);
+                tumVeriler.forEach((item, index) => { if (!item['Program Kodu']) item['Program Kodu'] = 'SYS_' + index; });
+
+                const kodSet = new Set(tercihSepetiKodlari);
+                tercihSepeti = tumVeriler.filter(p => kodSet.has(p['Program Kodu']));
+                sepetSayacGuncelle();
+
+                dinamikYillariBul();
+                veriGuncellenmisMi(veriText);
+                
+                try { const kosulResponse = await fetch(KOSULLAR_URL); kosulVerileri = await kosulResponse.json(); } 
+                catch(e) { kosulVerileri = {}; }
+                
+                filtrelenmisVeriler = tumVeriler;
+                filtrele(); 
+            } catch (error) {
+                document.getElementById('tableBody').innerHTML = `<tr><td colspan="10" style="text-align:center; color:#ef4444;">Sistem hatası: Veriler yüklenemedi.</td></tr>`;
+            }
+        };
+
+        function sepetiKaydet() {
+            tercihSepetiKodlari = tercihSepeti.map(p => p['Program Kodu']);
+            localStorage.setItem('tercihSepetiKodlari_v3', JSON.stringify(tercihSepetiKodlari));
+        }
+
+        function dinamikYillariBul() {
+            if (tumVeriler.length > 0) {
+                const keys = Object.keys(tumVeriler[0]);
+                const kontKeys = keys.filter(k => k.includes('Kont.')).map(k => parseInt(k.match(/\d{4}/))).filter(n => !isNaN(n));
+                if (kontKeys.length > 0) {
+                    yilGuncel = Math.max(...kontKeys).toString();
+                    yilGecmis = (parseInt(yilGuncel) - 1).toString();
+                    yilEski = (parseInt(yilGuncel) - 2).toString();
+                    yilDahaEski = (parseInt(yilGuncel) - 3).toString(); 
+                }
+            }
+            document.querySelectorAll('.yil-guncel').forEach(el => el.innerText = yilGuncel);
+            document.querySelectorAll('.yil-gecmis').forEach(el => el.innerText = yilGecmis);
+            document.querySelectorAll('.yil-eski').forEach(el => el.innerText = yilEski);
+        }
+
+        function veriGuncellenmisMi(jsonText) {
+            const guncelHash = basitHashOlustur(jsonText);
+            const onaylananHash = localStorage.getItem('onaylanmisVeriHash');
+            if (onaylananHash !== guncelHash) {
+                document.getElementById('updateNoticeModal').style.display = 'flex';
+                document.getElementById('btnUpdateOk').onclick = function() {
+                    if (document.getElementById('chkDontShowUpdate').checked) { localStorage.setItem('onaylanmisVeriHash', guncelHash); }
+                    document.getElementById('updateNoticeModal').style.display = 'none';
+                };
+            }
+        }
+        function updateModalKapat() { document.getElementById('updateNoticeModal').style.display = 'none'; }
+
+        function metinTemizle(metin) {
+            if (!metin) return "";
+            return metin.toString().replace(/İ/g, 'i').replace(/I/g, 'ı').replace(/Ğ/g, 'ğ').replace(/Ü/g, 'ü').replace(/Ş/g, 'ş').replace(/Ö/g, 'ö').replace(/Ç/g, 'ç').toLowerCase(); 
+        }
+
+        function filtrele() {
+            const arananKelimeler = metinTemizle(document.getElementById('search').value).split(' ').filter(k => k.trim() !== '');
+            const puanTuru = document.getElementById('puanTuru').value;
+            const uniTuruSecimi = document.getElementById('uniTuru').value;
+            const minSira = parseInt(document.getElementById('minSira').value) || 0;
+            const maxSira = parseInt(document.getElementById('maxSira').value) || 99999999;
+            const ekleDolmayan = document.getElementById('checkDolmayan').checked;
+            const ekleYeniAcilan = document.getElementById('checkYeniAcilan').checked;
+            const temizUniTuru = uniTuruSecimi.replace(/[0-9]/g, '');
+
+            const kontGuncelBaslik = yilGuncel + ' Kont.'; const kontGecmisBaslik = yilGecmis + ' Kont.'; const siraGecmisBaslik = yilGecmis + ' B. Sr.';
+
+            filtrelenmisVeriler = tumVeriler.filter(item => {
+                const birlesikMetin = metinTemizle((item['Üniversite'] || '') + " " + (item['Program Adı'] || '') + " " + (item['Şehir'] || ''));
+                let kelimelerUyuyor = true;
+                for (let kelime of arananKelimeler) { if (!birlesikMetin.includes(kelime)) { kelimelerUyuyor = false; break; } }
+                if (!kelimelerUyuyor) return false;
+                if (puanTuru !== "" && (item['Puan Türü'] || '') !== puanTuru) return false;
+                if (uniTuruSecimi !== "" && (item['Üni. Türü'] || '') !== uniTuruSecimi) return false;
+
+                let siralamaHam = String(item[siraGecmisBaslik] || '').replace(/\./g, '').trim();
+                let siralamaSayi = parseInt(siralamaHam); let gecerliSiralamaVar = !isNaN(siralamaSayi) && siralamaSayi > 0;
+                
+                let kontGecmisHam = String(item[kontGecmisBaslik] || '').trim();
+                let kontGuncelHam = String(item[kontGuncelBaslik] || '').trim();
+
+                let isYeniAcilan = (kontGecmisHam === "" || kontGecmisHam === "0") && kontGuncelHam !== "";
+                let isDolmayan = !isYeniAcilan && (!gecerliSiralamaVar || siralamaHam === "" || siralamaHam === "-");
+
+                if (gecerliSiralamaVar && siralamaSayi >= minSira && siralamaSayi <= maxSira) return true;
+                if (ekleYeniAcilan && isYeniAcilan) return true;
+                if (ekleDolmayan && isDolmayan) return true;
+                return false; 
+            });
+
+            gosterilenAdet = 0; document.getElementById('tableBody').innerHTML = '';
+            document.getElementById('loadingIndicator').style.display = 'block';
+            tabloyaVeriEkle(); tumunuSecDurumunuGuncelle(); 
+        }
+
+        document.querySelectorAll('input, select').forEach(el => el.addEventListener('input', filtrele));
+
+        function tumunuSecDurumunuGuncelle() {
+            const chk = document.getElementById('checkTumunuSec'); const toplamFiltreli = filtrelenmisVeriler.length;
+            if (toplamFiltreli === 0) { chk.checked = false; chk.indeterminate = false; chk.disabled = true; return; }
+            chk.disabled = false;
+            
+            const sepetKodlari = new Set(tercihSepeti.map(p => p['Program Kodu']));
+            let sepetteOlanAdet = 0;
+            for (let i = 0; i < toplamFiltreli; i++) { if (sepetKodlari.has(filtrelenmisVeriler[i]['Program Kodu'])) sepetteOlanAdet++; }
+            
+            if (sepetteOlanAdet === 0) { chk.checked = false; chk.indeterminate = false; } 
+            else if (sepetteOlanAdet === toplamFiltreli) { chk.checked = true; chk.indeterminate = false; } 
+            else { chk.checked = false; chk.indeterminate = true; }
+        }
+
+        function tabloyaVeriEkle() {
+            const tbody = document.getElementById('tableBody');
+            if(gosterilenAdet >= filtrelenmisVeriler.length) { document.getElementById('loadingIndicator').style.display = 'none'; return; }
+
+            const eklenecekVeriler = filtrelenmisVeriler.slice(gosterilenAdet, gosterilenAdet + ARTIS_MIKTARI);
+            
+            if (filtrelenmisVeriler.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="10" style="text-align:center;">Kriterlere uygun bölüm bulunamadı.</td></tr>';
+                document.getElementById('sonucBilgisi').innerText = '0 sonuç bulundu.'; 
+                document.getElementById('loadingIndicator').style.display = 'none'; return;
+            }
+
+            const sepetKodlari = new Set(tercihSepeti.map(p => p['Program Kodu']));
+            
+            const kontGuncelBaslik = yilGuncel + ' Kont.'; const kontGecmisBaslik = yilGecmis + ' Kont.'; const kontEskiBaslik = yilEski + ' Kont.';
+            const siraGecmisBaslik = yilGecmis + ' B. Sr.'; const siraEskiBaslik = yilEski + ' B. Sr.'; const siraDahaEskiBaslik = yilDahaEski + ' B. Sr.';
+            const puanGecmisBaslik = yilGecmis + ' Puan'; const puanEskiBaslik = yilEski + ' Puan'; const puanDahaEskiBaslik = yilDahaEski + ' Puan';
+
+            const html = eklenecekVeriler.map(item => {
+                let pKodu = item['Program Kodu']; let sepetteMi = sepetKodlari.has(pKodu);
+                let btnClass = sepetteMi ? 'btn-sepet-ekle added' : 'btn-sepet-ekle'; let btnText = sepetteMi ? '✓' : '+'; 
+
+                // AKILLI KOŞUL DETAYLARI
+                let kosullarHTML = '-';
+                let kosullarDetayListesi = ''; // Mobil detay görünümü için eklendi
+                if (item['Özel Koşul ve Açıklamalar']) {
+                    let kosulDizisi = String(item['Özel Koşul ve Açıklamalar']).split(',');
+                    
+                    // Ana satırdaki minik rozetler
+                    kosullarHTML = kosulDizisi.map(k => {
+                        let kosulNo = k.trim(); let aciklama = kosulVerileri[kosulNo] ? kosulVerileri[kosulNo].replace(/"/g, '&quot;') : 'Açıklama yok.';
+                        return `<span class="kosul-badge" title="${aciklama}">${kosulNo}</span>`;
+                    }).join(' ');
+
+                    // Açılır (Mobil İçin) Açık liste formu - "Bakınız" olarak güncellendi
+                    kosullarDetayListesi = kosulDizisi.map(k => {
+                        let kosulNo = k.trim(); 
+                        let aciklama = kosulVerileri[kosulNo] || 'Açıklama bulunamadı.';
+                        return `<div style="padding: 6px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.8rem; line-height: 1.4;">
+                                    <strong style="color:var(--primary); font-size: 0.85rem;">Bakınız ${kosulNo}:</strong> 
+                                    <span style="color: var(--text-main);">${aciklama}</span>
+                                </div>`;
+                    }).join('');
+                }
+
+                let univ = item['Üniversite'] || '-'; let prog = item['Program Adı'] || '-';
+                let uniTurMatin = String(item['Üni. Türü'] || '-').replace(/[0-9]/g, ''); let pTuru = item['Puan Türü'] || '-';
+                let sirGecmisYil = item[siraGecmisBaslik] && item[siraGecmisBaslik] !== "" ? item[siraGecmisBaslik] : '-';
+
+                return `
+                <tr class="main-row" onclick="detayAcKapat('${pKodu}')">
+                    <td onclick="event.stopPropagation()" style="text-align:center; vertical-align:middle;">
+                        <button class="${btnClass} screen-only" onclick="sepeteIslemYap(this, '${pKodu}')">${btnText}</button>
+                        <div class="prog-kodu-ekran" title="Kopyalamak için tıklayın" onclick="event.stopPropagation(); koduKopyala('${pKodu}')">${pKodu}</div>
+                    </td>
+                    <td><strong>${univ}</strong><br><span style="font-size:0.75rem; color:#64748b;">${prog}</span></td>
+                    <td>${item['Şehir'] || '-'}</td>
+                    <td>${uniTurMatin}</td>
+                    <td><span class="badge">${pTuru}</span></td>
+                    <td><strong>${item[kontGuncelBaslik] || '-'}</strong></td>
+                    <td style="font-weight:700;">${sirGecmisYil}</td>
+                    <td>${item[puanGecmisBaslik] || '-'}</td>
+                    <td class="screen-only" style="max-width: 150px; white-space: normal;">${kosullarHTML}</td>
+                    <td class="screen-only" style="text-align:center; color: var(--primary);">▼</td>
+                </tr>
+                <tr class="detail-row" id="detay-${pKodu}">
+                    <td colspan="10" style="padding: 15px 20px; background-color: #f8fafc; border-bottom: 2px solid var(--primary);">
+                        
+                        <table class="detail-table">
+                            <thead><tr><th>Kılavuz Yılı</th><th>Kontenjan</th><th>Başarı Sırası</th><th>Taban Puan</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>${yilGecmis}</strong></td><td>${item[kontGecmisBaslik] || '-'}</td><td>${item[siraEskiBaslik] || '-'}</td><td>${item[puanEskiBaslik] || '-'}</td></tr>
+                                <tr><td><strong>${yilEski}</strong></td><td>${item[kontEskiBaslik] || '-'}</td><td>${item[siraDahaEskiBaslik] || '-'}</td><td>${item[puanDahaEskiBaslik] || '-'}</td></tr>
+                            </tbody>
+                        </table>
+                        
+                        ${kosullarDetayListesi !== '' ? `
+                        <div class="screen-only" style="margin-top: 15px; background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 12px; text-align: left; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
+                            <strong style="font-size: 0.85rem; color: var(--primary-dark); display: flex; align-items: center; gap: 5px;">
+                                📝 Özel Koşullar ve Açıklamaları
+                            </strong>
+                            <div class="kosul-detay-liste" style="margin-top: 8px; max-height: 200px; overflow-y: auto; padding-right: 5px;">
+                                ${kosullarDetayListesi}
+                            </div>
+                        </div>` : ''}
+
+                    </td>
+                </tr>`;
+            }).join('');
+
+            tbody.insertAdjacentHTML('beforeend', html);
+            gosterilenAdet += eklenecekVeriler.length;
+            document.getElementById('sonucBilgisi').innerHTML = `Eşleşen sonuç: <strong>${filtrelenmisVeriler.length}</strong>`;
+            if(gosterilenAdet >= filtrelenmisVeriler.length) { document.getElementById('loadingIndicator').style.display = 'none'; }
+        }
+
+        window.addEventListener('scroll', function() { if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 300) tabloyaVeriEkle(); });
+
+        function detayAcKapat(kod) { document.getElementById(`detay-${kod}`).classList.toggle('open'); }
+
+        function gosterOnayModali(mesaj, callback) {
+            document.getElementById('confirmMessage').innerHTML = mesaj;
+            document.getElementById('confirmModal').style.display = 'flex';
+            confirmAction = callback;
+        }
+
+        function confirmKapat() { document.getElementById('confirmModal').style.display = 'none'; tumunuSecDurumunuGuncelle(); }
+        document.getElementById('btnConfirmOk').onclick = function() {
+            document.getElementById('confirmModal').style.display = 'none';
+            if (confirmAction) { confirmAction(); confirmAction = null; }
+        };
+
+        function sepeteIslemYap(btn, pKodu) {
+            let index = tercihSepeti.findIndex(p => p['Program Kodu'] === pKodu);
+            if (index === -1) {
+                tercihSepeti.push(tumVeriler.find(p => p['Program Kodu'] === pKodu));
+                btn.className = 'btn-sepet-ekle added'; btn.innerText = '✓';
+            } else {
+                tercihSepeti.splice(index, 1);
+                btn.className = 'btn-sepet-ekle'; btn.innerText = '+';
+            }
+            sepetiKaydet(); sepetSayacGuncelle(); tumunuSecDurumunuGuncelle();
+        }
+        
+        function tumunuSecToggle(checkbox) {
+            const toplamFiltreli = filtrelenmisVeriler.length; if (toplamFiltreli === 0) return;
+            const sepetKodlari = new Set(tercihSepeti.map(p => p['Program Kodu']));
+            let sepettekiSayi = 0;
+            for (let i = 0; i < toplamFiltreli; i++) { if (sepetKodlari.has(filtrelenmisVeriler[i]['Program Kodu'])) sepettekiSayi++; }
+            
+            let isSelectAllAction = (sepettekiSayi !== toplamFiltreli);
+
+            if (isSelectAllAction) {
+                const eklenecekSayi = toplamFiltreli - sepettekiSayi;
+                gosterOnayModali(`Arama sonucundaki seçili olmayan <strong>${eklenecekSayi} adet bölüm</strong> sepetinize eklenecektir. Devam edilsin mi?`, function() { uygulaTumunuSec(true); });
+            } else {
+                gosterOnayModali(`Arama sonucundaki <strong>${toplamFiltreli} adet bölüm</strong> sepetinizden çıkartılacaktır. Onaylıyor musunuz?`, function() { uygulaTumunuSec(false); });
+            }
+        }
+
+        function uygulaTumunuSec(isSelectAllAction) {
+            if(isSelectAllAction) {
+                const sepetKodlari = new Set(tercihSepeti.map(p => p['Program Kodu']));
+                filtrelenmisVeriler.forEach(item => { if (!sepetKodlari.has(item['Program Kodu'])) tercihSepeti.push(item); });
+            } else {
+                const cikarilacakKodlar = new Set(filtrelenmisVeriler.map(p => p['Program Kodu']));
+                tercihSepeti = tercihSepeti.filter(p => !cikarilacakKodlar.has(p['Program Kodu']));
+            }
+            try { sepetiKaydet(); } catch(e) { alert("⚠️ Tarayıcı hafıza sınırı aşıldı!"); }
+            sepetSayacGuncelle(); tumunuSecDurumunuGuncelle();
+            let acikKalanAdet = gosterilenAdet; gosterilenAdet = 0; document.getElementById('tableBody').innerHTML = '';
+            while(gosterilenAdet < acikKalanAdet && gosterilenAdet < filtrelenmisVeriler.length) { tabloyaVeriEkle(); }
+        }
+
+        function sepetSayacGuncelle() { document.getElementById('sepetSayac').innerText = tercihSepeti.length; }
+
+        function sepetModalAc() {
+            const tbody = document.getElementById('sepetBody'); tbody.innerHTML = '';
+            if(tercihSepeti.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:30px;">Sepetiniz boş.</td></tr>';
+            } else {
+                const kontGuncelBaslik = yilGuncel + ' Kont.'; const siraGecmisBaslik = yilGecmis + ' B. Sr.'; const puanGecmisBaslik = yilGecmis + ' Puan';
+                tbody.innerHTML = tercihSepeti.map(item => {
+                    let kosullarHTML = item['Özel Koşul ve Açıklamalar'] || '-';
+                    let uniTurMatin = String(item['Üni. Türü'] || '-').replace(/[0-9]/g, '');
+                    let sirGecmisYil = item[siraGecmisBaslik] && item[siraGecmisBaslik] !== "" ? item[siraGecmisBaslik] : '-';
+                    return `
+                    <tr>
+                        <td class="btn-sil" style="text-align:center; vertical-align:middle;">
+                            <button class="btn-sepet-sil screen-only" onclick="sepettenSil('${item['Program Kodu']}')">Sil</button>
+                            <div class="prog-kodu-ekran" title="Kopyalamak için tıklayın" onclick="event.stopPropagation(); koduKopyala('${item['Program Kodu']}')">${item['Program Kodu']}</div>
+                        </td>
+                        <td><strong>${item['Üniversite'] || '-'}</strong><br>${item['Program Adı'] || '-'}</td>
+                        <td>${item['Şehir'] || '-'}</td>
+                        <td>${uniTurMatin}</td>
+                        <td>${item['Puan Türü'] || '-'}</td>
+                        <td>${item[kontGuncelBaslik] || '-'}</td>
+                        <td style="font-weight:bold;">${sirGecmisYil}</td>
+                        <td>${item[puanGecmisBaslik] || '-'}</td>
+                        <td class="screen-only" style="font-size:0.75rem;">${kosullarHTML}</td>
+                    </tr>
+                `}).join('');
+            }
+            document.getElementById('sepetModal').style.display = 'flex';
+        }
+
+        function sepettenSil(pKodu) {
+            tercihSepeti = tercihSepeti.filter(p => p['Program Kodu'] !== pKodu);
+            sepetiKaydet(); sepetSayacGuncelle(); sepetModalAc(); tumunuSecDurumunuGuncelle();
+            gosterilenAdet = 0; document.getElementById('tableBody').innerHTML = ''; tabloyaVeriEkle();
+        }
+        function sepetModalKapat() { document.getElementById('sepetModal').style.display = 'none'; }
+
+        // YENİ AKILLI YAZDIRMA MİMARİSİ
+        function yazdirmaSecenekleriAc() {
+            document.getElementById('printFiltreSayi').innerText = filtrelenmisVeriler.length;
+            document.getElementById('printGorunenSayi').innerText = gosterilenAdet;
+            document.getElementById('printOptionsModal').style.display = 'flex';
+        }
+        
+        function printOptionsKapat() { document.getElementById('printOptionsModal').style.display = 'none'; }
+
+        function sayfayiYazdirIslem() {
+            const kapsam = document.querySelector('input[name="printKapsam"]:checked').value;
+            const detayGoster = document.getElementById('printOzelDetay').checked;
+
+            if (kapsam === 'tum') {
+                if(filtrelenmisVeriler.length > 500) {
+                    const onay = confirm(`Çok fazla bölüm (${filtrelenmisVeriler.length} adet) yazdırılacak. Tarayıcı işlem bitene kadar birkaç saniye donabilir. Onaylıyor musunuz?`);
+                    if(!onay) return;
+                }
+                while(gosterilenAdet < filtrelenmisVeriler.length) { tabloyaVeriEkle(); }
+            }
+
+            if (detayGoster) document.body.classList.add('print-with-details');
+            else document.body.classList.remove('print-with-details');
+
+            printOptionsKapat();
+            setTimeout(() => { window.print(); }, 300); 
+        }
+
+        function sepetiYazdir() {
+            if(tercihSepeti.length === 0) { alert("Yazdırılacak bölüm yok!"); return; }
+            document.body.classList.add('printing-sepet'); window.print();
+            setTimeout(() => { document.body.classList.remove('printing-sepet'); }, 1000);
+        }
+
+        // --- TERCİH SÖZLÜĞÜ FONKSİYONLARI (LİSANS) ---
+        let aktifRehberVerisi = [];
+
+        function rehberModalAc() {
+            document.getElementById('rehberModal').style.display = 'flex';
+            rehberListele('sehir'); // Varsayılan olarak şehirler açılsın
+        }
+
+        function rehberModalKapat() { document.getElementById('rehberModal').style.display = 'none'; }
+
+        function rehberListele(tur) {
+            document.querySelectorAll('.rehber-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btnRehber_' + tur).classList.add('active');
+
+            let benzersizListe = new Set();
+            
+            tumVeriler.forEach(item => {
+                if(tur === 'sehir' && item['Şehir']) benzersizListe.add(item['Şehir'].trim());
+                if(tur === 'uni' && item['Üniversite']) benzersizListe.add(item['Üniversite'].trim()); 
+                if(tur === 'bolum' && item['Program Adı']) {
+                    // Bölüm adındaki (Burslu), (%50 İndirimli), (İngilizce) gibi parantez içi kısımları temizler
+                    let temizBolum = item['Program Adı'].replace(/\s*\(.*?\)/g, '').trim();
+                    benzersizListe.add(temizBolum);
+                }
+            });
+
+            aktifRehberVerisi = Array.from(benzersizListe).sort((a, b) => a.localeCompare(b, 'tr'));
+            document.getElementById('rehberAraInput').value = '';
+            rehberEkranaBas(aktifRehberVerisi);
+        }
+
+        function rehberEkranaBas(liste) {
+            const kutu = document.getElementById('rehberListe');
+            kutu.innerHTML = liste.map(item => `<div class="rehber-badge" onclick="rehberSecveAra('${item.replace(/'/g, "\\'")}')">${item}</div>`).join('');
+        }
+
+        function rehberIciAra() {
+            const metin = metinTemizle(document.getElementById('rehberAraInput').value);
+            const filtrelenmis = aktifRehberVerisi.filter(item => metinTemizle(item).includes(metin));
+            rehberEkranaBas(filtrelenmis);
+        }
+
+        function rehberSecveAra(kelime) {
+            const aramaKutusu = document.getElementById('search');
+            let mevcutMetin = aramaKutusu.value.trim();
+            // Eğer kutuda zaten bir şey yazıyorsa yanına boşlukla ekler, yoksa direkt yazar
+            aramaKutusu.value = mevcutMetin ? mevcutMetin + ' ' + kelime : kelime;
+            filtrele(); // Tabloyu anında yeni aramaya göre süz
+            rehberModalKapat(); // Sözlüğü kapat
+        }
+
+        // --- KOPYALAMA MOTORU ---
+        function koduKopyala(kod) {
+            navigator.clipboard.writeText(kod).then(() => {
+                const toast = document.getElementById('toastKutu');
+                toast.innerHTML = `📋 ${kod} Kopyalandı!`;
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 2000); // 2 saniye sonra kaybolur
+            }).catch(err => {
+                console.error('Kopyalama hatası:', err);
+            });
+        }
+    </script>
+<div id="toastKutu" class="toast-kutu">📋 Kod Kopyalandı!</div>
+</body>
+</html>
