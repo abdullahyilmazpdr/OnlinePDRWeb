@@ -27,7 +27,6 @@
 
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KPSS Ortaöğretim Atama İstatistikleri ve Taban Puanları (2022-2025)</title>
   <meta name="description"
     content="2022, 2023, 2024 ve 2025 yılları KPSS Ortaöğretim bölümlere göre kontenjan, yerleşen sayısı ve en düşük taban puan istatistikleri.">
@@ -38,14 +37,14 @@
       "@context": "https://schema.org",
       "@type": "Dataset",
       "name": "KPSS Ortaöğretim Atama İstatistikleri (2022-2025)",
-      "description": "2022, 2023, 2024 ve 2025 yılları KPSS Ortaöğretim bölümlere göre kontenjan, yerleşen sayısı ve en düşük taban puan istatistikleri. ÖNEMLİ SINIRLILIKLAR: 1) Bu veriler yalnızca ÖSYM merkezi atamalarını kapsar; kurumsal veya mülakatlı alımlar dahil değildir. 2) Aynı kadroya birden fazla nitelik kodunun başvurabildiği durumlarda (Ortak Kontenjan), kadro sayısı başvuru yapabilen tüm kodlara tam olarak yansıtılmıştır. Bu nedenle sütun toplamları, gerçek atama sayısından yüksek çıkabilir. 3) Veri madenciliği sürecinde otomasyon ve yapay zeka araçları kullanıldığından marjinal hata payı bulunabilir.",
+      "description": "2022, 2023, 2024 ve 2025 yılları KPSS Ortaöğretim bölümlere göre kontenjan, yerleşen sayısı ve en düşük taban puan istatistikleri. ÖNEMLİ SINIRLILIKLAR: 1) Bu veriler yalnızca ÖSYM merkezi atamalarını kapsar; kurumsal veya mülakatlı alımlar dahil değildir. 2) Aynı kadroya birden fazla nitelik kodunun başvurabildiği durumlarda (Ortak Kontenjan), kadro sayısı başvuru yapabilen tüm kodlara tam olarak yansıtılmıştır. Bu nedenle sütun toplamları, gerçek atama sayısından yüksek çıkabilir. 3) Veri madenciliği sürecinde otomasyon ve yapay zeka araçları kullanıldığından marjinal hata payı bulunabilir. 4) Bazı bölümlerde özel koşullar aranabilmektedir. Bu koşullar, başvuru yapılan bölümler için farklılık gösterebilir. Bu çalışmada özel koşullar dikkate alınmamıştır.",
       "creator": {
         "@type": "Organization",
         "name": "Online PDR",
         "url": "https://www.onlinepdr.com"
       },
       "usageInfo": "https://www.onlinepdr.com",
-      "keywords": ["KPSS", "Atama", "Taban Puanlar", "2025 KPSS", "Kontenjan", "Merkezi Atama"],
+      "keywords": ["KPSS", "Atama", "Taban Puanlar", "2025 KPSS", "Kontenjan", "Merkezi Atama", "Özel Koşullar"],
       "license": "https://creativecommons.org/licenses/by/4.0/",
       "inLanguage": "tr"
     }
@@ -96,7 +95,6 @@
       background-color: var(--bg-color);
     }
 
-    /* 1. CONTAINER GÜNCELLEMESİ (1300px) */
     .container-yeni {
       max-width: 1300px;
       width: 100%;
@@ -142,12 +140,9 @@
       border-color: var(--accent-color);
     }
 
-    /* 2. SABİT KAYDIRMA ÇUBUĞU VE TABLO İÇİ SCROLL */
     .table-wrapper {
       overflow: auto;
-      /* Hem x hem y ekseninde kaydırma */
       max-height: 70vh;
-      /* Tablo yüksekliğini sınırla ki yatay bar hep altta görünsün */
       border-radius: 8px;
       border: 1px solid var(--border-color);
       width: 100%;
@@ -171,12 +166,10 @@
     th,
     td {
       padding: 8px 6px;
-      /* Hücreler daraltıldı, tam sığması için */
       text-align: center;
       border-bottom: 1px solid var(--border-color);
     }
 
-    /* Sticky Header Ayarı (Tablo içinde kayarken başlıkların üstte sabit kalması için) */
     thead {
       position: sticky;
       top: 0;
@@ -215,10 +208,10 @@
     }
 
     .d-none {
-      display: none;
+      display: none !important;
     }
 
-    /* 3. AKORDEON UYARI KUTUSU CSS'İ */
+    /* AKORDEON UYARI KUTUSU CSS'İ */
     .alert-box {
       background-color: #fff3cd;
       color: #856404;
@@ -262,7 +255,7 @@
       margin-bottom: 5px;
     }
 
-    /* 4. SAYFALAR ARASI GEZİNTİ MENÜSÜ */
+    /* SAYFALAR ARASI GEZİNTİ MENÜSÜ */
     .kpss-nav {
       display: flex;
       justify-content: center;
@@ -293,6 +286,119 @@
       color: #fff;
       border-color: var(--accent-color);
       box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
+    }
+
+    /* 5. MOBİL İÇİN KART GÖRÜNÜMÜ (Responsive Table) */
+    /* 5. MOBİL İÇİN KART GÖRÜNÜMÜ (Responsive Table) */
+    @media screen and (max-width: 992px) {
+      .table-wrapper {
+        border: none;
+        overflow: visible;
+        max-height: none;
+      }
+
+      table {
+        border: 0;
+      }
+
+      table caption {
+        font-size: 1.2em;
+      }
+
+      table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+      }
+
+      table tr {
+        border: 1px solid var(--border-color);
+        border-bottom: 4px solid var(--primary-color);
+        display: block;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+      }
+
+      table td {
+        border-bottom: 1px solid #f0f0f0;
+        display: block;
+        font-size: 0.95rem;
+        text-align: right !important;
+        padding: 12px 15px;
+      }
+
+      table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: 600;
+        color: var(--secondary-color);
+      }
+
+      table td:last-child {
+        border-bottom: 0;
+      }
+
+      table td:nth-child(1) {
+        background-color: var(--primary-color);
+        color: #fff;
+        text-align: center !important;
+        font-size: 1.2rem;
+        font-weight: bold;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+
+      table td:nth-child(1)::before {
+        display: none;
+      }
+
+      table td:nth-child(2) {
+        text-align: left !important;
+        font-weight: 500;
+        font-size: 0.95rem;
+        background-color: #f8f9fa;
+        border-bottom: 2px solid var(--border-color);
+      }
+
+      table td:nth-child(2)::before {
+        display: block;
+        float: none;
+        margin-bottom: 5px;
+        color: var(--primary-color);
+      }
+
+      /* --- YILLARI AYIRAN KALIN ÇİZGİLER --- */
+      table td:nth-child(5),
+      table td:nth-child(8),
+      table td:nth-child(11),
+      table td:nth-child(14) {
+        border-bottom: 4px solid #d1d8e0;
+        /* Yılları bölen belirgin çizgi */
+      }
+
+      /* --- SON 4 YIL ÖZET KISMI ARKA PLAN VURGUSU --- */
+      table td:nth-child(15),
+      table td:nth-child(16),
+      table td:nth-child(17) {
+        background-color: rgba(52, 152, 219, 0.07);
+        /* Temanın mavisinden hafif ton */
+      }
+
+      table td:nth-child(17) {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+
+      #searchInput {
+        width: 100%;
+      }
     }
   </style>
 
@@ -334,13 +440,14 @@
     <!-- Page Title -->
     <div class="page-title dark-background" style="display:none">
       <div class="container position-relative">
-        <h1>KPSS Ortaöğretim Araştırması</h1>
-        <p>2025,2024,2023,2022 Yılları Verileri İle Hazırlanmıştır</p>
+        <h1>KPSS Lisans Araştırması</h1>
+        <p>2022, 2023, 2024 ve 2025 yılları KPSS Lisans bölümlere göre kontenjan, yerleşen sayısı ve en düşük taban puan
+          istatistikleri.</p>
         <nav class="breadcrumbs">
           <ol>
             <li><a href="index.html">Ana Sayfa</a></li>
             <li><a href="rehberlik.html">Rehberlik</a></li>
-            <li class="current">KPSS Ortaöğretim Araştırması</li>
+            <li class="current">KPSS Lisans Araştırması</li>
           </ol>
         </nav>
       </div>
@@ -350,12 +457,14 @@
     <section id="sablon" class="blog-posts section">
 
       <div class="container-yeni">
+
         <!-- SAYFALAR ARASI GEZİNTİ MENÜSÜ -->
         <div class="kpss-nav">
           <a href="kpss-lisans-arastirmasi.html">Lisans (4 Yıllık)</a>
           <a href="kpss-onlisans-arastirmasi.html">Önlisans (2 Yıllık)</a>
           <a href="kpss-ortaogretim-arastirmasi.html" class="active">Ortaöğretim (Lise)</a>
         </div>
+
         <article>
           <header>
             <h1>KPSS Ortaöğretim Atama İstatistikleri ve Taban Puanları (2022-2025)</h1>
@@ -363,7 +472,6 @@
               sayısı ve en düşük taban puan istatistikleri.</p>
           </header>
 
-          <!-- AKORDEON UYARI KUTUSU -->
           <div class="alert-box" id="uyariKutusu">
             <h4 class="accordion-header" id="accordionBtn">
               <span>📌 Veri Seti Sınırlılıkları ve Önemli Uyarılar</span>
@@ -376,8 +484,7 @@
                 <li><strong>Ortak Kontenjan Dağılımı:</strong> ÖSYM kılavuzlarında bir kadroya birden fazla nitelik
                   koduyla (bölüm) başvuru yapılabilmektedir. Adayların kendi bölümleriyle başvurabilecekleri "maksimum
                   potansiyel kadro sayısını" görebilmeleri için, kadro sayısı o koda sahip tüm bölümlere tam olarak
-                  yansıtılmıştır. <em>(Örn: 5 kişilik bir kadroya 3 farklı bölüm başvurabiliyorsa, bu 5 kontenjan her üç
-                    bölümün de satırında gösterilir.)</em></li>
+                  yansıtılmıştır.</li>
                 <li><strong>Veri İşleme Süreci:</strong> Verilerin PDF formatındaki ham kılavuzlardan dönüştürülmesi ve
                   tasnif edilmesi aşamalarında otomasyon yazılımları ile yapay zeka araçları kullanılmıştır. Kontroller
                   yapılmış olmakla birlikte, sistem kaynaklı ufak hata payları olabileceği göz önünde bulundurulmalıdır.
@@ -428,763 +535,777 @@
               </thead>
               <tbody>
                 <tr>
-                  <td scope="row"><strong>2001</strong></td>
-                  <td>Ortaöğretim Kurumlarının herhangi bir alanından mezun olmak.</td>
-                  <td>716</td>
-                  <td>716</td>
-                  <td>84,314</td>
-                  <td>2399</td>
-                  <td>2399</td>
-                  <td>74,656</td>
-                  <td>170</td>
-                  <td>170</td>
-                  <td>82,792</td>
-                  <td>1985</td>
-                  <td>1985</td>
-                  <td>73,01607</td>
-                  <td>5270</td>
-                  <td>5270</td>
-                  <td>78,694</td>
+                  <td data-label="Kod" scope="row"><strong>2001</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının herhangi bir alanından mezun olmak.</td>
+                  <td data-label="2025 Kont.">716</td>
+                  <td data-label="2025 Yerleşen">716</td>
+                  <td data-label="2025 Min. Puan">84,314</td>
+                  <td data-label="2024 Kont.">2399</td>
+                  <td data-label="2024 Yerleşen">2399</td>
+                  <td data-label="2024 Min. Puan">74,656</td>
+                  <td data-label="2023 Kont.">170</td>
+                  <td data-label="2023 Yerleşen">170</td>
+                  <td data-label="2023 Min. Puan">82,792</td>
+                  <td data-label="2022 Kont.">1985</td>
+                  <td data-label="2022 Yerleşen">1985</td>
+                  <td data-label="2022 Min. Puan">73,01607</td>
+                  <td data-label="Son 4 Yıl Kont.">5270</td>
+                  <td data-label="Son 4 Yıl Yerleşen">5270</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">78,694</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2009</strong></td>
-                  <td>Ortaöğretim Kurumlarının Bahçecilik Alanı ve Dalları, Tarım Teknolojileri Alanı ve Dalları veya
-                    Tarım Alanı ve Dallarından mezun olmak.</td>
-                  <td>11</td>
-                  <td>11</td>
-                  <td>73,589</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>81,047</td>
-                  <td>6</td>
-                  <td>6</td>
-                  <td>72,25881</td>
-                  <td>18</td>
-                  <td>18</td>
-                  <td>75,631</td>
+                  <td data-label="Kod" scope="row"><strong>2009</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Bahçecilik Alanı ve Dalları, Tarım
+                    Teknolojileri Alanı ve Dalları veya Tarım Alanı ve Dallarından mezun olmak.</td>
+                  <td data-label="2025 Kont.">11</td>
+                  <td data-label="2025 Yerleşen">11</td>
+                  <td data-label="2025 Min. Puan">73,589</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">1</td>
+                  <td data-label="2023 Yerleşen">1</td>
+                  <td data-label="2023 Min. Puan">81,047</td>
+                  <td data-label="2022 Kont.">6</td>
+                  <td data-label="2022 Yerleşen">6</td>
+                  <td data-label="2022 Min. Puan">72,25881</td>
+                  <td data-label="Son 4 Yıl Kont.">18</td>
+                  <td data-label="Son 4 Yıl Yerleşen">18</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">75,631</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2011</strong></td>
-                  <td>Ortaöğretim Kurumlarının Bilişim Teknolojileri Alanı ve Dallarından mezun olmak.</td>
-                  <td>69</td>
-                  <td>69</td>
-                  <td>81,162</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>87,931</td>
-                  <td>3</td>
-                  <td>3</td>
-                  <td>90,66638</td>
-                  <td>73</td>
-                  <td>73</td>
-                  <td>86,586</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2013</strong></td>
-                  <td>Ortaöğretim Kurumlarının Biyomedikal Cihaz Teknolojileri Alanı ve Dallarından mezun olmak.</td>
-                  <td>74</td>
-                  <td>74</td>
-                  <td>70,088</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>74</td>
-                  <td>74</td>
-                  <td>70,088</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2015</strong></td>
-                  <td>Ortaöğretim Kurumlarının Büro Yönetimi Alanı ve Dalları, Büro Yönetimi ve Yönetici Asistanlığı
-                    Alanı ve Dalları veya Pazarlama ve Perakende Alanı - Ticaret / A-B Grubu (Ticaret Lisesi) Dalından
+                  <td data-label="Kod" scope="row"><strong>2011</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Bilişim Teknolojileri Alanı ve Dallarından
                     mezun olmak.</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>83,086</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>83,086</td>
+                  <td data-label="2025 Kont.">69</td>
+                  <td data-label="2025 Yerleşen">69</td>
+                  <td data-label="2025 Min. Puan">81,162</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">1</td>
+                  <td data-label="2023 Yerleşen">1</td>
+                  <td data-label="2023 Min. Puan">87,931</td>
+                  <td data-label="2022 Kont.">3</td>
+                  <td data-label="2022 Yerleşen">3</td>
+                  <td data-label="2022 Min. Puan">90,66638</td>
+                  <td data-label="Son 4 Yıl Kont.">73</td>
+                  <td data-label="Son 4 Yıl Yerleşen">73</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">86,586</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2017</strong></td>
-                  <td>Ortaöğretim Kurumlarının Çocuk Gelişimi ve Eğitimi Alanı ve Dallarından mezun olmak.</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>297</td>
-                  <td>244</td>
-                  <td>Dolmadı</td>
-                  <td>297</td>
-                  <td>244</td>
-                  <td>Dolmadı</td>
+                  <td data-label="Kod" scope="row"><strong>2013</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Biyomedikal Cihaz Teknolojileri Alanı ve
+                    Dallarından mezun olmak.</td>
+                  <td data-label="2025 Kont.">74</td>
+                  <td data-label="2025 Yerleşen">74</td>
+                  <td data-label="2025 Min. Puan">70,088</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">74</td>
+                  <td data-label="Son 4 Yıl Yerleşen">74</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">70,088</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2023</strong></td>
-                  <td>Ortaöğretim Kurumlarının Elektrik-Elektronik Teknolojisi Alanı ve Dallarından, Endüstriyel
-                    Otomasyon Teknolojileri Alanı - Endüstriyel Elektronik Dalından veya Endüstriyel Otomasyon
-                    Teknolojileri Alanı - Endüstriyel Kontrol Dalından mezun olmak.</td>
-                  <td>227</td>
-                  <td>227</td>
-                  <td>77,345</td>
-                  <td>44</td>
-                  <td>44</td>
-                  <td>79,377</td>
-                  <td>67</td>
-                  <td>67</td>
-                  <td>79,779</td>
-                  <td>79</td>
-                  <td>79</td>
-                  <td>82,93716</td>
-                  <td>417</td>
-                  <td>417</td>
-                  <td>79,859</td>
+                  <td data-label="Kod" scope="row"><strong>2015</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Büro Yönetimi Alanı ve Dalları, Büro
+                    Yönetimi ve Yönetici Asistanlığı Alanı ve Dalları veya Pazarlama ve Perakende Alanı - Ticaret / A-B
+                    Grubu (Ticaret Lisesi) Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">-</td>
+                  <td data-label="2025 Yerleşen">-</td>
+                  <td data-label="2025 Min. Puan">-</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">1</td>
+                  <td data-label="2023 Yerleşen">1</td>
+                  <td data-label="2023 Min. Puan">83,086</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">1</td>
+                  <td data-label="Son 4 Yıl Yerleşen">1</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">83,086</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2025</strong></td>
-                  <td>Ortaöğretim Kurumlarının El Sanatları Teknolojisi Alanı ve Dallarının, Aile ve Tüketici Hizmetleri
-                    Alanı -Beslenme ve Ev Yönetimi Dalının, Aile ve Tüketici Hizmetleri Alanı -Ev Ekonomisi Dalının,
-                    Giyim Üretim Teknolojisi Alanı -Ev ve Giyim Aksesuarları Dalının, Giyim Üretim Teknolojisi Alanı
-                    -Tekstil Konfeksiyon Dalının veya Giyim Üretim Teknolojisi Alanı -Hazır Giyim Endüstrisi Nakışı
-                    Dalının birinden mezun olmak.</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>84,941</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>84,941</td>
+                  <td data-label="Kod" scope="row"><strong>2017</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Çocuk Gelişimi ve Eğitimi Alanı ve
+                    Dallarından mezun olmak.</td>
+                  <td data-label="2025 Kont.">-</td>
+                  <td data-label="2025 Yerleşen">-</td>
+                  <td data-label="2025 Min. Puan">-</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">297</td>
+                  <td data-label="2022 Yerleşen">244</td>
+                  <td data-label="2022 Min. Puan">Dolmadı</td>
+                  <td data-label="Son 4 Yıl Kont.">297</td>
+                  <td data-label="Son 4 Yıl Yerleşen">244</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">Dolmadı</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2035</strong></td>
-                  <td>Ortaöğretim Kurumlarının Giyim Üretim Teknolojisi Alanı ve Dallarından veya Moda Tasarım
-                    Teknolojileri Alanı ve Dallarından mezun olmak.</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>84,941</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>84,941</td>
+                  <td data-label="Kod" scope="row"><strong>2023</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Elektrik-Elektronik Teknolojisi Alanı ve
+                    Dallarından, Endüstriyel Otomasyon Teknolojileri Alanı - Endüstriyel Elektronik Dalından veya
+                    Endüstriyel Otomasyon Teknolojileri Alanı - Endüstriyel Kontrol Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">227</td>
+                  <td data-label="2025 Yerleşen">227</td>
+                  <td data-label="2025 Min. Puan">77,345</td>
+                  <td data-label="2024 Kont.">44</td>
+                  <td data-label="2024 Yerleşen">44</td>
+                  <td data-label="2024 Min. Puan">79,377</td>
+                  <td data-label="2023 Kont.">67</td>
+                  <td data-label="2023 Yerleşen">67</td>
+                  <td data-label="2023 Min. Puan">79,779</td>
+                  <td data-label="2022 Kont.">79</td>
+                  <td data-label="2022 Yerleşen">79</td>
+                  <td data-label="2022 Min. Puan">82,93716</td>
+                  <td data-label="Son 4 Yıl Kont.">417</td>
+                  <td data-label="Son 4 Yıl Yerleşen">417</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">79,859</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2043</strong></td>
-                  <td>Ortaöğretim Kurumlarının Hasta ve Yaşlı Hizmetleri Alanı ve Dallarından mezun olmak.</td>
-                  <td>6</td>
-                  <td>6</td>
-                  <td>67,221</td>
-                  <td>25</td>
-                  <td>25</td>
-                  <td>60,834</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>290</td>
-                  <td>290</td>
-                  <td>76,58913</td>
-                  <td>321</td>
-                  <td>321</td>
-                  <td>68,214</td>
+                  <td data-label="Kod" scope="row"><strong>2025</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının El Sanatları Teknolojisi Alanı ve
+                    Dallarının, Aile ve Tüketici Hizmetleri Alanı -Beslenme ve Ev Yönetimi Dalının, Aile ve Tüketici
+                    Hizmetleri Alanı -Ev Ekonomisi Dalının, Giyim Üretim Teknolojisi Alanı -Ev ve Giyim Aksesuarları
+                    Dalının, Giyim Üretim Teknolojisi Alanı -Tekstil Konfeksiyon Dalının veya Giyim Üretim Teknolojisi
+                    Alanı -Hazır Giyim Endüstrisi Nakışı Dalının birinden mezun olmak.</td>
+                  <td data-label="2025 Kont.">1</td>
+                  <td data-label="2025 Yerleşen">1</td>
+                  <td data-label="2025 Min. Puan">84,941</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">1</td>
+                  <td data-label="Son 4 Yıl Yerleşen">1</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">84,941</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2047</strong></td>
-                  <td>Ortaöğretim Kurumlarının Hayvan Sağlığı Alanı - Veteriner Sağlık Dalından veya Hayvan
-                    Yetiştiriciliği ve Sağlığı Alanı - Veteriner Sağlık Dalından mezun olmak.</td>
-                  <td>18</td>
-                  <td>18</td>
-                  <td>70,531</td>
-                  <td>46</td>
-                  <td>46</td>
-                  <td>71,252</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>3</td>
-                  <td>3</td>
-                  <td>86,43559</td>
-                  <td>67</td>
-                  <td>67</td>
-                  <td>76,073</td>
+                  <td data-label="Kod" scope="row"><strong>2035</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Giyim Üretim Teknolojisi Alanı ve
+                    Dallarından veya Moda Tasarım Teknolojileri Alanı ve Dallarından mezun olmak.</td>
+                  <td data-label="2025 Kont.">1</td>
+                  <td data-label="2025 Yerleşen">1</td>
+                  <td data-label="2025 Min. Puan">84,941</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">1</td>
+                  <td data-label="Son 4 Yıl Yerleşen">1</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">84,941</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2051</strong></td>
-                  <td>Ortaöğretim Kurumlarının İnşaat Teknolojisi Alanı ve Dalları veya Ahşap Teknolojisi Alanı - Ahşap
-                    Yapı (Doğramacılık) Dalından mezun olmak.</td>
-                  <td>60</td>
-                  <td>60</td>
-                  <td>67,840</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>81,552</td>
-                  <td>4</td>
-                  <td>4</td>
-                  <td>78,088</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>83,26416</td>
-                  <td>66</td>
-                  <td>66</td>
-                  <td>77,686</td>
+                  <td data-label="Kod" scope="row"><strong>2043</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Hasta ve Yaşlı Hizmetleri Alanı ve
+                    Dallarından mezun olmak.</td>
+                  <td data-label="2025 Kont.">6</td>
+                  <td data-label="2025 Yerleşen">6</td>
+                  <td data-label="2025 Min. Puan">67,221</td>
+                  <td data-label="2024 Kont.">25</td>
+                  <td data-label="2024 Yerleşen">25</td>
+                  <td data-label="2024 Min. Puan">60,834</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">290</td>
+                  <td data-label="2022 Yerleşen">290</td>
+                  <td data-label="2022 Min. Puan">76,58913</td>
+                  <td data-label="Son 4 Yıl Kont.">321</td>
+                  <td data-label="Son 4 Yıl Yerleşen">321</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">68,214</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2053</strong></td>
-                  <td>Ortaöğretim Kurumlarının Kimya Teknolojisi Alanı ve Dallarından mezun olmak.</td>
-                  <td>2</td>
-                  <td>2</td>
-                  <td>82,137</td>
-                  <td>8</td>
-                  <td>8</td>
-                  <td>71,191</td>
-                  <td>10</td>
-                  <td>10</td>
-                  <td>77,445</td>
-                  <td>2</td>
-                  <td>2</td>
-                  <td>79,58228</td>
-                  <td>22</td>
-                  <td>22</td>
-                  <td>77,589</td>
+                  <td data-label="Kod" scope="row"><strong>2047</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Hayvan Sağlığı Alanı - Veteriner Sağlık
+                    Dalından veya Hayvan Yetiştiriciliği ve Sağlığı Alanı - Veteriner Sağlık Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">18</td>
+                  <td data-label="2025 Yerleşen">18</td>
+                  <td data-label="2025 Min. Puan">70,531</td>
+                  <td data-label="2024 Kont.">46</td>
+                  <td data-label="2024 Yerleşen">46</td>
+                  <td data-label="2024 Min. Puan">71,252</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">3</td>
+                  <td data-label="2022 Yerleşen">3</td>
+                  <td data-label="2022 Min. Puan">86,43559</td>
+                  <td data-label="Son 4 Yıl Kont.">67</td>
+                  <td data-label="Son 4 Yıl Yerleşen">67</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">76,073</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2055</strong></td>
-                  <td>Ortaöğretim Kurumlarının Konaklama ve Seyahat Hizmetleri Alanı ve Dalları, Konaklama Hizmetleri
-                    Alanı-Konaklama Hizmetleri Dalından veya Yiyecek İçecek Hizmetleri Alanı - Turizm Endüstrisi Servis
-                    Hizmetleri Dalından mezun olmak.</td>
-                  <td>16</td>
-                  <td>16</td>
-                  <td>74,396</td>
-                  <td>2</td>
-                  <td>2</td>
-                  <td>77,491</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>7</td>
-                  <td>7</td>
-                  <td>56,73479</td>
-                  <td>25</td>
-                  <td>25</td>
-                  <td>69,540</td>
+                  <td data-label="Kod" scope="row"><strong>2051</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının İnşaat Teknolojisi Alanı ve Dalları veya
+                    Ahşap Teknolojisi Alanı - Ahşap Yapı (Doğramacılık) Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">60</td>
+                  <td data-label="2025 Yerleşen">60</td>
+                  <td data-label="2025 Min. Puan">67,840</td>
+                  <td data-label="2024 Kont.">1</td>
+                  <td data-label="2024 Yerleşen">1</td>
+                  <td data-label="2024 Min. Puan">81,552</td>
+                  <td data-label="2023 Kont.">4</td>
+                  <td data-label="2023 Yerleşen">4</td>
+                  <td data-label="2023 Min. Puan">78,088</td>
+                  <td data-label="2022 Kont.">1</td>
+                  <td data-label="2022 Yerleşen">1</td>
+                  <td data-label="2022 Min. Puan">83,26416</td>
+                  <td data-label="Son 4 Yıl Kont.">66</td>
+                  <td data-label="Son 4 Yıl Yerleşen">66</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">77,686</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2059</strong></td>
-                  <td>Ortaöğretim Kurumlarının Laboratuvar Hizmetleri Alanı ve Dallarından mezun olmak.</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>75,543</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>24</td>
-                  <td>24</td>
-                  <td>72,81783</td>
-                  <td>25</td>
-                  <td>25</td>
-                  <td>74,180</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2061</strong></td>
-                  <td>Ortaöğretim Kurumlarının Makine Teknolojisi Alanı ve Dalları veya Makine ve Tasarım Teknolojisi
-                    Alanı ve Dallarından mezun olmak.</td>
-                  <td>50</td>
-                  <td>50</td>
-                  <td>77,572</td>
-                  <td>35</td>
-                  <td>35</td>
-                  <td>76,985</td>
-                  <td>83</td>
-                  <td>83</td>
-                  <td>78,324</td>
-                  <td>30</td>
-                  <td>30</td>
-                  <td>83,01311</td>
-                  <td>198</td>
-                  <td>198</td>
-                  <td>78,974</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2063</strong></td>
-                  <td>Ortaöğretim Kurumlarının Matbaa Teknolojisi Alanı ve Dalları veya Gazetecilik Alanı -Gazetecilik /
-                    Masaüstü Yayıncılık Dalından mezun olmak.</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>77,216</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>77,216</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2065</strong></td>
-                  <td>Ortaöğretim Kurumlarının Metal Teknolojisi Alanı ve Dallarından mezun olmak.</td>
-                  <td>34</td>
-                  <td>34</td>
-                  <td>72,424</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>91,334</td>
-                  <td>37</td>
-                  <td>37</td>
-                  <td>76,567</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>82,86211</td>
-                  <td>73</td>
-                  <td>73</td>
-                  <td>80,797</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2067</strong></td>
-                  <td>Ortaöğretim Kurumlarının Metalürji Teknolojisi Alanı ve Dallarından mezun olmak.</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>79,832</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>79,832</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2071</strong></td>
-                  <td>Ortaöğretim Kurumlarının Ahşap Teknolojisi Alanı ve Dalları veya Mobilya ve İç Mekan Tasarımı
-                    Alanı ve Dallarından mezun olmak.</td>
-                  <td>32</td>
-                  <td>32</td>
-                  <td>70,904</td>
-                  <td>2</td>
-                  <td>2</td>
-                  <td>75,646</td>
-                  <td>8</td>
-                  <td>8</td>
-                  <td>77,060</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>79,82413</td>
-                  <td>43</td>
-                  <td>43</td>
-                  <td>75,859</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2073</strong></td>
-                  <td>Ortaöğretim Kurumlarının Motorlu Araçlar Teknolojisi Alanı ve Dalları veya Kimya Teknolojisi Alanı
-                    -Sınai Boya / Sanayi Boyacılığı ve Uygulama Tekniği Dalından mezun olmak.</td>
-                  <td>2</td>
-                  <td>2</td>
-                  <td>85,791</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>2</td>
-                  <td>2</td>
-                  <td>85,791</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2075</strong></td>
-                  <td>Ortaöğretim Kurumlarının Muhasebe ve Fi-sman Alanı ve Dalları veya Pazarlama ve Perakende Alanı -
-                    Ticaret / A-B Grubu (Ticaret Lisesi) Dalından mezun olmak.</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>4</td>
-                  <td>4</td>
-                  <td>80,902</td>
-                  <td>35</td>
-                  <td>35</td>
-                  <td>76,699</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>39</td>
-                  <td>39</td>
-                  <td>78,800</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2079</strong></td>
-                  <td>Ortaöğretim Kurumlarının Pazarlama ve Perakende Alanı ve Dalları veya Muhasebe ve Fi-sman Alanı -
-                    Muhasebe / Muhasebe ve Fi-sman Dalından mezun olmak.</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>4</td>
-                  <td>4</td>
-                  <td>80,902</td>
-                  <td>33</td>
-                  <td>33</td>
-                  <td>76,699</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>37</td>
-                  <td>37</td>
-                  <td>78,800</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2085</strong></td>
-                  <td>Ortaöğretim Kurumlarının Raylı Sistemler Teknolojisi Alanı ve Dallarından mezun olmak.</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>14</td>
-                  <td>14</td>
-                  <td>78,220</td>
-                  <td>2</td>
-                  <td>2</td>
-                  <td>82,336</td>
-                  <td>73</td>
-                  <td>73</td>
-                  <td>71,69884</td>
-                  <td>89</td>
-                  <td>89</td>
-                  <td>77,418</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2086</strong></td>
-                  <td>Ortaöğretim Kurumlarının Raylı Sistemler Teknolojisi Alanı-Raylı Sistemler Makine Dalı, Raylı
-                    Sistemler Elektrik-Elektronik Dalı, Raylı Sistemler Mekatronik Dalı veya Raylı Sistem Araçları
-                    Dalından Mezun Olmak.</td>
-                  <td>78</td>
-                  <td>78</td>
-                  <td>73,207</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>78</td>
-                  <td>78</td>
-                  <td>73,207</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2087</strong></td>
-                  <td>Ortaöğretim Kurumlarının Acil Sağlık Hizmetleri Alanı - Acil Tıp Teknisyenliği Dalından mezun
+                  <td data-label="Kod" scope="row"><strong>2053</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Kimya Teknolojisi Alanı ve Dallarından mezun
                     olmak.</td>
-                  <td>304</td>
-                  <td>304</td>
-                  <td>80,923</td>
-                  <td>434</td>
-                  <td>434</td>
-                  <td>77,715</td>
-                  <td>427</td>
-                  <td>427</td>
-                  <td>80,156</td>
-                  <td>858</td>
-                  <td>858</td>
-                  <td>76,58913</td>
-                  <td>2023</td>
-                  <td>2023</td>
-                  <td>78,846</td>
+                  <td data-label="2025 Kont.">2</td>
+                  <td data-label="2025 Yerleşen">2</td>
+                  <td data-label="2025 Min. Puan">82,137</td>
+                  <td data-label="2024 Kont.">8</td>
+                  <td data-label="2024 Yerleşen">8</td>
+                  <td data-label="2024 Min. Puan">71,191</td>
+                  <td data-label="2023 Kont.">10</td>
+                  <td data-label="2023 Yerleşen">10</td>
+                  <td data-label="2023 Min. Puan">77,445</td>
+                  <td data-label="2022 Kont.">2</td>
+                  <td data-label="2022 Yerleşen">2</td>
+                  <td data-label="2022 Min. Puan">79,58228</td>
+                  <td data-label="Son 4 Yıl Kont.">22</td>
+                  <td data-label="Son 4 Yıl Yerleşen">22</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">77,589</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2089</strong></td>
-                  <td>Ortaöğretim Kurumlarının Anestezi ve Reanimasyon Alanı - Anestezi Teknisyenliği Dalından mezun
-                    olmak.</td>
-                  <td>9</td>
-                  <td>9</td>
-                  <td>86,888</td>
-                  <td>50</td>
-                  <td>50</td>
-                  <td>74,614</td>
-                  <td>55</td>
-                  <td>55</td>
-                  <td>75,290</td>
-                  <td>104</td>
-                  <td>104</td>
-                  <td>78,83359</td>
-                  <td>218</td>
-                  <td>218</td>
-                  <td>78,907</td>
+                  <td data-label="Kod" scope="row"><strong>2055</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Konaklama ve Seyahat Hizmetleri Alanı ve
+                    Dalları, Konaklama Hizmetleri Alanı-Konaklama Hizmetleri Dalından veya Yiyecek İçecek Hizmetleri
+                    Alanı - Turizm Endüstrisi Servis Hizmetleri Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">16</td>
+                  <td data-label="2025 Yerleşen">16</td>
+                  <td data-label="2025 Min. Puan">74,396</td>
+                  <td data-label="2024 Kont.">2</td>
+                  <td data-label="2024 Yerleşen">2</td>
+                  <td data-label="2024 Min. Puan">77,491</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">7</td>
+                  <td data-label="2022 Yerleşen">7</td>
+                  <td data-label="2022 Min. Puan">56,73479</td>
+                  <td data-label="Son 4 Yıl Kont.">25</td>
+                  <td data-label="Son 4 Yıl Yerleşen">25</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">69,540</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2091</strong></td>
-                  <td>Ortaöğretim Kurumlarının Çevre Sağlığı Alanı - Çevre Sağlığı Teknisyenliği Dalından mezun olmak.
-                  </td>
-                  <td>20</td>
-                  <td>20</td>
-                  <td>72,130</td>
-                  <td>10</td>
-                  <td>10</td>
-                  <td>72,894</td>
-                  <td>13</td>
-                  <td>13</td>
-                  <td>73,180</td>
-                  <td>20</td>
-                  <td>20</td>
-                  <td>74,86723</td>
-                  <td>63</td>
-                  <td>63</td>
-                  <td>73,268</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2097</strong></td>
-                  <td>Ortaöğretim Kurumlarının Radyoloji Alanı - Radyoloji Teknisyenliği Dalından mezun olmak.</td>
-                  <td>28</td>
-                  <td>28</td>
-                  <td>77,315</td>
-                  <td>200</td>
-                  <td>200</td>
-                  <td>65,480</td>
-                  <td>64</td>
-                  <td>64</td>
-                  <td>72,637</td>
-                  <td>112</td>
-                  <td>112</td>
-                  <td>76,06088</td>
-                  <td>404</td>
-                  <td>404</td>
-                  <td>72,873</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2099</strong></td>
-                  <td>Ortaöğretim Kurumlarının Tıbbi Laboratuvar Alanı - Tıbbi Laboratuvar Teknisyenliği Dalından mezun
-                    olmak.</td>
-                  <td>9</td>
-                  <td>9</td>
-                  <td>81,611</td>
-                  <td>80</td>
-                  <td>80</td>
-                  <td>71,278</td>
-                  <td>50</td>
-                  <td>50</td>
-                  <td>74,312</td>
-                  <td>91</td>
-                  <td>91</td>
-                  <td>76,16864</td>
-                  <td>230</td>
-                  <td>230</td>
-                  <td>75,842</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2101</strong></td>
-                  <td>Ortaöğretim Kurumlarının Büro Yönetimi Alanı - Tıp Sekreterliği Dalından veya Sağlık Hizmetleri
-                    Sekreterliği Alanı - Tıbbi sekreterlik Dalından mezun olmak.</td>
-                  <td>106</td>
-                  <td>106</td>
-                  <td>72,127</td>
-                  <td>100</td>
-                  <td>100</td>
-                  <td>71,833</td>
-                  <td>200</td>
-                  <td>200</td>
-                  <td>73,156</td>
-                  <td>22</td>
-                  <td>22</td>
-                  <td>77,95667</td>
-                  <td>428</td>
-                  <td>428</td>
-                  <td>73,768</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2105</strong></td>
-                  <td>Ortaöğretim Kurumlarının Seramik ve Cam Teknolojisi Alanı ve Dallarından mezun olmak.</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>63,714</td>
-                  <td>2</td>
-                  <td>2</td>
-                  <td>58,66606</td>
-                  <td>3</td>
-                  <td>3</td>
-                  <td>61,190</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2109</strong></td>
-                  <td>Ortaöğretim Kurumlarının Tekstil Teknolojisi Alanı ve Dallarının, Giyim Üretim Teknolojisi Alanı
-                    -Konfeksiyon Makinaları Bakım Onarım Dalının, Giyim Üretim Teknolojisi Alanı -Tekstil Konfeksiyon
-                    Dalının veya Giyim Üretim Teknolojisi Alanı -Örme Hazır Giyim / Triko Konfeksiyon / Trikotaj Dalının
-                    birinden mezun olmak.</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>84,941</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>84,941</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2111</strong></td>
-                  <td>Ortaöğretim Kurumlarının Tesisat Teknolojisi ve İklimlendirme Alanı ve Dallarından mezun olmak.
-                  </td>
-                  <td>160</td>
-                  <td>160</td>
-                  <td>68,430</td>
-                  <td>5</td>
-                  <td>5</td>
-                  <td>75,986</td>
-                  <td>21</td>
-                  <td>21</td>
-                  <td>73,106</td>
-                  <td>37</td>
-                  <td>37</td>
-                  <td>69,02621</td>
-                  <td>223</td>
-                  <td>223</td>
-                  <td>71,637</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2112</strong></td>
-                  <td>Ortaöğretim Kurumlarının Tesisat Teknolojisi Alanı ve Dallarından mezun olmak.</td>
-                  <td>130</td>
-                  <td>130</td>
-                  <td>68,430</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>76,169</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>131</td>
-                  <td>131</td>
-                  <td>72,299</td>
-                </tr>
-                <tr>
-                  <td scope="row"><strong>2117</strong></td>
-                  <td>Ortaöğretim Kurumlarının Yiyecek İçecek Hizmetleri Alanı ve Dallarının, Aile ve Tüketici
-                    Hizmetleri Alanı - Beslenme ve Ev Yönetimi Dalının, Aile ve Tüketici Hizmetleri Alanı - Ev Ekonomisi
-                    Dalının veya Konaklama ve Seyahat Hizmetleri Alanı - Turizm / Otelcilik ve Turizm Dalının birinden
+                  <td data-label="Kod" scope="row"><strong>2059</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Laboratuvar Hizmetleri Alanı ve Dallarından
                     mezun olmak.</td>
-                  <td>23</td>
-                  <td>23</td>
-                  <td>74,396</td>
-                  <td>2</td>
-                  <td>2</td>
-                  <td>77,491</td>
-                  <td>26</td>
-                  <td>26</td>
-                  <td>71,900</td>
-                  <td>69</td>
-                  <td>69</td>
-                  <td>65,3265</td>
-                  <td>120</td>
-                  <td>120</td>
-                  <td>72,278</td>
+                  <td data-label="2025 Kont.">-</td>
+                  <td data-label="2025 Yerleşen">-</td>
+                  <td data-label="2025 Min. Puan">-</td>
+                  <td data-label="2024 Kont.">1</td>
+                  <td data-label="2024 Yerleşen">1</td>
+                  <td data-label="2024 Min. Puan">75,543</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">24</td>
+                  <td data-label="2022 Yerleşen">24</td>
+                  <td data-label="2022 Min. Puan">72,81783</td>
+                  <td data-label="Son 4 Yıl Kont.">25</td>
+                  <td data-label="Son 4 Yıl Yerleşen">25</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">74,180</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2125</strong></td>
-                  <td>Ortaöğretim Kurumlarının Hemşirelik-Ebelik-Sağlık Memurluğu Alanı - Ebelik-Hemşirelik Dalının,
-                    Hemşirelik-Ebelik-Sağlık Memurluğu Alanı - Hemşirelik Dalının veya Hemşirelik-Ebelik- Sağlık
-                    Memurluğu Alanı - Sağlık Memurluğu Dalının birinden mezun olmak.</td>
-                  <td>1874</td>
-                  <td>1874</td>
-                  <td>79,195</td>
-                  <td>2000</td>
-                  <td>2000</td>
-                  <td>79,049</td>
-                  <td>867</td>
-                  <td>867</td>
-                  <td>83,836</td>
-                  <td>1901</td>
-                  <td>1901</td>
-                  <td>76,58913</td>
-                  <td>6642</td>
-                  <td>6642</td>
-                  <td>79,667</td>
+                  <td data-label="Kod" scope="row"><strong>2061</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Makine Teknolojisi Alanı ve Dalları veya
+                    Makine ve Tasarım Teknolojisi Alanı ve Dallarından mezun olmak.</td>
+                  <td data-label="2025 Kont.">50</td>
+                  <td data-label="2025 Yerleşen">50</td>
+                  <td data-label="2025 Min. Puan">77,572</td>
+                  <td data-label="2024 Kont.">35</td>
+                  <td data-label="2024 Yerleşen">35</td>
+                  <td data-label="2024 Min. Puan">76,985</td>
+                  <td data-label="2023 Kont.">83</td>
+                  <td data-label="2023 Yerleşen">83</td>
+                  <td data-label="2023 Min. Puan">78,324</td>
+                  <td data-label="2022 Kont.">30</td>
+                  <td data-label="2022 Yerleşen">30</td>
+                  <td data-label="2022 Min. Puan">83,01311</td>
+                  <td data-label="Son 4 Yıl Kont.">198</td>
+                  <td data-label="Son 4 Yıl Yerleşen">198</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">78,974</td>
                 </tr>
                 <tr>
-                  <td scope="row"><strong>2127</strong></td>
-                  <td>Ortaöğretim Kurumlarının Hemşirelik-Ebelik-Sağlık Memurluğu Alanı - Ebelik Dalı veya
-                    Hemşirelik-Ebelik-Sağlık Memurluğu Alanı - Ebelik-Hemşirelik Dalından mezun olmak.</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>-</td>
-                  <td>290</td>
-                  <td>290</td>
-                  <td>76,58913</td>
-                  <td>290</td>
-                  <td>290</td>
-                  <td>76,589</td>
+                  <td data-label="Kod" scope="row"><strong>2063</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Matbaa Teknolojisi Alanı ve Dalları veya
+                    Gazetecilik Alanı -Gazetecilik / Masaüstü Yayıncılık Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">1</td>
+                  <td data-label="2025 Yerleşen">1</td>
+                  <td data-label="2025 Min. Puan">77,216</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">1</td>
+                  <td data-label="Son 4 Yıl Yerleşen">1</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">77,216</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2065</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Metal Teknolojisi Alanı ve Dallarından mezun
+                    olmak.</td>
+                  <td data-label="2025 Kont.">34</td>
+                  <td data-label="2025 Yerleşen">34</td>
+                  <td data-label="2025 Min. Puan">72,424</td>
+                  <td data-label="2024 Kont.">1</td>
+                  <td data-label="2024 Yerleşen">1</td>
+                  <td data-label="2024 Min. Puan">91,334</td>
+                  <td data-label="2023 Kont.">37</td>
+                  <td data-label="2023 Yerleşen">37</td>
+                  <td data-label="2023 Min. Puan">76,567</td>
+                  <td data-label="2022 Kont.">1</td>
+                  <td data-label="2022 Yerleşen">1</td>
+                  <td data-label="2022 Min. Puan">82,86211</td>
+                  <td data-label="Son 4 Yıl Kont.">73</td>
+                  <td data-label="Son 4 Yıl Yerleşen">73</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">80,797</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2067</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Metalürji Teknolojisi Alanı ve Dallarından
+                    mezun olmak.</td>
+                  <td data-label="2025 Kont.">-</td>
+                  <td data-label="2025 Yerleşen">-</td>
+                  <td data-label="2025 Min. Puan">-</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">1</td>
+                  <td data-label="2023 Yerleşen">1</td>
+                  <td data-label="2023 Min. Puan">79,832</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">1</td>
+                  <td data-label="Son 4 Yıl Yerleşen">1</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">79,832</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2071</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Ahşap Teknolojisi Alanı ve Dalları veya
+                    Mobilya ve İç Mekan Tasarımı Alanı ve Dallarından mezun olmak.</td>
+                  <td data-label="2025 Kont.">32</td>
+                  <td data-label="2025 Yerleşen">32</td>
+                  <td data-label="2025 Min. Puan">70,904</td>
+                  <td data-label="2024 Kont.">2</td>
+                  <td data-label="2024 Yerleşen">2</td>
+                  <td data-label="2024 Min. Puan">75,646</td>
+                  <td data-label="2023 Kont.">8</td>
+                  <td data-label="2023 Yerleşen">8</td>
+                  <td data-label="2023 Min. Puan">77,060</td>
+                  <td data-label="2022 Kont.">1</td>
+                  <td data-label="2022 Yerleşen">1</td>
+                  <td data-label="2022 Min. Puan">79,82413</td>
+                  <td data-label="Son 4 Yıl Kont.">43</td>
+                  <td data-label="Son 4 Yıl Yerleşen">43</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">75,859</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2073</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Motorlu Araçlar Teknolojisi Alanı ve Dalları
+                    veya Kimya Teknolojisi Alanı -Sınai Boya / Sanayi Boyacılığı ve Uygulama Tekniği Dalından mezun
+                    olmak.</td>
+                  <td data-label="2025 Kont.">2</td>
+                  <td data-label="2025 Yerleşen">2</td>
+                  <td data-label="2025 Min. Puan">85,791</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">2</td>
+                  <td data-label="Son 4 Yıl Yerleşen">2</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">85,791</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2075</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Muhasebe ve Fi-sman Alanı ve Dalları veya
+                    Pazarlama ve Perakende Alanı - Ticaret / A-B Grubu (Ticaret Lisesi) Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">-</td>
+                  <td data-label="2025 Yerleşen">-</td>
+                  <td data-label="2025 Min. Puan">-</td>
+                  <td data-label="2024 Kont.">4</td>
+                  <td data-label="2024 Yerleşen">4</td>
+                  <td data-label="2024 Min. Puan">80,902</td>
+                  <td data-label="2023 Kont.">35</td>
+                  <td data-label="2023 Yerleşen">35</td>
+                  <td data-label="2023 Min. Puan">76,699</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">39</td>
+                  <td data-label="Son 4 Yıl Yerleşen">39</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">78,800</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2079</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Pazarlama ve Perakende Alanı ve Dalları veya
+                    Muhasebe ve Fi-sman Alanı - Muhasebe / Muhasebe ve Fi-sman Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">-</td>
+                  <td data-label="2025 Yerleşen">-</td>
+                  <td data-label="2025 Min. Puan">-</td>
+                  <td data-label="2024 Kont.">4</td>
+                  <td data-label="2024 Yerleşen">4</td>
+                  <td data-label="2024 Min. Puan">80,902</td>
+                  <td data-label="2023 Kont.">33</td>
+                  <td data-label="2023 Yerleşen">33</td>
+                  <td data-label="2023 Min. Puan">76,699</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">37</td>
+                  <td data-label="Son 4 Yıl Yerleşen">37</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">78,800</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2085</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Raylı Sistemler Teknolojisi Alanı ve
+                    Dallarından mezun olmak.</td>
+                  <td data-label="2025 Kont.">-</td>
+                  <td data-label="2025 Yerleşen">-</td>
+                  <td data-label="2025 Min. Puan">-</td>
+                  <td data-label="2024 Kont.">14</td>
+                  <td data-label="2024 Yerleşen">14</td>
+                  <td data-label="2024 Min. Puan">78,220</td>
+                  <td data-label="2023 Kont.">2</td>
+                  <td data-label="2023 Yerleşen">2</td>
+                  <td data-label="2023 Min. Puan">82,336</td>
+                  <td data-label="2022 Kont.">73</td>
+                  <td data-label="2022 Yerleşen">73</td>
+                  <td data-label="2022 Min. Puan">71,69884</td>
+                  <td data-label="Son 4 Yıl Kont.">89</td>
+                  <td data-label="Son 4 Yıl Yerleşen">89</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">77,418</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2086</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Raylı Sistemler Teknolojisi Alanı-Raylı
+                    Sistemler Makine Dalı, Raylı Sistemler Elektrik-Elektronik Dalı, Raylı Sistemler Mekatronik Dalı
+                    veya Raylı Sistem Araçları Dalından Mezun Olmak.</td>
+                  <td data-label="2025 Kont.">78</td>
+                  <td data-label="2025 Yerleşen">78</td>
+                  <td data-label="2025 Min. Puan">73,207</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">78</td>
+                  <td data-label="Son 4 Yıl Yerleşen">78</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">73,207</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2087</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Acil Sağlık Hizmetleri Alanı - Acil Tıp
+                    Teknisyenliği Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">304</td>
+                  <td data-label="2025 Yerleşen">304</td>
+                  <td data-label="2025 Min. Puan">80,923</td>
+                  <td data-label="2024 Kont.">434</td>
+                  <td data-label="2024 Yerleşen">434</td>
+                  <td data-label="2024 Min. Puan">77,715</td>
+                  <td data-label="2023 Kont.">427</td>
+                  <td data-label="2023 Yerleşen">427</td>
+                  <td data-label="2023 Min. Puan">80,156</td>
+                  <td data-label="2022 Kont.">858</td>
+                  <td data-label="2022 Yerleşen">858</td>
+                  <td data-label="2022 Min. Puan">76,58913</td>
+                  <td data-label="Son 4 Yıl Kont.">2023</td>
+                  <td data-label="Son 4 Yıl Yerleşen">2023</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">78,846</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2089</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Anestezi ve Reanimasyon Alanı - Anestezi
+                    Teknisyenliği Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">9</td>
+                  <td data-label="2025 Yerleşen">9</td>
+                  <td data-label="2025 Min. Puan">86,888</td>
+                  <td data-label="2024 Kont.">50</td>
+                  <td data-label="2024 Yerleşen">50</td>
+                  <td data-label="2024 Min. Puan">74,614</td>
+                  <td data-label="2023 Kont.">55</td>
+                  <td data-label="2023 Yerleşen">55</td>
+                  <td data-label="2023 Min. Puan">75,290</td>
+                  <td data-label="2022 Kont.">104</td>
+                  <td data-label="2022 Yerleşen">104</td>
+                  <td data-label="2022 Min. Puan">78,83359</td>
+                  <td data-label="Son 4 Yıl Kont.">218</td>
+                  <td data-label="Son 4 Yıl Yerleşen">218</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">78,907</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2091</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Çevre Sağlığı Alanı - Çevre Sağlığı
+                    Teknisyenliği Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">20</td>
+                  <td data-label="2025 Yerleşen">20</td>
+                  <td data-label="2025 Min. Puan">72,130</td>
+                  <td data-label="2024 Kont.">10</td>
+                  <td data-label="2024 Yerleşen">10</td>
+                  <td data-label="2024 Min. Puan">72,894</td>
+                  <td data-label="2023 Kont.">13</td>
+                  <td data-label="2023 Yerleşen">13</td>
+                  <td data-label="2023 Min. Puan">73,180</td>
+                  <td data-label="2022 Kont.">20</td>
+                  <td data-label="2022 Yerleşen">20</td>
+                  <td data-label="2022 Min. Puan">74,86723</td>
+                  <td data-label="Son 4 Yıl Kont.">63</td>
+                  <td data-label="Son 4 Yıl Yerleşen">63</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">73,268</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2097</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Radyoloji Alanı - Radyoloji Teknisyenliği
+                    Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">28</td>
+                  <td data-label="2025 Yerleşen">28</td>
+                  <td data-label="2025 Min. Puan">77,315</td>
+                  <td data-label="2024 Kont.">200</td>
+                  <td data-label="2024 Yerleşen">200</td>
+                  <td data-label="2024 Min. Puan">65,480</td>
+                  <td data-label="2023 Kont.">64</td>
+                  <td data-label="2023 Yerleşen">64</td>
+                  <td data-label="2023 Min. Puan">72,637</td>
+                  <td data-label="2022 Kont.">112</td>
+                  <td data-label="2022 Yerleşen">112</td>
+                  <td data-label="2022 Min. Puan">76,06088</td>
+                  <td data-label="Son 4 Yıl Kont.">404</td>
+                  <td data-label="Son 4 Yıl Yerleşen">404</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">72,873</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2099</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Tıbbi Laboratuvar Alanı - Tıbbi Laboratuvar
+                    Teknisyenliği Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">9</td>
+                  <td data-label="2025 Yerleşen">9</td>
+                  <td data-label="2025 Min. Puan">81,611</td>
+                  <td data-label="2024 Kont.">80</td>
+                  <td data-label="2024 Yerleşen">80</td>
+                  <td data-label="2024 Min. Puan">71,278</td>
+                  <td data-label="2023 Kont.">50</td>
+                  <td data-label="2023 Yerleşen">50</td>
+                  <td data-label="2023 Min. Puan">74,312</td>
+                  <td data-label="2022 Kont.">91</td>
+                  <td data-label="2022 Yerleşen">91</td>
+                  <td data-label="2022 Min. Puan">76,16864</td>
+                  <td data-label="Son 4 Yıl Kont.">230</td>
+                  <td data-label="Son 4 Yıl Yerleşen">230</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">75,842</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2101</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Büro Yönetimi Alanı - Tıp Sekreterliği
+                    Dalından veya Sağlık Hizmetleri Sekreterliği Alanı - Tıbbi sekreterlik Dalından mezun olmak.</td>
+                  <td data-label="2025 Kont.">106</td>
+                  <td data-label="2025 Yerleşen">106</td>
+                  <td data-label="2025 Min. Puan">72,127</td>
+                  <td data-label="2024 Kont.">100</td>
+                  <td data-label="2024 Yerleşen">100</td>
+                  <td data-label="2024 Min. Puan">71,833</td>
+                  <td data-label="2023 Kont.">200</td>
+                  <td data-label="2023 Yerleşen">200</td>
+                  <td data-label="2023 Min. Puan">73,156</td>
+                  <td data-label="2022 Kont.">22</td>
+                  <td data-label="2022 Yerleşen">22</td>
+                  <td data-label="2022 Min. Puan">77,95667</td>
+                  <td data-label="Son 4 Yıl Kont.">428</td>
+                  <td data-label="Son 4 Yıl Yerleşen">428</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">73,768</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2105</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Seramik ve Cam Teknolojisi Alanı ve
+                    Dallarından mezun olmak.</td>
+                  <td data-label="2025 Kont.">-</td>
+                  <td data-label="2025 Yerleşen">-</td>
+                  <td data-label="2025 Min. Puan">-</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">1</td>
+                  <td data-label="2023 Yerleşen">1</td>
+                  <td data-label="2023 Min. Puan">63,714</td>
+                  <td data-label="2022 Kont.">2</td>
+                  <td data-label="2022 Yerleşen">2</td>
+                  <td data-label="2022 Min. Puan">58,66606</td>
+                  <td data-label="Son 4 Yıl Kont.">3</td>
+                  <td data-label="Son 4 Yıl Yerleşen">3</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">61,190</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2109</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Tekstil Teknolojisi Alanı ve Dallarının,
+                    Giyim Üretim Teknolojisi Alanı -Konfeksiyon Makinaları Bakım Onarım Dalının, Giyim Üretim
+                    Teknolojisi Alanı -Tekstil Konfeksiyon Dalının veya Giyim Üretim Teknolojisi Alanı -Örme Hazır Giyim
+                    / Triko Konfeksiyon / Trikotaj Dalının birinden mezun olmak.</td>
+                  <td data-label="2025 Kont.">1</td>
+                  <td data-label="2025 Yerleşen">1</td>
+                  <td data-label="2025 Min. Puan">84,941</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">1</td>
+                  <td data-label="Son 4 Yıl Yerleşen">1</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">84,941</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2111</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Tesisat Teknolojisi ve İklimlendirme Alanı
+                    ve Dallarından mezun olmak.</td>
+                  <td data-label="2025 Kont.">160</td>
+                  <td data-label="2025 Yerleşen">160</td>
+                  <td data-label="2025 Min. Puan">68,430</td>
+                  <td data-label="2024 Kont.">5</td>
+                  <td data-label="2024 Yerleşen">5</td>
+                  <td data-label="2024 Min. Puan">75,986</td>
+                  <td data-label="2023 Kont.">21</td>
+                  <td data-label="2023 Yerleşen">21</td>
+                  <td data-label="2023 Min. Puan">73,106</td>
+                  <td data-label="2022 Kont.">37</td>
+                  <td data-label="2022 Yerleşen">37</td>
+                  <td data-label="2022 Min. Puan">69,02621</td>
+                  <td data-label="Son 4 Yıl Kont.">223</td>
+                  <td data-label="Son 4 Yıl Yerleşen">223</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">71,637</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2112</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Tesisat Teknolojisi Alanı ve Dallarından
+                    mezun olmak.</td>
+                  <td data-label="2025 Kont.">130</td>
+                  <td data-label="2025 Yerleşen">130</td>
+                  <td data-label="2025 Min. Puan">68,430</td>
+                  <td data-label="2024 Kont.">1</td>
+                  <td data-label="2024 Yerleşen">1</td>
+                  <td data-label="2024 Min. Puan">76,169</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">-</td>
+                  <td data-label="2022 Yerleşen">-</td>
+                  <td data-label="2022 Min. Puan">-</td>
+                  <td data-label="Son 4 Yıl Kont.">131</td>
+                  <td data-label="Son 4 Yıl Yerleşen">131</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">72,299</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2117</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Yiyecek İçecek Hizmetleri Alanı ve
+                    Dallarının, Aile ve Tüketici Hizmetleri Alanı - Beslenme ve Ev Yönetimi Dalının, Aile ve Tüketici
+                    Hizmetleri Alanı - Ev Ekonomisi Dalının veya Konaklama ve Seyahat Hizmetleri Alanı - Turizm /
+                    Otelcilik ve Turizm Dalının birinden mezun olmak.</td>
+                  <td data-label="2025 Kont.">23</td>
+                  <td data-label="2025 Yerleşen">23</td>
+                  <td data-label="2025 Min. Puan">74,396</td>
+                  <td data-label="2024 Kont.">2</td>
+                  <td data-label="2024 Yerleşen">2</td>
+                  <td data-label="2024 Min. Puan">77,491</td>
+                  <td data-label="2023 Kont.">26</td>
+                  <td data-label="2023 Yerleşen">26</td>
+                  <td data-label="2023 Min. Puan">71,900</td>
+                  <td data-label="2022 Kont.">69</td>
+                  <td data-label="2022 Yerleşen">69</td>
+                  <td data-label="2022 Min. Puan">65,3265</td>
+                  <td data-label="Son 4 Yıl Kont.">120</td>
+                  <td data-label="Son 4 Yıl Yerleşen">120</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">72,278</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2125</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Hemşirelik-Ebelik-Sağlık Memurluğu Alanı -
+                    Ebelik-Hemşirelik Dalının, Hemşirelik-Ebelik-Sağlık Memurluğu Alanı - Hemşirelik Dalının veya
+                    Hemşirelik-Ebelik- Sağlık Memurluğu Alanı - Sağlık Memurluğu Dalının birinden mezun olmak.</td>
+                  <td data-label="2025 Kont.">1874</td>
+                  <td data-label="2025 Yerleşen">1874</td>
+                  <td data-label="2025 Min. Puan">79,195</td>
+                  <td data-label="2024 Kont.">2000</td>
+                  <td data-label="2024 Yerleşen">2000</td>
+                  <td data-label="2024 Min. Puan">79,049</td>
+                  <td data-label="2023 Kont.">867</td>
+                  <td data-label="2023 Yerleşen">867</td>
+                  <td data-label="2023 Min. Puan">83,836</td>
+                  <td data-label="2022 Kont.">1901</td>
+                  <td data-label="2022 Yerleşen">1901</td>
+                  <td data-label="2022 Min. Puan">76,58913</td>
+                  <td data-label="Son 4 Yıl Kont.">6642</td>
+                  <td data-label="Son 4 Yıl Yerleşen">6642</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">79,667</td>
+                </tr>
+                <tr>
+                  <td data-label="Kod" scope="row"><strong>2127</strong></td>
+                  <td data-label="Bölüm / Nitelik">Ortaöğretim Kurumlarının Hemşirelik-Ebelik-Sağlık Memurluğu Alanı -
+                    Ebelik Dalı veya Hemşirelik-Ebelik-Sağlık Memurluğu Alanı - Ebelik-Hemşirelik Dalından mezun olmak.
+                  </td>
+                  <td data-label="2025 Kont.">-</td>
+                  <td data-label="2025 Yerleşen">-</td>
+                  <td data-label="2025 Min. Puan">-</td>
+                  <td data-label="2024 Kont.">-</td>
+                  <td data-label="2024 Yerleşen">-</td>
+                  <td data-label="2024 Min. Puan">-</td>
+                  <td data-label="2023 Kont.">-</td>
+                  <td data-label="2023 Yerleşen">-</td>
+                  <td data-label="2023 Min. Puan">-</td>
+                  <td data-label="2022 Kont.">290</td>
+                  <td data-label="2022 Yerleşen">290</td>
+                  <td data-label="2022 Min. Puan">76,58913</td>
+                  <td data-label="Son 4 Yıl Kont.">290</td>
+                  <td data-label="Son 4 Yıl Yerleşen">290</td>
+                  <td data-label="Son 4 Yıl Ort. Puan">76,589</td>
                 </tr>
               </tbody>
             </table>
@@ -1318,10 +1439,9 @@
       const accordionBody = document.getElementById('accordionBody');
       const accordionIcon = document.getElementById('accordionIcon');
 
-      // Tarayıcı hafızasını kontrol et (Daha önce gördü mü?)
-      let isFirstVisit = !localStorage.getItem('kpssUyariGoruldu');
+      const storageKey = 'kpssUyariGoruldu_' + document.title.replace(/\s+/g, '');
+      let isFirstVisit = !localStorage.getItem(storageKey);
 
-      // Aç/Kapat (Toggle) Fonksiyonu
       function toggleAccordion() {
         if (accordionBody.classList.contains('collapsed')) {
           accordionBody.classList.remove('collapsed');
@@ -1332,21 +1452,17 @@
         }
       }
 
-      // Başlığa tıklandığında çalıştır
       accordionBtn.addEventListener('click', toggleAccordion);
 
       if (isFirstVisit) {
-        // İlk giriş: Kutu açık başlar, 12 saniye sonra otomatik kapanır
         setTimeout(function () {
           if (!accordionBody.classList.contains('collapsed')) {
             toggleAccordion();
           }
-        }, 600000);
+        }, 12000);
 
-        // Kullanıcının bu uyarıyı gördüğünü tarayıcıya kaydet
-        localStorage.setItem('kpssUyariGoruldu', 'true');
+        localStorage.setItem(storageKey, 'true');
       } else {
-        // İkinci ve sonraki girişler: Sayfa açıldığında kutu doğrudan kapalı gelir
         accordionBody.classList.add('collapsed');
         accordionIcon.textContent = '▲';
       }
