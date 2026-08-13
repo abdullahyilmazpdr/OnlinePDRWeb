@@ -289,6 +289,22 @@
       box-shadow: 0 4px 6px rgba(52, 152, 219, 0.3);
     }
 
+    /* Satır Tıklanabilirlik Efekti */
+    #kpssTable tbody tr {
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    #kpssTable tbody tr:hover {
+      background-color: rgba(52, 152, 219, 0.1);
+    }
+    .detay-bilgi {
+      display: block;
+      font-size: 0.75rem;
+      color: #3498db;
+      margin-top: 5px;
+      font-weight: normal;
+    }
+
     /* 5. MOBİL İÇİN KART GÖRÜNÜMÜ (Responsive Table) */
     /* 5. MOBİL İÇİN KART GÖRÜNÜMÜ (Responsive Table) */
     @media screen and (max-width: 992px) {
@@ -3543,6 +3559,60 @@
         accordionIcon.textContent = '▲';
       }
     });
+
+    // --- SATIR TIKLAMA VE DİNAMİK URL (SLUG) YÖNLENDİRMESİ ---
+    document.addEventListener("DOMContentLoaded", function () {
+      
+      // Kullanıcılar için bilgilendirme notu ekleme (Mobilde ve Masaüstünde)
+      let tableCaption = document.getElementById('kpss-table-desc');
+      if(tableCaption) {
+          tableCaption.innerHTML += '<br><span style="font-size: 0.85rem; color: #e74c3c; font-weight: normal;">💡 Bölümler hakkında detaylı analiz, istihdam fırsatları ve geçmiş yıllara ait atama verilerini görmek için ilgili satıra (Nitelik Koduna) tıklayınız.</span>';
+      }
+
+      // Slug oluşturma fonksiyonu (Python'daki create_slug ile aynı mantıkta çalışır)
+      function createSlug(text) {
+        text = text.toLowerCase();
+        const charMap = {'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u'};
+        for (let key in charMap) {
+            text = text.replace(new RegExp(key, 'g'), charMap[key]);
+        }
+        text = text.replace(/[^a-z0-9]+/g, '-');
+        text = text.replace(/-+/g, '-').replace(/^-|-$/g, '');
+        return text;
+      }
+
+      // Tüm tablo satırlarını (başlıklar hariç) seçiyoruz
+      let rows = document.querySelectorAll('#kpssTable tbody tr');
+
+      rows.forEach(function(row) {
+        
+        // 1. Sütun (Kod) ve 2. Sütun (Bölüm Açıklaması) verilerini alıyoruz
+        let kodHucresi = row.querySelector('td:nth-child(1)');
+        let aciklamaHucresi = row.querySelector('td:nth-child(2)');
+
+        if (kodHucresi && aciklamaHucresi) {
+            // Masaüstü görünümü için Kod hücresinin altına "Detay" yazısı ekliyoruz
+            kodHucresi.innerHTML += '<span class="detay-bilgi d-none d-lg-block">Detayları Gör</span>';
+            
+            row.addEventListener('click', function() {
+                // Kod metnini al
+                let kod = kodHucresi.innerText.replace('Detayları Gör', '').trim();
+                
+                // Açıklama metnini al (sadece ilk 5 kelimesini slug yapmak için ayır)
+                let aciklamaTam = aciklamaHucresi.innerText.trim();
+                let aciklamaKisa = aciklamaTam.split(' ').slice(0, 5).join(' ');
+                
+                // URL'yi oluştur
+                let aciklamaSlug = createSlug(aciklamaKisa);
+                let finalUrl = "kpss-arastirmasi-blog/" + kod + "-" + aciklamaSlug + ".html";
+                
+                // Yeni sekmede aç
+                window.open(finalUrl, '_blank');
+            });
+        }
+      });
+    });
+    
   </script>
 
 </body>
