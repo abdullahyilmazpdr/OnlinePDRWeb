@@ -56,7 +56,53 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script type="text/javascript" async src="https://static.cdn.admatic.com.tr/dist/gpt.min.js?id=NID-171446397753"></script>
 <!-- Admatic BACKFILL ads END -->
 
+<style>
+  /* Header (Üst Menü) Sabit Arka Planı - Footer'daki Lacivert ile Birebir Aynı Uyum */
+    #header {
+        background-color: #1b2f45 !important; /* Footer ve menünün tam oturduğu kurumsal ton */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+        transition: all 0.3s ease-in-out;
+    }
 
+    /* Plan Robotuna Özel SÜPER DARALTILMIŞ ve DERİNLİK KATILMIŞ Üst Başlık (Hero) Alanı */
+    .tool-page-title {
+        padding: 100px 0 25px 0 !important; 
+        min-height: auto !important; 
+        /* Senin o çok sevdiğin orjinal mavi tonunu, kurumsal lacivertten açık maviye geçiş (gradient) ile harmanladık */
+        background: linear-gradient(135deg, #1b2f45 0%, #2980b9 100%) !important;
+        position: relative;
+        box-shadow: inset 0 -5px 15px rgba(0,0,0,0.1); /* İçeriye doğru hafif derinlik gölgesi */
+    }
+    
+    .tool-page-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+        height: 4px;
+        background: linear-gradient(to right, #3498db, #2ecc71); /* İnce şık bir renk şeridi */
+    }
+
+    .tool-page-title h1 {
+        font-size: 2.2rem !important;
+        font-weight: 700;
+        margin-bottom: 8px !important;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Yazıya 3D hissi veren gölge */
+    }
+    .tool-page-title p {
+        font-size: 1.05rem !important;
+        margin-bottom: 5px !important; 
+        opacity: 0.9;
+        font-weight: 300;
+    }
+    .tool-page-title .breadcrumbs {
+        margin-top: 10px !important;
+        background: rgba(0,0,0,0.15); /* Ekmek kırıntısı arka planını hafif saydamlaştırdık */
+        padding: 5px 15px;
+        border-radius: 20px;
+        display: inline-block;
+    }
+</style>
+  
 </head>
 
 <body class="services-page">
@@ -92,7 +138,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <main class="main">
 
     <!-- Page Title -->
-    <div class="page-title dark-background">
+    <div class="page-title tool-page-title dark-background">
       <div class="container position-relative">
         <h1>Hizmetlerimiz</h1>
         <p>OnlinePDR tarafından siz kıymetli takipçilerimiz için hazırladığımız içerikler</p>
@@ -401,6 +447,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script>
+    // --- 8. BAŞLIK SİLİKLEŞTİRME EFEKTİ (SCROLL FADE) ---
+    window.addEventListener('scroll', function() {
+        const baslikKismi = document.querySelector('.tool-page-title .container');
+        if (baslikKismi) {
+            let kaydirmaMiktari = window.scrollY;
+            // Kaydırma 0 ile 120px arasındayken opaklığı 1'den 0'a doğru düşürür
+            let opaklik = 1 - (kaydirmaMiktari / 120);
+            
+            // Opaklık 0'ın altına düşmesin
+            baslikKismi.style.opacity = opaklik >= 0 ? opaklik : 0;
+            
+            // Daha modern görünmesi için kaydırırken yazıyı hafifçe aşağı iter (Parallax etkisi)
+            baslikKismi.style.transform = `translateY(${kaydirmaMiktari * 0.4}px)`;
+        }
+    });
+  </script>
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
