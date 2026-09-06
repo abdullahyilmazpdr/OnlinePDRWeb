@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Sayfa Bulunamadı | onlinepdr.com</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .error-container {
+            max-width: 550px;
+            background: #ffffff;
+            padding: 50px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .icon-wrapper {
+            font-size: 64px;
+            margin-bottom: 20px;
+            line-height: 1;
+        }
+
+        h1 {
+            font-size: 72px;
+            font-weight: 800;
+            color: #3498db;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #7f8c8d;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn-home {
+            display: inline-block;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #3498db;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+        }
+
+        .btn-home:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.3);
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 56px;
+            }
+            h2 {
+                font-size: 20px;
+            }
+            .error-container {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="error-container">
+        <div class="icon-wrapper">🧭</div>
+        <h1>404</h1>
+        <h2>Bazen En İyi Rehberler Bile Kaybolabilir!</h2>
+        <p>Aradığınız sayfa rehberlik arşivimizde bulunamadı, taşınmış veya artık mevcut olmayabilir. Doğru yönlendirme için ana sayfaya dönerek araçlarımızı kullanmaya devam edebilirsiniz.</p>
+        <a href="/" class="btn-home">Ana Sayfaya Dön</a>
+    </div>
+
+</body>
+</html>
