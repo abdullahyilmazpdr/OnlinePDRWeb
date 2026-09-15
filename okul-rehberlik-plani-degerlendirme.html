@@ -119,7 +119,6 @@
     /* FLEXBOX İLE ALT ALTA VEYA YAN YANA YERLEŞİM (Mobil Öncelikli) */
     .row2 { display: flex; flex-direction: column; gap: 20px; width: 100%; }
     .row2 > div { flex: 1; width: 100%; display: flex; flex-direction: column; }
-    
     @media(min-width:768px) { .row2 { flex-direction: row; } }
 
     .drop { border: 2px dashed #3498db !important; border-radius: 12px; padding: 40px 20px; text-align: center; background: #f8faff !important; cursor: pointer; transition: all 0.2s ease-in-out; }
@@ -149,59 +148,32 @@
     .debug summary { cursor: pointer; font-weight: 600; color: var(--accent); }
 
     .ad-wrapper { display: flex; justify-content: center; align-items: center; margin: 10px auto 25px auto; padding: 10px; background: #f1f1f1; border: 1px solid #e0e0e0; border-radius: 8px; min-height: 90px; text-align: center; color: #888; font-size: 12px; max-width: 100%; box-sizing: border-box; overflow: hidden; }
-    .ad-sidebar { width: 100%; max-width: 300px; min-height: 250px; }
+    .ad-sidebar { width: 100%; max-width: 300px; min-height: 250px; margin: 0 auto 20px auto; }
 
+    /* ========================================================= */
+    /* GÜÇLENDİRİLMİŞ YAZDIRMA (PRINT) STİLLERİ                  */
+    /* ========================================================= */
     .no-screen { display: none; }
     
     @media print {
-      /* 1. Kesin Olarak Gizlenecek Tüm Elementler (En yüksek öncelik) */
-      .no-print, 
-      #header, 
-      #footer, 
-      .tool-page-title, 
-      .ad-wrapper,
-      .ad-sidebar,
-      .settings-toggle,
-      #scroll-top,
-      #hero-carousel,
-      .breadcrumbs,
-      /* Kartlar içinden SADECE Sonuç Kartı hariç diğerlerini gizle */
-      section.card:not(#resultsCard) { 
-        display: none !important; 
-        opacity: 0 !important;
-        visibility: hidden !important;
-        height: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
+      .no-print, #header, #footer, .tool-page-title, .ad-wrapper, .ad-sidebar, .settings-toggle, #scroll-top, #hero-carousel, .breadcrumbs, section.card:not(#resultsCard) { 
+        display: none !important; opacity: 0 !important; visibility: hidden !important; height: 0 !important; margin: 0 !important; padding: 0 !important;
       }
-
-      /* 2. Yazıcıya Özel Sayfa Arka Planı ve Temizliği */
       @page { margin: 1.5cm; }
       body { background: #fff !important; color: #000 !important; }
       .rpd-app-container { box-shadow: none !important; padding: 0 !important; background: #fff !important; width: 100% !important; max-width: none !important; border: none !important; }
       .app-content { max-width: none !important; padding: 0 !important; margin: 0 !important; }
       
-      /* 3. Sadece Yazdırmada Görünmesi Gereken Sonuç Kartı ve Başlığı */
       section.card#resultsCard { border: none !important; padding: 0 !important; box-shadow: none !important; display: block !important; }
       #printBaslik { display: block !important; margin-bottom: 20px !important; }
       
-      /* 4. Kriter (Result) Kutularının Yazıcıdaki Görünümü */
       .result { break-inside: avoid; border: 1px solid #ccc !important; box-shadow: none !important; margin-bottom: 10px !important; }
-      /* Yazıcılar arka plan renklerini basmadığı için border renklerini belirginleştiriyoruz */
       .result.ok { border-color: #1e7a43 !important; }
       .result.bad { border-color: #b23a3a !important; }
       .result.warn { border-color: #9a6a12 !important; }
 
-      /* 5. İmza Bloğunun Gösterimi (Kesin Kurallar) */
       .no-screen { display: block !important; }
-      #printImzaBloku { 
-        margin-top: 50px !important; 
-        padding-top: 20px !important; 
-        border-top: 2px solid #ccc !important; 
-        page-break-inside: avoid !important; /* İmzanın iki sayfaya bölünmesini engeller */
-        font-family: var(--serif) !important; 
-        display: block !important; 
-      }
+      #printImzaBloku { margin-top: 50px !important; padding-top: 20px !important; border-top: 2px solid #ccc !important; page-break-inside: avoid !important; font-family: var(--serif) !important; display: block !important; }
       .imza-satiri { display: flex !important; justify-content: space-between !important; align-items: flex-start !important; padding: 0 10px !important; text-align: center !important; width: 100% !important; }
       .imza-kutu { flex: 1 !important; display: flex !important; flex-direction: column !important; align-items: center !important; }
       .imza-unvan { font-weight: 600 !important; font-size: 14px !important; margin-bottom: 50px !important; line-height: 1.4 !important; }
@@ -262,13 +234,13 @@
 
             <section class="card">
               <h2 class="card-title-sm">01 · AYARLAR</h2>
-              <h3 class="card-subtitle-lg">Dönem Hedefleri</h3>
+              <h3 class="card-subtitle-lg">Dönem Hedefleri ve Kurum Bilgileri</h3>
               
               <div class="row2">
                 <div>
                   <label style="display:flex; justify-content:space-between; align-items:center;">
                     <span>Okulun bulunduğu il</span>
-                    <button type="button" id="btnKonumBul" style="background:none; border:none; color:#3498db; font-size:12px; font-weight:600; cursor:pointer; padding:0;"><i class="fa-solid fa-location-dot"></i> Konumumu Bul</button>
+                    <button type="button" id="btnKonumBul" class="no-print" style="background:none; border:none; color:#3498db; font-size:12px; font-weight:600; cursor:pointer; padding:0;"><i class="fa-solid fa-location-dot"></i> Konumumu Bul</button>
                   </label>
                   <select id="ilSelect"></select>
                   <div style="margin-top: 15px;">
@@ -279,25 +251,37 @@
                 <div>
                   <label>Bu dönemin Genel Hedefi (Bakanlık — tüm Türkiye için tek)</label>
                   <div id="genelHedefDisplay" style="padding:10px 12px; border:1px solid var(--line); border-radius:6px; background:var(--paper); font-size:14px; font-weight:600; min-height:45px; display:flex; align-items:center;">yükleniyor…</div>
-                  <a href="#" id="hataBildirLink" style="display:inline-block; margin-top:6px; font-size:12px; color:var(--accent);">Bu değer yanlış görünüyor → Hata bildir</a>
+                  <a href="#" id="hataBildirLink" class="no-print" style="display:inline-block; margin-top:6px; font-size:12px; color:var(--accent);">Bu değer yanlış görünüyor → Hata bildir</a>
                 </div>
               </div>
               
               <div style="margin-top:25px;">
                 <label for="okulTuruSelect">Okul / Görev Türü (resmi "Hedef Çalışmaları İş Akış Çizelgesi"ne göre)</label>
                 <select id="okulTuruSelect"></select>
-                <p class="settings-note" id="okulTuruAciklama" style="margin-top:6px;"></p>
+                <p class="settings-note no-print" id="okulTuruAciklama" style="margin-top:6px;"></p>
               </div>
-              <p class="settings-note mt-3">Kaynak: <span id="configKaynak" style="font-family:var(--mono);">yükleniyor…</span></p>
-              <button class="settings-toggle" id="toggleIlTable">81 ilin Yerel Hedef listesini düzenle</button>
-              <div class="settings-body" id="ilTableBody">
+
+              <!-- YENİ EKLENEN: KAYNAŞTIRMA (ÖZEL EĞİTİM) DURUMU CHECKBOX'I -->
+              <div class="no-print" style="margin-top:20px; padding: 12px 15px; border: 1px solid #cce5df; border-radius: 6px; background: #e6f2ef;">
+                <label style="display:flex; align-items:center; gap:10px; margin:0; cursor:pointer;">
+                  <input type="checkbox" id="kaynastirmaCheck" checked style="width:20px; height:20px; cursor:pointer; accent-color: #1f6f5c;">
+                  <span style="font-weight:600; color:var(--ink); font-size:14px;">Okulumuzda Kaynaştırma / Özel Eğitim Öğrencisi Bulunmaktadır</span>
+                </label>
+                <p style="font-size:12px; color:var(--ink-soft); margin:6px 0 0 30px;">
+                  İşaretli değilse, <b>BEP</b> ve <b>Destek Eğitim Odası</b> toplantı kontrolleri planda aranmaz (kapsam dışı tutulur).
+                </p>
+              </div>
+
+              <p class="settings-note mt-3 no-print">Kaynak: <span id="configKaynak" style="font-family:var(--mono);">yükleniyor…</span></p>
+              <button class="settings-toggle no-print" id="toggleIlTable">81 ilin Yerel Hedef listesini düzenle</button>
+              <div class="settings-body no-print" id="ilTableBody">
                 <p class="settings-note" style="margin-top:0;">Değiştirdiğiniz değer sadece tarayıcınızda geçerli olur. Tüm Türkiye'ye yansıması için "Yöneticiye Öner" butonuna basın.</p>
                 <div id="ilTableEdit"></div>
                 <button class="settings-toggle" id="resetIlTable" style="margin-top:10px; color:var(--bad-ink);">Tümünü varsayılanlara sıfırla</button>
               </div>
             </section>
 
-            <section class="card">
+            <section class="card no-print">
               <h2 class="card-title-sm">02 · PLAN DOSYASI</h2>
               <h3 class="card-subtitle-lg">E-Rehberlik'ten indirdiğiniz Excel dosyasını yükleyin</h3>
               
@@ -315,7 +299,7 @@
             <section class="card" id="resultsCard" style="display:none;">
               <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap;">
                 <div>
-                  <h2 class="card-title-sm">03 · SONUÇ</h2>
+                  <h2 class="card-title-sm no-print">03 · SONUÇ</h2>
                   <h3 class="card-subtitle-lg" id="schoolTitle" style="font-size:16px; color:#4b5670; font-weight:600; margin-top:2px;"></h3>
                 </div>
                 <div class="no-print" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
@@ -452,92 +436,12 @@
   <!-- ============================================================ -->
   <script>
     const CONFIG_URL = "./assets/rehberlikPlaniKontrolProgrami/config.json";
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfwr6WboJ4kjK78U5JxTIFh0SPXFG76DvnU8JfNfdsP2YczRJJUF1Nfip4AqDCDpNgpw/exec";  // GAS Web App URL'si buraya yazılacak
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzfwr6WboJ4kjK78U5JxTIFh0SPXFG76DvnU8JfNfdsP2YczRJJUF1Nfip4AqDCDpNgpw/exec";
 
     const ICI_VARSAYILAN = {
       genelHedef: "Selamlaşma",
       ilYerelHedef: {
-        "Adana": "Otokontrol",
-        "Adıyaman": "",
-        "Afyonkarahisar": "Duygu Düzenleme",
-        "Ağrı": "Otokontrol",
-        "Amasya": "",
-        "Ankara": "Etik Davranış",
-        "Antalya": "",
-        "Artvin": "İletişim Becerileri",
-        "Aydın": "Şiddeti Önleme",
-        "Balıkesir": "Sınır Koyma",
-        "Bilecik": "Otokontrol",
-        "Bingöl": "",
-        "Bitlis": "Otokontrol",
-        "Bolu": "",
-        "Burdur": "",
-        "Bursa": "Sınır Koyma",
-        "Çanakkale": "",
-        "Çankırı": "",
-        "Çorum": "İletişim Becerileri",
-        "Denizli": "Otokontrol",
-        "Diyarbakır": "",
-        "Edirne": "",
-        "Elazığ": "",
-        "Erzincan": "",
-        "Erzurum": "",
-        "Eskişehir": "Sınır Koyma",
-        "Gaziantep": "",
-        "Giresun": "Otokontrol",
-        "Gümüşhane": "",
-        "Hakkari": "",
-        "Hatay": "Şiddeti Önleme",
-        "Isparta": "",
-        "Mersin": "",
-        "İstanbul": "Otokontrol",
-        "İzmir": "Sınır Koyma",
-        "Kars": "",
-        "Kastamonu": "",
-        "Kayseri": "Sınır Koyma",
-        "Kırklareli": "",
-        "Kırşehir": "",
-        "Kocaeli": "",
-        "Konya": "Sınır Koyma",
-        "Kütahya": "Otokontrol",
-        "Malatya": "Akran Nezaketi",
-        "Manisa": "Atılganlık",
-        "Kahramanmaraş": "Duygu Düzenleme",
-        "Mardin": "Sınır Koyma",
-        "Muğla": "",
-        "Muş": "Otokontrol",
-        "Nevşehir": "",
-        "Niğde": "",
-        "Ordu": "Hedef Belirleme",
-        "Rize": "",
-        "Sakarya": "",
-        "Samsun": "",
-        "Siirt": "Akran Nezaketi",
-        "Sinop": "",
-        "Sivas": "Teknoloji Bağımlılığı",
-        "Tekirdağ": "Sınır Koyma",
-        "Tokat": "",
-        "Trabzon": "",
-        "Tunceli": "",
-        "Şanlıurfa": "Sınır Koyma",
-        "Uşak": "Sınır Koyma",
-        "Van": "Zaman Yönetimi",
-        "Yozgat": "Akran Nezaketi",
-        "Zonguldak": "",
-        "Aksaray": "",
-        "Bayburt": "",
-        "Karaman": "",
-        "Kırıkkale": "Sınır Koyma",
-        "Batman": "",
-        "Şırnak": "",
-        "Bartın": "",
-        "Ardahan": "Motivasyon",
-        "Iğdır": "Atılganlık",
-        "Yalova": "",
-        "Karabük": "",
-        "Kilis": "Akran Nezaketi",
-        "Osmaniye": "",
-        "Düzce": "",
+        "Adana": "Otokontrol", "Adıyaman": "", "Afyonkarahisar": "Duygu Düzenleme", "Ağrı": "Otokontrol", "Amasya": "", "Ankara": "Etik Davranış", "Antalya": "", "Artvin": "İletişim Becerileri", "Aydın": "Şiddeti Önleme", "Balıkesir": "Sınır Koyma", "Bilecik": "Otokontrol", "Bingöl": "", "Bitlis": "Otokontrol", "Bolu": "", "Burdur": "", "Bursa": "Sınır Koyma", "Çanakkale": "", "Çankırı": "", "Çorum": "İletişim Becerileri", "Denizli": "Otokontrol", "Diyarbakır": "", "Edirne": "", "Elazığ": "", "Erzincan": "", "Erzurum": "", "Eskişehir": "Sınır Koyma", "Gaziantep": "", "Giresun": "Otokontrol", "Gümüşhane": "", "Hakkari": "", "Hatay": "Şiddeti Önleme", "Isparta": "", "Mersin": "", "İstanbul": "Otokontrol", "İzmir": "Sınır Koyma", "Kars": "", "Kastamonu": "", "Kayseri": "Sınır Koyma", "Kırklareli": "", "Kırşehir": "", "Kocaeli": "", "Konya": "Sınır Koyma", "Kütahya": "Otokontrol", "Malatya": "Akran Nezaketi", "Manisa": "Atılganlık", "Kahramanmaraş": "Duygu Düzenleme", "Mardin": "Sınır Koyma", "Muğla": "", "Muş": "Otokontrol", "Nevşehir": "", "Niğde": "", "Ordu": "Hedef Belirleme", "Rize": "", "Sakarya": "", "Samsun": "", "Siirt": "Akran Nezaketi", "Sinop": "", "Sivas": "Teknoloji Bağımlılığı", "Tekirdağ": "Sınır Koyma", "Tokat": "", "Trabzon": "", "Tunceli": "", "Şanlıurfa": "Sınır Koyma", "Uşak": "Sınır Koyma", "Van": "Zaman Yönetimi", "Yozgat": "Akran Nezaketi", "Zonguldak": "", "Aksaray": "", "Bayburt": "", "Karaman": "", "Kırıkkale": "Sınır Koyma", "Batman": "", "Şırnak": "", "Bartın": "", "Ardahan": "Motivasyon", "Iğdır": "Atılganlık", "Yalova": "", "Karabük": "", "Kilis": "Akran Nezaketi", "Osmaniye": "", "Düzce": "",
       }
     };
 
@@ -567,6 +471,7 @@
     const genelHedefDisplay = document.getElementById("genelHedefDisplay");
     const yerelHedefDisplay = document.getElementById("yerelHedefDisplay");
     const btnKonumBul = document.getElementById("btnKonumBul");
+    const kaynastirmaCheck = document.getElementById("kaynastirmaCheck");
 
     async function init() {
       let yuklendi = false;
@@ -603,21 +508,28 @@
       
       genelHedefDisplay.textContent = MERKEZI_AYAR.genelHedef;
 
+      if(settings.kaynastirma !== undefined) {
+          kaynastirmaCheck.checked = settings.kaynastirma;
+      }
+
       // Konum veya Varsayılan İl Mantığı
       if (settings.il) {
           ilSelect.value = settings.il;
           yerelHedefDisplay.textContent = getEffectiveIlMap()[ilSelect.value] || "Bulunamadı";
       } else {
-          ilSelect.value = "Konya"; // Fallback default
+          ilSelect.value = "Konya";
           yerelHedefDisplay.textContent = getEffectiveIlMap()["Konya"] || "Bulunamadı";
           otomatikKonumBul();
       }
     }
     init();
 
-    /* ============================================================
-       YENİ: KONUM BULMA MANTIĞI (GEOLOCATION API)
-       ============================================================ */
+    kaynastirmaCheck.addEventListener("change", () => {
+        settings.kaynastirma = kaynastirmaCheck.checked;
+        saveSettings(settings);
+        if (lastParsed) evaluate(lastParsed);
+    });
+
     function otomatikKonumBul() {
         if ("geolocation" in navigator) {
              navigator.geolocation.getCurrentPosition(async (position) => {
@@ -637,9 +549,7 @@
                          }
                      }
                  } catch(e) {}
-             }, () => {
-                 // Sessizce yoksay, Konya'da kalır
-             });
+             }, () => { });
         }
     }
 
@@ -1104,14 +1014,39 @@
       body.appendChild(renderBireyselGrupSayiKriteri(31, "Öğretmenlerle yürütülecek çalışmalar Rehberlik Hizmetleri Sunum Sisteminde grup çalışmalarında yer alan “Destek Hizmetler” bölümündeki çalışma ve kodlardan seçilmiştir.", parsed, bireysel, "DMÖ"));
       body.appendChild(renderBireyselGrupSayiKriteri(32, "Velilerle yürütülecek çalışmalar Rehberlik Hizmetleri Sunum Sisteminde grup çalışmalarında yer alan “Destek Hizmetler” bölümündeki çalışma ve kodlardan seçilmiştir.", parsed, bireysel, "DMV"));
 
-      /* KRİTER 33, 34, 35, 36: RİBA, SRP, BAĞIMLILIK, ŞİDDET */
+      /* KRİTER 33, 34, 35, 36, 37: RİBA, SRP, BAĞIMLILIK, ŞİDDET, MAYIS AYI HEDEF KONTROLÜ */
       body.appendChild(renderRibaKriteri(33, "RİBA uygulamalarına yayınlanan rehberlik hizmetleri çalışma takvimine uygun tarihlerde yer verilmiştir.", parsed));
       body.appendChild(renderSrpKriteri(34, "Yalnızca rehberlik öğretmeni tarafından yapılacak çalışmalara yer verilmiştir.", parsed));
-      body.appendChild(renderKapsamKriteri(35, "Bağımlılıkla Mücadele kapsamında planlanan çalışma durumu", parsed, "Bağımlı"));
-      body.appendChild(renderKapsamKriteri(36, "Kadına Yönelik Şiddetin Önlenmesi kapsamında planlanan çalışma durumu", parsed, "Kadına Yönelik Şiddetin Önlenmesi"));
-
-      /* KRİTER 37: MAYIS AYI HEDEF KONTROLÜ */
+      body.appendChild(renderGenelKapsamKriteri(35, "Bağımlılıkla Mücadele kapsamında planlanan çalışma durumu", parsed, "BAĞIMLI"));
+      body.appendChild(renderGenelKapsamKriteri(36, "Kadına Yönelik Şiddetin Önlenmesi kapsamında planlanan çalışma durumu", parsed, "KADINA YÖNELİK ŞİDDET"));
       body.appendChild(renderMayisKriteri(37, "Öğrenci ve veli hedef çalışmaları Mayıs ayından önce bitirilmiştir.", parsed));
+
+      /* YENİ EKLENEN PROGRAM KRİTERLERİ (38-46) */
+      body.appendChild(renderGenelKapsamKriteri(38, "Şiddeti önleme çalışmalarına yer verilmiştir (Kadına Yönelik Şiddet vb. kapsayıcıdır)", parsed, "ŞİDDET"));
+      body.appendChild(renderGenelKapsamKriteri(39, "Aile Yılı kapsamında çalışmalara yer verilmiştir", parsed, "AİLE"));
+      body.appendChild(renderGenelKapsamKriteri(40, "Psikososyal koruma, önleme ve krize müdahale çalışmalarına yer verilmiştir", parsed, "PSİKOSOSYAL"));
+      body.appendChild(renderAylikKriter(41, "Okul Risk Haritasının çıkarılması çalışmaları Kasım ayında planlanmıştır", parsed, "RİSK", 11));
+      body.appendChild(renderGenelKapsamKriteri(42, "PDR Hizmetleri Yürütme Komisyonu toplantılarına yer verilmiştir", parsed, "YÜRÜTME KOMİSYONU"));
+      
+      const isOrtaokulLise = (okulTuruAnahtari === "normal" || okulTuruAnahtari === "ikinciOkul") && 
+                             (parsed.title.toLocaleUpperCase('tr').includes("ORTAOKUL") || parsed.title.toLocaleUpperCase('tr').includes("LİSE"));
+                             
+      if (isOrtaokulLise) {
+          body.appendChild(renderGenelKapsamKriteri(43, "7-12. Sınıflar için Mesleki İlgi Envanterine yer verilmiştir", parsed, "İLGİ ENVANTERİ"));
+          body.appendChild(renderGenelKapsamKriteri(44, "8-9. Sınıflar için Mesleki Beceri Envanterine yer verilmiştir", parsed, "BECERİ"));
+      } else {
+          body.appendChild(renderGerekYok(43, "7-12. Sınıflar için Mesleki İlgi Envanterine yer verilmiştir", "Bu kriter sadece Ortaokul ve Lise kademelerinde aranır."));
+          body.appendChild(renderGerekYok(44, "8-9. Sınıflar için Mesleki Beceri Envanterine yer verilmiştir", "Bu kriter sadece Ortaokul ve Lise kademelerinde aranır."));
+      }
+
+      if (kaynastirmaCheck.checked) {
+          body.appendChild(renderGenelKapsamKriteri(45, "BEP Geliştirme Birimi toplantılarına yer verilmiştir", parsed, "BEP"));
+          body.appendChild(renderGenelKapsamKriteri(46, "Destek Eğitim Odası toplantılarına yer verilmiştir", parsed, "DESTEK EĞİTİM"));
+      } else {
+          body.appendChild(renderGerekYok(45, "BEP Geliştirme Birimi toplantılarına yer verilmiştir", "Okulda kaynaştırma öğrencisi olmadığı belirtildiğinden bu kriter muaf tutulmuştur."));
+          body.appendChild(renderGerekYok(46, "Destek Eğitim Odası toplantılarına yer verilmiştir", "Okulda kaynaştırma öğrencisi olmadığı belirtildiğinden bu kriter muaf tutulmuştur."));
+      }
+
 
       document.getElementById("debugDump").textContent = JSON.stringify({ baslikSatiri: parsed.headerRowIdx + 1, sutunlar: parsed.colIdx, toplamSatir: parsed.rowCount, okulTuru: okulTuru.ad, genelHedefler: parsed.genel, yerelHedefler: parsed.yerel, ozelHedefler: parsed.ozel }, null, 2);
 
@@ -1120,7 +1055,7 @@
       const kontrolSayisi = body.querySelectorAll(".result.warn").length;
       const toplamKriter = uygunSayisi + uygunDegilSayisi + kontrolSayisi;
       
-      document.getElementById("ozetKutusu").textContent = `${toplamKriter} kriter değerlendirildi — ${uygunSayisi} Uygun, ${uygunDegilSayisi} Uygun Değil` + (kontrolSayisi ? `, ${kontrolSayisi} Kontrol Edilmeli` : "");
+      document.getElementById("ozetKutusu").textContent = `${toplamKriter} kriter değerlendirildi — ${uygunSayisi} Uygun, ${uygunDegilSayisi} Uygun Değil` + (kontrolSayisi ? `, ${kontrolSayisi} Kontrol Edilmeli / Muaf` : "");
       document.getElementById("printTarih").textContent = new Date().toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' });
     }
 
@@ -1250,13 +1185,68 @@
       return div;
     }
 
-    function renderKapsamKriteri(no, kriterText, parsed, anahtarKelime) {
-      const div = document.createElement("div"); const kw = anahtarKelime.toLocaleUpperCase('tr'); const sayilar = {};
-      [["ÖOV", "Öğrenciler"], ["DMV", "Veliler"], ["DMÖ", "Öğretmenler"], ["DMD", "Diğer"]].forEach(([pfx, ad]) => { const pfxN = pfx.toLocaleUpperCase('tr'); sayilar[ad] = parsed.dataRows.filter(r => { const c = normWs(r[parsed.calismaCol]).toLocaleUpperCase('tr'); return c.startsWith(pfxN) && c.includes(kw); }).length; });
-      const parcalar = Object.entries(sayilar).filter(([, n]) => n > 0).map(([ad, n]) => `${ad} İçin: ${n}`);
-      const ok = parcalar.length > 0; div.className = "result " + (ok ? "ok" : "bad");
-      div.innerHTML = box(no, kriterText, ok ? "UYGUN" : "UYGUN DEĞİL", ok ? parcalar.join(", ") + " adet çalışma planlanmıştır." : "Hiç çalışma planlanmamış");
+    function renderGenelKapsamKriteri(no, kriterText, parsed, anahtarKelime) {
+      const div = document.createElement("div");
+      const kw = anahtarKelime.toLocaleUpperCase('tr');
+      let adet = 0;
+      let ornek = "";
+
+      parsed.dataRows.forEach(r => {
+          const calisma = normWs(r[parsed.calismaCol]).toLocaleUpperCase('tr');
+          if(calisma.includes(kw)) {
+              adet++;
+              if(!ornek) ornek = normWs(r[parsed.calismaCol]);
+          }
+      });
+
+      const ok = adet > 0;
+      div.className = "result " + (ok ? "ok" : "bad");
+      div.innerHTML = box(no, kriterText, ok ? "UYGUN" : "UYGUN DEĞİL", 
+          ok ? `Planda bu kapsama uyan toplam <b>${adet}</b> adet çalışma bulundu. Örn: <i>${esc(ornek)}</i>` 
+             : `Planda "${esc(anahtarKelime)}" ifadesini içeren bir çalışma bulunamadı.`);
       return div;
+    }
+
+    function renderAylikKriter(no, kriterText, parsed, keyword, beklenenAy) {
+        const div = document.createElement("div");
+        const kw = keyword.toLocaleUpperCase('tr');
+        const tarihCol = parsed.colIdx["BASLANGIC_TARIHI"] !== undefined ? parsed.colIdx["BASLANGIC_TARIHI"] : parsed.colIdx["BAŞLANGIÇ TARİHİ"];
+        
+        if (tarihCol === undefined) {
+            div.className = "result warn";
+            div.innerHTML = box(no, kriterText, "KONTROL EDİLMELİ", "'BAŞLANGIÇ TARİHİ' sütunu bulunamadı.");
+            return div;
+        }
+
+        let bulundu = false;
+        let tespitEdilenAy = null;
+        let calismaAdi = "";
+
+        parsed.dataRows.forEach(r => {
+            const calisma = normWs(r[parsed.calismaCol]).toLocaleUpperCase('tr');
+            if (calisma.includes(kw)) {
+                bulundu = true;
+                tespitEdilenAy = tarihAyBul(r[tarihCol]);
+                calismaAdi = normWs(r[parsed.calismaCol]);
+            }
+        });
+
+        if (!bulundu) {
+            div.className = "result bad";
+            div.innerHTML = box(no, kriterText, "UYGUN DEĞİL", `Planda "${esc(keyword)}" ifadesi geçen bir çalışma bulunamadı.`);
+            return div;
+        }
+
+        const ok = tespitEdilenAy === beklenenAy;
+        div.className = "result " + (ok ? "ok" : "bad");
+        const aylar = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
+        const beklenenAyIsmi = aylar[beklenenAy - 1];
+        const tespitAyIsmi = tespitEdilenAy ? aylar[tespitEdilenAy - 1] : "Bilinmiyor";
+
+        div.innerHTML = box(no, kriterText, ok ? "UYGUN" : "UYGUN DEĞİL",
+            ok ? `Çalışma doğru bir şekilde ${beklenenAyIsmi} ayında planlanmıştır.` 
+               : `Bu çalışmanın ${beklenenAyIsmi} ayında yapılması gerekirken, planda ${tespitAyIsmi} ayında görünüyor.<br>Görülen Çalışma: <b>${esc(calismaAdi)}</b>`);
+        return div;
     }
 
     function tarihAyBul(deger) {
