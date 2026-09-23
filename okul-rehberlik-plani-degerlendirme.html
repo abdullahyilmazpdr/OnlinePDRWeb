@@ -1577,29 +1577,29 @@
           • <b>8. ve 10. Sınıflar İçin:</b> Değerler Envanteri`;
 
         body.appendChild(renderBilgiNotu("Mesleki ve Değerler Envanteri Uygulamaları", bilgiMesaji));
+      } else {
+        body.appendChild(renderGerekYok(43, "7-12. Sınıflar için Mesleki İlgi Envanterine yer verilmiştir", "Bu kriter sadece Ortaokul ve Lise kademelerinde aranır."));
+        body.appendChild(renderGerekYok(44, "8-9. Sınıflar için Mesleki Beceri Envanterine yer verilmiştir", "Bu kriter sadece Ortaokul ve Lise kademelerinde aranır."));
       }
-      body.appendChild(renderGerekYok(43, "7-12. Sınıflar için Mesleki İlgi Envanterine yer verilmiştir", "Bu kriter sadece Ortaokul ve Lise kademelerinde aranır."));
-      body.appendChild(renderGerekYok(44, "8-9. Sınıflar için Mesleki Beceri Envanterine yer verilmiştir", "Bu kriter sadece Ortaokul ve Lise kademelerinde aranır."));
-    }
 
-    if (kaynastirmaCheck.checked) {
-      body.appendChild(renderGenelKapsamKriteri(45, "BEP Geliştirme Birimi toplantılarına yer verilmiştir", parsed, "BEP"));
-      body.appendChild(renderGenelKapsamKriteri(46, "Destek Eğitim Odası toplantılarına yer verilmiştir", parsed, "DESTEK EĞİTİM"));
-    } else {
-      body.appendChild(renderGerekYok(45, "BEP Geliştirme Birimi toplantılarına yer verilmiştir", "Okulda kaynaştırma öğrencisi olmadığı belirtildiğinden bu kriter muaf tutulmuştur."));
-      body.appendChild(renderGerekYok(46, "Destek Eğitim Odası toplantılarına yer verilmiştir", "Okulda kaynaştırma öğrencisi olmadığı belirtildiğinden bu kriter muaf tutulmuştur."));
-    }
+      if (kaynastirmaCheck.checked) {
+        body.appendChild(renderGenelKapsamKriteri(45, "BEP Geliştirme Birimi toplantılarına yer verilmiştir", parsed, "BEP"));
+        body.appendChild(renderGenelKapsamKriteri(46, "Destek Eğitim Odası toplantılarına yer verilmiştir", parsed, "DESTEK EĞİTİM"));
+      } else {
+        body.appendChild(renderGerekYok(45, "BEP Geliştirme Birimi toplantılarına yer verilmiştir", "Okulda kaynaştırma öğrencisi olmadığı belirtildiğinden bu kriter muaf tutulmuştur."));
+        body.appendChild(renderGerekYok(46, "Destek Eğitim Odası toplantılarına yer verilmiştir", "Okulda kaynaştırma öğrencisi olmadığı belirtildiğinden bu kriter muaf tutulmuştur."));
+      }
 
 
-    document.getElementById("debugDump").textContent = JSON.stringify({ baslikSatiri: parsed.headerRowIdx + 1, sutunlar: parsed.colIdx, toplamSatir: parsed.rowCount, okulTuru: okulTuru.ad, genelHedefler: parsed.genel, yerelHedefler: parsed.yerel, ozelHedefler: parsed.ozel }, null, 2);
+      document.getElementById("debugDump").textContent = JSON.stringify({ baslikSatiri: parsed.headerRowIdx + 1, sutunlar: parsed.colIdx, toplamSatir: parsed.rowCount, okulTuru: okulTuru.ad, genelHedefler: parsed.genel, yerelHedefler: parsed.yerel, ozelHedefler: parsed.ozel }, null, 2);
 
-    const uygunSayisi = body.querySelectorAll(".result.ok").length;
-    const uygunDegilSayisi = body.querySelectorAll(".result.bad").length;
-    const kontrolSayisi = body.querySelectorAll(".result.warn").length;
-    const toplamKriter = uygunSayisi + uygunDegilSayisi + kontrolSayisi;
+      const uygunSayisi = body.querySelectorAll(".result.ok").length;
+      const uygunDegilSayisi = body.querySelectorAll(".result.bad").length;
+      const kontrolSayisi = body.querySelectorAll(".result.warn").length;
+      const toplamKriter = uygunSayisi + uygunDegilSayisi + kontrolSayisi;
 
-    document.getElementById("ozetKutusu").textContent = `${toplamKriter} kriter değerlendirildi — ${uygunSayisi} Uygun, ${uygunDegilSayisi} Uygun Değil` + (kontrolSayisi ? `, ${kontrolSayisi} Kontrol Edilmeli / Muaf` : "");
-    document.getElementById("printTarih").textContent = new Date().toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById("ozetKutusu").textContent = `${toplamKriter} kriter değerlendirildi — ${uygunSayisi} Uygun, ${uygunDegilSayisi} Uygun Değil` + (kontrolSayisi ? `, ${kontrolSayisi} Kontrol Edilmeli / Muaf` : "");
+      document.getElementById("printTarih").textContent = new Date().toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' });
     }
 
     function stripPrefix(text) { const idx = text.indexOf("-"); return idx === -1 ? text.trim() : text.slice(idx + 1).trim(); }
