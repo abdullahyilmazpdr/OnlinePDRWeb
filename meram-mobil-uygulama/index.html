@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Meram Özel Eğitim Uygulama Okulu III. Kademe | Mobil Uygulaması</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- PWA Kurulumu İçin Manifest ve Favicon -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="apple-touch-icon" href="assets/img/favicon.png">
+    <meta name="theme-color" content="#f5f5f5">
+
+    <!-- FontAwesome İkonları -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #f5f5f5;
+            --text-dark: #333;
+            --text-muted: #666;
+            --admin-btn: #9C27B0;
+            --duyuru-btn: #E91E63;
+            --servis-btn: #4CAF50;
+            --veli-btn: #FF9800;
+            --kasa-btn: #009688;
+            --cikis-btn: #607D8B;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Loader */
+        #loader {
+            position: fixed;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            color: #2196F3;
+            display: none;
+        }
+
+        /* Ortak Başlık */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            color: var(--text-dark);
+            margin-bottom: 5px;
+            margin-top: 15px;
+        }
+
+        .header p {
+            font-size: 15px;
+            color: var(--text-muted);
+        }
+
+        /* Logo Stili */
+        .logo-img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        /* Info Butonu */
+        .info-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #e3f2fd;
+            color: #1976D2;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ================= GİRİŞ EKRANI STİLLERİ ================= */
+        #loginScreen {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-container {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .input-field {
+            width: 100%;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .input-field:focus {
+            border-color: #2196F3;
+        }
+
+        .login-btn {
+            width: 100%;
+            background-color: #2196F3;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .login-btn:active {
+            transform: scale(0.98);
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #2196F3;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* ================= ŞİFRE DEĞİŞTİRME EKRANI ================= */
+        #passwordChangeScreen {
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* ================= ANA MENÜ STİLLERİ ================= */
+        #mainScreen {
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .welcome-card {
+            background-color: #e3f2fd;
+            padding: 15px 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            width: 85%;
+        }
+
+        .welcome-card .greeting {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .welcome-card .name {
+            color: #1976D2;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 3px;
+        }
+
+        .menu-buttons {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .menu-btn {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            border-radius: 15px;
+            color: white;
+            font-size: 17px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+
+        .menu-btn i {
+            font-size: 24px;
+            width: 40px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        .btn-admin {
+            background-color: var(--admin-btn);
+            display: none;
+        }
+
+        .btn-duyuru {
+            background-color: var(--duyuru-btn);
+        }
+
+        .btn-servis {
+            background-color: var(--servis-btn);
+        }
+
+        .btn-veli {
+            background-color: var(--veli-btn);
+        }
+
+        .btn-kasa {
+            background-color: var(--kasa-btn);
+            display: none;
+        }
+
+        .btn-cikis {
+            background-color: var(--cikis-btn);
+            margin-top: 10px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .bg-web {
+            background-color: #2196F3;
+        }
+
+        .bg-insta {
+            background-color: #E1306C;
+        }
+
+        .bg-fb {
+            background-color: #1877F2;
+        }
+
+        .bg-yt {
+            background-color: #FF0000;
+        }
+
+        .bg-tw {
+            background-color: #1DA1F2;
+        }
+
+        .bg-n {
+            background-color: #1A1A1A;
+            font-weight: 900;
+            font-style: italic;
+        }
+
+        /* ================= MESAJLAŞMA EKRANI STİLLERİ ================= */
+        #messagesScreen {
+            width: 100%;
+            display: none;
+            flex-direction: column;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: white;
+            z-index: 100;
+        }
+
+        .msg-header {
+            background: var(--duyuru-btn);
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .msg-header h2 {
+            font-size: 18px;
+            margin: 0;
+        }
+
+        .msg-header button {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        #messageList {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .msg-bubble {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        .msg-sent {
+            background: #DCF8C6;
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .msg-received {
+            background: #F1F0F0;
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .msg-sender-name {
+            font-size: 11px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        .msg-time {
+            font-size: 10px;
+            color: #888;
+            text-align: right;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .msg-input-area {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background: #f9f9f9;
+        }
+
+        #messageInput {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        #sendMsgBtn {
+            background: var(--duyuru-btn);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Bildirim Toast */
+        #notificationToast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 3000;
+            display: none;
+        }
+
+        /* Modal (Perde) Stilleri */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            width: 85%;
+            max-width: 400px;
+            padding: 25px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .modal-text {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .modal-text i {
+            color: #333;
+            font-size: 18px;
+        }
+
+        .close-modal {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        /* ================= GELİŞTİRİCİ / REKLAM ALANI ================= */
+        .sponsor-container {
+            width: 100%;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #90caf9;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+
+        .sponsor-container:active {
+            transform: scale(0.98);
+        }
+
+        .sponsor-badge {
+            font-size: 11px;
+            color: #1976D2;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .sponsor-text {
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .sponsor-text span {
+            color: #E91E63;
+            font-weight: 800;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Yükleniyor Ekranı -->
+    <div id="loader"><i class="fas fa-spinner fa-spin"></i></div>
+    <div id="notificationToast"></div>
+
+    <div class="container">
+
+        <!-- Info Butonu (Sadece Ana Menüde Görünecek) -->
+        <div class="info-btn" id="infoBtn" style="display:none;" onclick="toggleModal(true)">
+            <i class="fas fa-info"></i>
+        </div>
+
+        <!-- 1. GİRİŞ EKRANI -->
+        <div id="loginScreen">
+            <img src="assets/img/icon.png" alt="Okul Logosu" class="logo-img">
+            <div class="header">
+                <h1>Meram Özel Eğitim</h1>
+                <p>Personel Girişi</p>
+            </div>
+
+            <div class="input-container">
+                <input type="email" id="emailInput" class="input-field" placeholder="E-posta Adresiniz"
+                    autocomplete="off">
+                <input type="password" id="passwordInput" class="input-field" placeholder="Şifreniz">
+                <button class="login-btn" id="loginBtn">Giriş Yap</button>
+                <a class="forgot-password" id="resetPasswordBtn">Şifremi Unuttum</a>
+            </div>
+        </div>
+
+        <!-- 2. ŞİFRE DEĞİŞTİRME EKRANI -->
+        <div id="passwordChangeScreen">
+            <i class="fas fa-key logo-icon" style="color: #FF9800; font-size: 60px; margin-bottom: 10px;"></i>
+            <div class="header">
+                <h1>Yeni Şifre Belirle</h1>
+                <p>Güvenliğiniz için varsayılan şifrenizi değiştirmelisiniz.</p>
+            </div>
+
+            <div class="input-container">
+                <input type="password" id="newPassword" class="input-field"
+                    placeholder="Yeni Şifreniz (En az 6 haneli)">
+                <input type="password" id="newPasswordConfirm" class="input-field"
+                    placeholder="Yeni Şifrenizi Tekrar Girin">
+                <button class="login-btn" id="savePasswordBtn" style="background-color: #FF9800;">Şifreyi Kaydet ve
+                    Gir</button>
+            </div>
+        </div>
+
+        <!-- 3. ANA MENÜ EKRANI -->
+        <div id="mainScreen">
+            <div class="header">
+                <h1>Meram Özel Eğitim</h1>
+                <p>Uygulama Okulu III. Kademe</p>
+            </div>
+
+            <div class="welcome-card" id="welcomeCard" style="display:none;">
+                <div class="greeting">Hoş geldiniz,</div>
+                <div class="name" id="userNameText">Yükleniyor...</div>
+            </div>
+
+            <div class="menu-buttons">
+                <!-- Sadece Adminlere Görünecek Buton -->
+                <button class="menu-btn btn-admin" id="btnAdminDuyuru">
+                    <i class="fas fa-pen-nib"></i> Duyuru Yayınla (Admin)
+                </button>
+
+                <button class="menu-btn btn-duyuru" id="btnMesajlar" style="position: relative;">
+                    <i class="fas fa-bullhorn"></i> Okul Duyuruları / Mesajlar
+                    <span id="unreadBadge"
+                        style="display: none; position: absolute; right: 15px; background: red; color: white; border-radius: 50px; padding: 2px 8px; font-size: 12px; font-weight: bold;">0</span>
+                </button>
+
+                <button class="menu-btn btn-servis" id="btnServisTakip">
+                    <i class="fas fa-bus-alt"></i> Servis Takip Sistemi
+                </button>
+
+                <button class="menu-btn btn-veli"
+                    onclick="openLink('https://www.appsheet.com/start/53ec8dba-c969-47ea-9623-69f9f6344792')">
+                    <i class="fas fa-address-book"></i> Veli İletişim Bilgileri (Yetkili Personeller)
+                </button>
+
+                <!-- Sadece İdarecilere Görünecek Kasa Butonu -->
+                <button class="menu-btn btn-kasa" id="btnKasa">
+                    <i class="fas fa-hand-holding-usd"></i> Okul Kasa Uygulaması (Sadece Yöneticiler)
+                </button>
+
+                <button class="menu-btn btn-cikis" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Çıkış Yap
+                </button>
+            </div>
+
+            <div class="social-icons">
+                <a href="javascript:void(0)" onclick="openLink('https://meramozelegitimuygulamamerkezi.meb.k12.tr/')"
+                    class="social-icon bg-web"><i class="fas fa-globe"></i></a>
+                <a href="javascript:void(0)" onclick="openLink('https://instagram.com/meramozelegitim')"
+                    class="social-icon bg-insta"><i class="fab fa-instagram"></i></a>
+                <a href="javascript:void(0)" onclick="openLink('https://www.facebook.com/share/1JKtecKHU4/')"
+                    class="social-icon bg-fb"><i class="fab fa-facebook-f"></i></a>
+                <a href="javascript:void(0)" onclick="openLink('https://youtube.com/@MeramOEUO')"
+                    class="social-icon bg-yt"><i class="fab fa-youtube"></i></a>
+                <a href="javascript:void(0)" onclick="openLink('https://x.com/MeramOEUO')" class="social-icon bg-tw"><i
+                        class="fab fa-twitter"></i></a>
+                <a href="javascript:void(0)" onclick="openLink('https://nsosyal.com/MeramOEUO')"
+                    class="social-icon bg-n">N</a>
+            </div>
+
+            <!-- GELİŞTİRİCİ / REKLAM ALANI BAŞLANGICI -->
+            <a href="https://onlinepdr.com" target="_blank" class="sponsor-container">
+                <span class="sponsor-badge"><i class="fas fa-code"></i> Sistem Geliştirici & Tasarım</span>
+                <div class="sponsor-text">
+                    Abdullah YILMAZ | <span>onlinepdr.com</span>
+                </div>
+            </a>
+            <!-- GELİŞTİRİCİ / REKLAM ALANI BİTİŞİ -->
+        </div>
+
+        <!-- 4. MESAJLAŞMA EKRANI -->
+        <div id="messagesScreen">
+            <div class="msg-header">
+                <button id="closeMessagesBtn"><i class="fas fa-arrow-left"></i></button>
+                <h2>Duyurular & Mesajlar</h2>
+                <div style="width: 20px;"></div> <!-- Dengeleme için -->
+            </div>
+
+            <div id="messageList">
+                <!-- Mesajlar Buraya Yüklenecek -->
+            </div>
+
+            <!-- Rol kontrolü ile js tarafında gizlenecek/gösterilecek -->
+            <div class="msg-input-area" id="msgInputArea">
+                <input type="text" id="messageInput" placeholder="Mesajınızı yazın...">
+                <button id="sendMsgBtn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- PWA Kurulum Bilgilendirme Modalı -->
+    <div class="modal-overlay" id="installModal" onclick="checkClose(event)">
+        <div class="modal-content">
+            <h2 class="modal-title">Ana Ekrana Kısayol Ekleme</h2>
+
+            <p class="modal-text">
+                <img src="assets/img/favicon.png" alt="icon"
+                    style="width: 20px; vertical-align: middle; margin-right: 5px;"><strong>🍎 iPhone (iOS)
+                    İçin:</strong><br>
+                Safari tarayıcısında alt menüde bulunan <b>Paylaş</b> <i class="fas fa-share-square"></i> butonuna
+                tıklayın ve <b>"Ana Ekrana Ekle"</b> seçeneğini seçin.
+            </p>
+
+            <p class="modal-text">
+                <img src="assets/img/favicon.png" alt="icon"
+                    style="width: 20px; vertical-align: middle; margin-right: 5px;"><strong>🤖 Android
+                    İçin:</strong><br>
+                Chrome tarayıcısında sağ üstteki <b>Üç Nokta</b> <i class="fas fa-ellipsis-v"></i> menüsüne tıklayın ve
+                <b>"Ana Ekrana Ekle"</b> seçeneğini seçin.
+            </p>
+
+            <button class="close-modal" onclick="toggleModal(false)">Kapat</button>
+        </div>
+    </div>
+
+    <!-- Firebase Modüllerini Yükleme ve Uygulama Mantığı -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail, updatePassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, collection, query, orderBy, limit, onSnapshot, addDoc, serverTimestamp, getDocs, startAfter, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBUXWMDKUobVMSoCZbWMPAseTdsrb5vuio",
+            authDomain: "meram-mobil.firebaseapp.com",
+            projectId: "meram-mobil",
+            storageBucket: "meram-mobil.firebasestorage.app",
+            messagingSenderId: "320227235358",
+            appId: "1:320227235358:web:b71e941250e64bedec800f"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUser = null;
+        let currentUserData = null;
+        let tempEnteredPassword = "";
+        
+        // Mesajlaşma değişkenleri
+        let messagesUnsubscribe = null;
+
+        // UI Elementleri Seçimi
+        const loader = document.getElementById("loader");
+        const loginScreen = document.getElementById("loginScreen");
+        const passwordChangeScreen = document.getElementById("passwordChangeScreen");
+        const mainScreen = document.getElementById("mainScreen");
+        const messagesScreen = document.getElementById("messagesScreen");
+        const emailInput = document.getElementById("emailInput");
+        const passwordInput = document.getElementById("passwordInput");
+        const userNameText = document.getElementById("userNameText");
+        const welcomeCard = document.getElementById("welcomeCard");
+        const btnAdminDuyuru = document.getElementById("btnAdminDuyuru");
+        const btnKasa = document.getElementById("btnKasa");
+        const infoBtn = document.getElementById("infoBtn");
+        
+        const messageList = document.getElementById("messageList");
+        const messageInput = document.getElementById("messageInput");
+        const msgInputArea = document.getElementById("msgInputArea");
+
+        // Modal Yönetimi
+        window.toggleModal = function(show) {
+            document.getElementById('installModal').style.display = show ? 'flex' : 'none';
+        }
+        window.checkClose = function(event) {
+            if (event.target.id === 'installModal') toggleModal(false);
+        }
+
+        function showNotification(msg) {
+            const toast = document.getElementById('notificationToast');
+            toast.innerText = msg;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 3000);
+        }
+
+        // UI Toggleri
+        function showScreen(screen) {
+            loader.style.display = "none";
+            loginScreen.style.display = "none";
+            passwordChangeScreen.style.display = "none";
+            mainScreen.style.display = "none";
+            messagesScreen.style.display = "none";
+            infoBtn.style.display = "none";
+
+            if(screen === "login") loginScreen.style.display = "flex";
+            else if(screen === "passwordChange") passwordChangeScreen.style.display = "flex";
+            else if(screen === "main") {
+                mainScreen.style.display = "flex";
+                infoBtn.style.display = "flex";
+            }
+            else if(screen === "messages") messagesScreen.style.display = "flex";
+        }
+
+        // --- GİRİŞ VE YETKİ KONTROLÜ ---
+        
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUser = user;
+                try {
+                    const userDoc = await getDoc(doc(db, "users", user.uid));
+                    if (userDoc.exists()) {
+                        currentUserData = userDoc.data();
+                        
+                        // İsim bilgisini ekrana bas
+                        if(currentUserData.adSoyad) {
+                            userNameText.innerText = currentUserData.adSoyad;
+                            welcomeCard.style.display = "block";
+                        }
+                        
+                        // Yetki Kontrolleri ve Buton Gizleme/Gösterme
+                        if(currentUserData.adminYetkisi === true) {
+                            btnAdminDuyuru.style.display = "flex";
+                            btnKasa.style.display = "flex";
+                        } else {
+                            btnAdminDuyuru.style.display = "none";
+                            if(btnKasa) btnKasa.remove(); 
+                        }
+
+                        setupMessageInputVisibility();
+                        
+                        // Kullanıcı sisteme girdiği an mesajları arka planda dinlemeye başla (Rozet güncellemesi için)
+                        initRealtimeMessagesListener();
+                    }
+                } catch (error) {
+                    console.error("Veri çekme hatası:", error);
+                }
+                
+                if (currentUserData && currentUserData.isPasswordDefault) {
+                     showScreen("passwordChange");
+                } else {
+                     showScreen("main");
+                }
+                
+            } else {
+                currentUser = null;
+                currentUserData = null;
+                showScreen("login");
+                if (messagesUnsubscribe) {
+                    messagesUnsubscribe();
+                    messagesUnsubscribe = null;
+                }
+            }
+        });
+
+        document.getElementById("loginBtn").addEventListener("click", async () => {
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            
+            if (!email || !password) {
+                alert("Lütfen e-posta ve şifrenizi girin.");
+                return;
+            }
+            
+            tempEnteredPassword = password;
+            loader.style.display = "flex";
+            try {
+                await signInWithEmailAndPassword(auth, email, password);
+            } catch (error) {
+                loader.style.display = "none";
+                alert("Giriş Başarısız: E-posta veya şifre hatalı.");
+            }
+        });
+
+        document.getElementById("savePasswordBtn").addEventListener("click", async () => {
+            const newPass = document.getElementById("newPassword").value;
+            const confirmPass = document.getElementById("newPasswordConfirm").value;
+
+            if (newPass.length < 6) { alert("Şifreniz en az 6 karakter olmalıdır."); return; }
+            if (newPass !== confirmPass) { alert("Girdiğiniz şifreler birbiriyle eşleşmiyor."); return; }
+
+            loader.style.display = "flex";
+            try {
+                await updatePassword(auth.currentUser, newPass);
+                await updateDoc(doc(db, "users", auth.currentUser.uid), { isPasswordDefault: false });
+                alert("Şifreniz başarıyla güncellendi!");
+                showScreen("main");
+            } catch (error) {
+                loader.style.display = "none";
+                alert("Şifre güncellenirken bir hata oluştu.");
+            }
+        });
+
+        document.getElementById("resetPasswordBtn").addEventListener("click", async () => {
+            const email = emailInput.value.trim();
+            if (!email || !email.includes("@")) {
+                alert("Lütfen şifre sıfırlama bağlantısı için e-posta adresinizi kutucuğa yazın ve tekrar tıklayın.");
+                return;
+            }
+            loader.style.display = "flex";
+            try {
+                await sendPasswordResetEmail(auth, email);
+                loader.style.display = "none";
+                alert("Başarılı! Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.");
+            } catch (error) {
+                loader.style.display = "none";
+                alert("Hata: Bu e-posta adresine ait bir kayıt bulunamadı veya bir hata oluştu.");
+            }
+        });
+
+        document.getElementById("logoutBtn").addEventListener("click", async () => {
+            loader.style.display = "flex";
+            await signOut(auth);
+        });
+
+        // --- BUTON YÖNLENDİRMELERİ ---
+
+        document.getElementById("btnServisTakip").addEventListener("click", () => {
+            if (currentUserData && currentUserData.servisYetkisi === true) {
+                const isimParametresi = currentUserData.adSoyad ? `&isim=${encodeURIComponent(currentUserData.adSoyad)}` : '';
+                const uidParametresi = currentUser.uid ? `?uid=${currentUser.uid}` : '';
+                window.open(`https://onlinepdr.com/meram-servis-takip-sistemi.html${uidParametresi}${isimParametresi}`, "_blank");
+            } else {
+                alert("Erişim Engellendi: Bu sisteme giriş yetkiniz bulunmamaktadır.");
+            }
+        });
+        
+        if(btnKasa) {
+             btnKasa.addEventListener("click", () => {
+                if (currentUserData && currentUserData.adminYetkisi === true) {
+                    const isimParametresi2 = currentUserData.adSoyad ? `?isim=${encodeURIComponent(currentUserData.adSoyad)}` : '';
+                    const uidParametresi2 = currentUser.uid ? `&uid=${currentUser.uid}` : '';
+                    window.open(`https://script.google.com/macros/s/AKfycbygPva9nzqypc6AG4PjgnXAK56cUIsbKTBuCxumXeUQrQ5cYP21j9KYcP_Atq0vlUYjVg/exec${isimParametresi2}${uidParametresi2}`, '_blank');
+                } else {
+                    alert("Erişim Engellendi: Bu işlem için yönetici yetkiniz bulunmuyor.");
+                }
+            });
+        }
+
+        btnAdminDuyuru.addEventListener("click", () => {
+             showScreen("messages");
+             msgInputArea.style.display = "flex";
+        });
+
+        window.openLink = function(url) { window.open(url, "_blank"); }
+
+        // --- MESAJLAŞMA SİSTEMİ (ANLIK SENKRONİZASYON VE ROZET) ---
+
+        document.getElementById("btnMesajlar").addEventListener("click", () => {
+            showScreen("messages");
+            setupMessageInputVisibility();
+            // Mesaj ekranı açıldığında mevcut listeyi doldur ve okundu olarak işaretle
+            loadAllMessagesIntoUI();
+        });
+
+        document.getElementById("closeMessagesBtn").addEventListener("click", () => {
+            showScreen("main");
+        });
+        
+        function setupMessageInputVisibility() {
+             if(currentUserData && currentUserData.adminYetkisi === true) {
+                 msgInputArea.style.display = "flex";
+             } else {
+                 msgInputArea.style.display = "none";
+             }
+        }
+
+        // Arka planda sürekli çalışarak okunmamış mesaj sayısını ve rozeti güncelleyen dinleyici
+        function initRealtimeMessagesListener() {
+            if (!db || !currentUserData) return;
+
+            const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
+
+            onSnapshot(q, (snapshot) => {
+                let unreadCount = 0;
+                
+                snapshot.forEach((docSnap) => {
+                    const msg = docSnap.data();
+                    
+                    // Rol bazlı filtreleme kontrolü
+                    if (currentUserData.adminYetkisi !== true) {
+                        const rol = currentUserData.rol ? currentUserData.rol.toLowerCase() : "";
+                        const isRehber = (rol === "rehber");
+                        if (isRehber && msg.target === "teachers") return;
+                        if (!isRehber && msg.target === "counselors") return;
+                    }
+
+                    const readByList = msg.readBy || [];
+                    const isRead = readByList.includes(currentUserData.adSoyad);
+
+                    // Eğer mesaj bana ait değilse ve henüz okunmamışsa sayacı artır
+                    if (msg.senderName !== currentUserData.adSoyad && !isRead) {
+                        unreadCount++;
+                    }
+                });
+
+                // Kırmızı rozeti (WhatsApp tarzı) güncelle
+                const badge = document.getElementById("unreadBadge");
+                if (badge) {
+                    if (unreadCount > 0) {
+                        badge.innerText = unreadCount;
+                        badge.style.display = "inline-block";
+                    } else {
+                        badge.style.display = "none";
+                    }
+                }
+
+                // Eğer şu an mesaj ekranı açıksa listeyi anlık olarak tazele
+                if (messagesScreen.style.display === "flex") {
+                    renderMessagesToUI(snapshot.docs);
+                }
+            });
+        }
+
+        // Mesaj ekranı açıldığında veya yeni mesaj geldiğinde UI'ı dolduran ve okundu işaretleyen fonksiyon
+        async function loadAllMessagesIntoUI() {
+            messageList.innerHTML = '<div style="text-align:center; padding:20px;"><i class="fas fa-spinner fa-spin text-muted"></i></div>';
+            
+            try {
+                const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
+                const snapshot = await getDocs(q);
+                renderMessagesToUI(snapshot.docs);
+            } catch (error) {
+                console.error("Mesajlar yüklenemedi:", error);
+                messageList.innerHTML = '<p style="text-align:center; color:#999;">Mesajlar yüklenirken bir hata oluştu.</p>';
+            }
+        }
+
+        function renderMessagesToUI(docs) {
+            messageList.innerHTML = "";
+            
+            if (docs.length === 0) {
+                messageList.innerHTML = '<p style="text-align:center; color:#999;">Henüz bir duyuru veya mesaj bulunmuyor.</p>';
+                return;
+            }
+
+            docs.forEach((docSnap) => {
+                const msgData = docSnap.data();
+                const docId = docSnap.id;
+
+                // Rol bazlı filtreleme
+                if (currentUserData.adminYetkisi !== true) {
+                    const rol = currentUserData.rol ? currentUserData.rol.toLowerCase() : "";
+                    const isRehber = (rol === "rehber");
+                    if (isRehber && msgData.target === "teachers") return;
+                    if (!isRehber && msgData.target === "counselors") return;
+                }
+
+                const isMine = msgData.senderName === currentUserData.adSoyad;
+                const timeStr = msgData.timestamp ? new Date(msgData.timestamp.toDate()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Şimdi';
+                
+                const readByList = msgData.readBy || [];
+                const isRead = readByList.includes(currentUserData.adSoyad);
+
+                // Eğer mesajı açtıysam ve henüz okuyanlar listesinde adim yoksa otomatik okundu olarak kaydet
+                if (!isMine && !isRead) {
+                    markMessageAsRead(docId, msgData);
+                }
+
+                let readInfoHtml = "";
+                if (isMine && currentUserData.adminYetkisi === true) {
+                    readInfoHtml = ` <i class="fas fa-check-double" style="color:${readByList.length > 0 ? '#4CAF50' : '#888'};" title="Okuyanlar: ${readByList.join(', ') || 'Henüz kimse okumadı'}"></i>`;
+                }
+
+                const msgDiv = document.createElement("div");
+                msgDiv.className = `msg-bubble ${isMine ? 'msg-sent' : 'msg-received'}`;
+                msgDiv.innerHTML = `
+                    ${!isMine ? `<span class="msg-sender-name">${msgData.senderName}</span>` : ''}
+                    <p style="margin:0; word-break: break-word;">${msgData.text}</p>
+                    <span class="msg-time">${timeStr}${readInfoHtml}</span>
+                `;
+                
+                messageList.appendChild(msgDiv);
+            });
+
+            // En son mesaja otomatik kaydır
+            messageList.scrollTop = messageList.scrollHeight;
+        }
+
+        async function markMessageAsRead(docId, msgData) {
+            if (currentUserData && currentUserData.adSoyad) {
+                const readList = msgData.readBy || [];
+                if (!readList.includes(currentUserData.adSoyad)) {
+                    try {
+                        const msgRef = doc(db, 'messages', docId);
+                        await updateDoc(msgRef, {
+                            readBy: arrayUnion(currentUserData.adSoyad)
+                        });
+                    } catch(e) {
+                         console.error("Okundu bilgisi kaydedilemedi", e);
+                    }
+                }
+            }
+        }
+        function appendMessageToUI(msgData, docId, isRead) {
+            const messageList = document.getElementById("messageList");
+            if (!messageList) return;
+
+            // Rol bazlı filtreleme
+            if (currentUserData.adminYetkisi !== true) {
+                const rol = currentUserData.rol ? currentUserData.rol.toLowerCase() : "";
+                const isRehber = (rol === "rehber");
+                if (isRehber && msgData.target === "teachers") return;
+                if (!isRehber && msgData.target === "counselors") return;
+            }
+
+            const isMine = msgData.senderName === currentUserData.adSoyad;
+            const timeStr = msgData.timestamp ? new Date(msgData.timestamp.toDate()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Şimdi';
+            
+            const readByList = msgData.readBy || [];
+            
+            // Eğer mesajı açtıysam ve henüz okuyanlar listesinde adim yoksa otomatik okundu olarak kaydet
+            if (!isMine && !isRead) {
+                markMessageAsRead(docId, msgData);
+            }
+
+            let readInfoHtml = "";
+            // SADECE mesajı ben gönderdiysem ve idareciysem okuyanlar listesini göster[cite: 15]
+            if (isMine && currentUserData.adminYetkisi === true) {
+                const readTitle = readByList.length > 0 ? "Okuyanlar: " + readByList.join(", ") : "Henüz kimse okumadı";
+                const iconColor = readByList.length > 0 ? "#4CAF50" : "#888";
+                // Tıklanabilir ikon ile okuyanları alert veya tooltip olarak göster
+                readInfoHtml = ` <i class="fas fa-check-double" style="color:${iconColor}; cursor:pointer;" title="${readTitle}" onclick="alert('${readTitle}')"></i>`;
+            }
+
+            const msgDiv = document.createElement("div");
+            msgDiv.className = `p-3 rounded-lg mb-2 max-w-[80%] ${isMine ? 'bg-green-100 ml-auto text-right' : 'bg-gray-100 mr-auto text-left'} ${!isRead && !isMine ? 'border-l-4 border-red-500' : ''}`;
+            
+            msgDiv.innerHTML = `
+                ${!isMine ? `<span class="block text-xs font-bold text-blue-600 mb-1">${msgData.senderName}</span>` : ''}
+                <p style="margin:0; word-break: break-word;" class="text-sm text-slate-800">${msgData.text}</p>
+                <span class="block text-[10px] text-slate-400 mt-1">${timeStr}${readInfoHtml}</span>
+            `;
+            
+            messageList.appendChild(msgDiv);
+        }
+
+        document.getElementById("sendMsgBtn").addEventListener("click", async () => {
+            const text = messageInput.value.trim();
+            if (!text) return;
+            
+            const targetAudience = "all"; 
+            messageInput.value = "";
+            
+            try {
+                await addDoc(collection(db, "messages"), {
+                    text: text,
+                    senderUid: currentUser.uid,
+                    senderName: currentUserData.adSoyad,
+                    timestamp: serverTimestamp(),
+                    target: targetAudience,
+                    readBy: []
+                });
+            } catch (error) {
+                console.error("Mesaj gönderilemedi:", error);
+                alert("Mesaj gönderilemedi.");
+            }
+        });
+    </script>
+</body>
+
+</html>
