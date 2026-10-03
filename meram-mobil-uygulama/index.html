@@ -605,12 +605,12 @@
 
                 <button class="menu-btn btn-veli"
                     onclick="openLink('https://www.appsheet.com/start/53ec8dba-c969-47ea-9623-69f9f6344792')">
-                    <i class="fas fa-address-book"></i> Veli İletişim Bilgileri (Yetkililer)
+                    <i class="fas fa-address-book"></i> Veli İletişim Bilgileri (Yetkili Personeller)
                 </button>
 
                 <!-- Sadece İdarecilere Görünecek Kasa Butonu -->
                 <button class="menu-btn btn-kasa" id="btnKasa">
-                    <i class="fas fa-hand-holding-usd"></i> Okul Kasa Uygulaması (Admin)
+                    <i class="fas fa-hand-holding-usd"></i> Okul Kasa Uygulaması (Sadece Yöneticiler)
                 </button>
 
                 <button class="menu-btn btn-cikis" id="logoutBtn">
@@ -694,6 +694,7 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail, updatePassword } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
         import { getFirestore, doc, getDoc, collection, query, orderBy, limit, onSnapshot, addDoc, serverTimestamp, getDocs, startAfter, updateDoc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+        import { getMessaging, getToken, onMessage } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-messaging.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyBUXWMDKUobVMSoCZbWMPAseTdsrb5vuio",
@@ -707,15 +708,13 @@
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const messaging = getMessaging(app);
 
         let currentUser = null;
         let currentUserData = null;
         let tempEnteredPassword = "";
-        
-        // Mesajlaşma değişkenleri
         let messagesUnsubscribe = null;
 
-        // UI Elementleri Seçimi
         const loader = document.getElementById("loader");
         const loginScreen = document.getElementById("loginScreen");
         const passwordChangeScreen = document.getElementById("passwordChangeScreen");
@@ -728,46 +727,44 @@
         const btnAdminDuyuru = document.getElementById("btnAdminDuyuru");
         const btnKasa = document.getElementById("btnKasa");
         const infoBtn = document.getElementById("infoBtn");
-        
         const messageList = document.getElementById("messageList");
         const messageInput = document.getElementById("messageInput");
         const msgInputArea = document.getElementById("msgInputArea");
 
-        // Modal Yönetimi
-        window.toggleModal = function(show) {
-            document.getElementById('installModal').style.display = show ? 'flex' : 'none';
-        }
-        window.checkClose = function(event) {
-            if (event.target.id === 'installModal') toggleModal(false);
-        }
-
+        window.toggleModal = function(show) { document.getElementById('installModal').style.display = show ? 'flex' : 'none'; }
+        window.checkClose = function(event) { if (event.target.id === 'installModal') toggleModal(false); }
         function showNotification(msg) {
             const toast = document.getElementById('notificationToast');
-            toast.innerText = msg;
-            toast.style.display = 'block';
+            toast.innerText = msg; toast.style.display = 'block';
             setTimeout(() => { toast.style.display = 'none'; }, 3000);
         }
 
-        // UI Toggleri
         function showScreen(screen) {
-            loader.style.display = "none";
-            loginScreen.style.display = "none";
-            passwordChangeScreen.style.display = "none";
-            mainScreen.style.display = "none";
-            messagesScreen.style.display = "none";
-            infoBtn.style.display = "none";
-
+            loader.style.display = "none"; loginScreen.style.display = "none"; passwordChangeScreen.style.display = "none";
+            mainScreen.style.display = "none"; messagesScreen.style.display = "none"; infoBtn.style.display = "none";
             if(screen === "login") loginScreen.style.display = "flex";
             else if(screen === "passwordChange") passwordChangeScreen.style.display = "flex";
-            else if(screen === "main") {
-                mainScreen.style.display = "flex";
-                infoBtn.style.display = "flex";
-            }
+            else if(screen === "main") { mainScreen.style.display = "flex"; infoBtn.style.display = "flex"; }
             else if(screen === "messages") messagesScreen.style.display = "flex";
         }
 
-        // --- GİRİŞ VE YETKİ KONTROLÜ ---
-        
+        // BİLDİRİM İZNİ VE VAPID KEY ENTEGRASYONU
+        async function requestNotificationPermissionAndGetToken(uid) {
+            try {
+                if (!('Notification' in window)) return;
+                const permission = await Notification.requestPermission();
+                if (permission === 'granted') {
+                    const currentToken = await getToken(messaging, { vapidKey: 'BDInuPPqoU7qMnBu4z23gIPWBYtHHmPRkl3m67AacioOU0VLn6q6Urt60mNzZskySXx700wBqSwILKOy0I4nl7Q' });
+                    if (currentToken) {
+                        await updateDoc(doc(db, "users", uid), {
+                            fcmToken: currentToken,
+                            expoPushToken: currentToken 
+                        });
+                    }
+                }
+            } catch (error) { console.error("Bildirim izni hatası:", error); }
+        }
+
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUser = user;
@@ -775,173 +772,93 @@
                     const userDoc = await getDoc(doc(db, "users", user.uid));
                     if (userDoc.exists()) {
                         currentUserData = userDoc.data();
+                        if(currentUserData.adSoyad) { userNameText.innerText = currentUserData.adSoyad; welcomeCard.style.display = "block"; }
+                        if(currentUserData.adminYetkisi === true) { btnAdminDuyuru.style.display = "flex"; if(btnKasa) btnKasa.style.display = "flex"; } 
+                        else { btnAdminDuyuru.style.display = "none"; if(btnKasa) btnKasa.remove(); }
                         
-                        // İsim bilgisini ekrana bas
-                        if(currentUserData.adSoyad) {
-                            userNameText.innerText = currentUserData.adSoyad;
-                            welcomeCard.style.display = "block";
-                        }
-                        
-                        // Yetki Kontrolleri ve Buton Gizleme/Gösterme
-                        if(currentUserData.adminYetkisi === true) {
-                            btnAdminDuyuru.style.display = "flex";
-                            btnKasa.style.display = "flex";
-                        } else {
-                            btnAdminDuyuru.style.display = "none";
-                            if(btnKasa) btnKasa.remove(); 
-                        }
-
                         setupMessageInputVisibility();
-                        
-                        // Kullanıcı sisteme girdiği an mesajları arka planda dinlemeye başla (Rozet güncellemesi için)
                         initRealtimeMessagesListener();
+                        requestNotificationPermissionAndGetToken(user.uid);
                     }
-                } catch (error) {
-                    console.error("Veri çekme hatası:", error);
-                }
-                
-                if (currentUserData && currentUserData.isPasswordDefault) {
-                     showScreen("passwordChange");
-                } else {
-                     showScreen("main");
-                }
-                
+                } catch (error) { console.error("Veri çekme hatası:", error); }
+                if (currentUserData && currentUserData.isPasswordDefault) showScreen("passwordChange");
+                else showScreen("main");
             } else {
-                currentUser = null;
-                currentUserData = null;
-                showScreen("login");
-                if (messagesUnsubscribe) {
-                    messagesUnsubscribe();
-                    messagesUnsubscribe = null;
-                }
+                currentUser = null; currentUserData = null; showScreen("login");
+                if (messagesUnsubscribe) { messagesUnsubscribe(); messagesUnsubscribe = null; }
             }
         });
 
         document.getElementById("loginBtn").addEventListener("click", async () => {
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
-            
-            if (!email || !password) {
-                alert("Lütfen e-posta ve şifrenizi girin.");
-                return;
-            }
-            
-            tempEnteredPassword = password;
+            const email = emailInput.value.trim(); const password = passwordInput.value;
+            if (!email || !password) { alert("Lütfen e-posta ve şifrenizi girin."); return; }
             loader.style.display = "flex";
-            try {
-                await signInWithEmailAndPassword(auth, email, password);
-            } catch (error) {
-                loader.style.display = "none";
-                alert("Giriş Başarısız: E-posta veya şifre hatalı.");
-            }
+            try { await signInWithEmailAndPassword(auth, email, password); } 
+            catch (error) { loader.style.display = "none"; alert("Giriş Başarısız: E-posta veya şifre hatalı."); }
         });
 
         document.getElementById("savePasswordBtn").addEventListener("click", async () => {
-            const newPass = document.getElementById("newPassword").value;
-            const confirmPass = document.getElementById("newPasswordConfirm").value;
-
-            if (newPass.length < 6) { alert("Şifreniz en az 6 karakter olmalıdır."); return; }
-            if (newPass !== confirmPass) { alert("Girdiğiniz şifreler birbiriyle eşleşmiyor."); return; }
-
+            const newPass = document.getElementById("newPassword").value; const confirmPass = document.getElementById("newPasswordConfirm").value;
+            if (newPass.length < 6) { alert("En az 6 karakter."); return; }
+            if (newPass !== confirmPass) { alert("Şifreler eşleşmiyor."); return; }
             loader.style.display = "flex";
             try {
                 await updatePassword(auth.currentUser, newPass);
                 await updateDoc(doc(db, "users", auth.currentUser.uid), { isPasswordDefault: false });
-                alert("Şifreniz başarıyla güncellendi!");
-                showScreen("main");
-            } catch (error) {
-                loader.style.display = "none";
-                alert("Şifre güncellenirken bir hata oluştu.");
-            }
+                alert("Şifre güncellendi!"); showScreen("main");
+            } catch (error) { loader.style.display = "none"; alert("Hata oluştu."); }
         });
 
         document.getElementById("resetPasswordBtn").addEventListener("click", async () => {
             const email = emailInput.value.trim();
-            if (!email || !email.includes("@")) {
-                alert("Lütfen şifre sıfırlama bağlantısı için e-posta adresinizi kutucuğa yazın ve tekrar tıklayın.");
-                return;
-            }
+            if (!email || !email.includes("@")) { alert("Lütfen e-posta girin."); return; }
             loader.style.display = "flex";
-            try {
-                await sendPasswordResetEmail(auth, email);
-                loader.style.display = "none";
-                alert("Başarılı! Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.");
-            } catch (error) {
-                loader.style.display = "none";
-                alert("Hata: Bu e-posta adresine ait bir kayıt bulunamadı veya bir hata oluştu.");
-            }
+            try { await sendPasswordResetEmail(auth, email); loader.style.display = "none"; alert("Sıfırlama linki gönderildi."); } 
+            catch (error) { loader.style.display = "none"; alert("Hata oluştu."); }
         });
 
-        document.getElementById("logoutBtn").addEventListener("click", async () => {
-            loader.style.display = "flex";
-            await signOut(auth);
-        });
-
-        // --- BUTON YÖNLENDİRMELERİ ---
+        document.getElementById("logoutBtn").addEventListener("click", async () => { loader.style.display = "flex"; await signOut(auth); });
 
         document.getElementById("btnServisTakip").addEventListener("click", () => {
             if (currentUserData && currentUserData.servisYetkisi === true) {
-                const isimParametresi = currentUserData.adSoyad ? `&isim=${encodeURIComponent(currentUserData.adSoyad)}` : '';
-                const uidParametresi = currentUser.uid ? `?uid=${currentUser.uid}` : '';
-                window.open(`https://onlinepdr.com/meram-servis-takip-sistemi.html${uidParametresi}${isimParametresi}`, "_blank");
-            } else {
-                alert("Erişim Engellendi: Bu sisteme giriş yetkiniz bulunmamaktadır.");
-            }
+                const isim = currentUserData.adSoyad ? `&isim=${encodeURIComponent(currentUserData.adSoyad)}` : '';
+                const uid = currentUser.uid ? `?uid=${currentUser.uid}` : '';
+                window.open(`https://onlinepdr.com/meram-servis-takip-sistemi.html${uid}${isim}`, "_blank");
+            } else { alert("Erişim Engellendi: Bu sisteme giriş yetkiniz bulunmamaktadır.");}
         });
         
         if(btnKasa) {
              btnKasa.addEventListener("click", () => {
                 if (currentUserData && currentUserData.adminYetkisi === true) {
-                    const isimParametresi2 = currentUserData.adSoyad ? `?isim=${encodeURIComponent(currentUserData.adSoyad)}` : '';
-                    const uidParametresi2 = currentUser.uid ? `&uid=${currentUser.uid}` : '';
-                    window.open(`https://script.google.com/macros/s/AKfycbygPva9nzqypc6AG4PjgnXAK56cUIsbKTBuCxumXeUQrQ5cYP21j9KYcP_Atq0vlUYjVg/exec${isimParametresi2}${uidParametresi2}`, '_blank');
-                } else {
-                    alert("Erişim Engellendi: Bu işlem için yönetici yetkiniz bulunmuyor.");
-                }
+                    const isim = currentUserData.adSoyad ? `?isim=${encodeURIComponent(currentUserData.adSoyad)}` : '';
+                    const uid = currentUser.uid ? `&uid=${currentUser.uid}` : '';
+                    window.open(`https://script.google.com/macros/s/AKfycbygPva9nzqypc6AG4PjgnXAK56cUIsbKTBuCxumXeUQrQ5cYP21j9KYcP_Atq0vlUYjVg/exec${isim}${uid}`, '_blank');
+                } else { alert("Erişim Engellendi: Bu işlem için yönetici yetkiniz bulunmuyor.");}
             });
         }
 
-        btnAdminDuyuru.addEventListener("click", () => {
-             showScreen("messages");
-             msgInputArea.style.display = "flex";
-        });
-
+        btnAdminDuyuru.addEventListener("click", () => { showScreen("messages"); msgInputArea.style.display = "flex"; });
         window.openLink = function(url) { window.open(url, "_blank"); }
 
-        // --- MESAJLAŞMA SİSTEMİ (ANLIK SENKRONİZASYON VE ROZET) ---
-
         document.getElementById("btnMesajlar").addEventListener("click", () => {
-            showScreen("messages");
-            setupMessageInputVisibility();
-            // Mesaj ekranı açıldığında mevcut listeyi doldur ve okundu olarak işaretle
-            loadAllMessagesIntoUI();
+            showScreen("messages"); setupMessageInputVisibility(); loadAllMessagesIntoUI();
         });
 
-        document.getElementById("closeMessagesBtn").addEventListener("click", () => {
-            showScreen("main");
-        });
+        document.getElementById("closeMessagesBtn").addEventListener("click", () => { showScreen("main"); });
         
         function setupMessageInputVisibility() {
-             if(currentUserData && currentUserData.adminYetkisi === true) {
-                 msgInputArea.style.display = "flex";
-             } else {
-                 msgInputArea.style.display = "none";
-             }
+             msgInputArea.style.display = (currentUserData && currentUserData.adminYetkisi === true) ? "flex" : "none";
         }
 
-        // Arka planda sürekli çalışarak okunmamış mesaj sayısını ve rozeti güncelleyen dinleyici
+        // GERİ EKLENEN KISIM: Rozet (Badge) ve Rol Filtreleme
         function initRealtimeMessagesListener() {
             if (!db || !currentUserData) return;
-
             const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
-
             onSnapshot(q, (snapshot) => {
                 let unreadCount = 0;
-                
                 snapshot.forEach((docSnap) => {
                     const msg = docSnap.data();
                     
-                    // Rol bazlı filtreleme kontrolü
                     if (currentUserData.adminYetkisi !== true) {
                         const rol = currentUserData.rol ? currentUserData.rol.toLowerCase() : "";
                         const isRehber = (rol === "rehber");
@@ -951,58 +868,35 @@
 
                     const readByList = msg.readBy || [];
                     const isRead = readByList.includes(currentUserData.adSoyad);
-
-                    // Eğer mesaj bana ait değilse ve henüz okunmamışsa sayacı artır
-                    if (msg.senderName !== currentUserData.adSoyad && !isRead) {
-                        unreadCount++;
-                    }
+                    if (msg.senderName !== currentUserData.adSoyad && !isRead) unreadCount++;
                 });
 
-                // Kırmızı rozeti (WhatsApp tarzı) güncelle
                 const badge = document.getElementById("unreadBadge");
                 if (badge) {
-                    if (unreadCount > 0) {
-                        badge.innerText = unreadCount;
-                        badge.style.display = "inline-block";
-                    } else {
-                        badge.style.display = "none";
-                    }
+                    if (unreadCount > 0) { badge.innerText = unreadCount; badge.style.display = "inline-block"; } 
+                    else badge.style.display = "none";
                 }
-
-                // Eğer şu an mesaj ekranı açıksa listeyi anlık olarak tazele
-                if (messagesScreen.style.display === "flex") {
-                    renderMessagesToUI(snapshot.docs);
-                }
+                if (messagesScreen.style.display === "flex") renderMessagesToUI(snapshot.docs);
             });
         }
 
-        // Mesaj ekranı açıldığında veya yeni mesaj geldiğinde UI'ı dolduran ve okundu işaretleyen fonksiyon
         async function loadAllMessagesIntoUI() {
             messageList.innerHTML = '<div style="text-align:center; padding:20px;"><i class="fas fa-spinner fa-spin text-muted"></i></div>';
-            
             try {
                 const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
                 const snapshot = await getDocs(q);
                 renderMessagesToUI(snapshot.docs);
-            } catch (error) {
-                console.error("Mesajlar yüklenemedi:", error);
-                messageList.innerHTML = '<p style="text-align:center; color:#999;">Mesajlar yüklenirken bir hata oluştu.</p>';
-            }
+            } catch (error) { messageList.innerHTML = '<p style="text-align:center; color:#999;">Hata oluştu.</p>'; }
         }
 
         function renderMessagesToUI(docs) {
             messageList.innerHTML = "";
-            
-            if (docs.length === 0) {
-                messageList.innerHTML = '<p style="text-align:center; color:#999;">Henüz bir duyuru veya mesaj bulunmuyor.</p>';
-                return;
-            }
+            if (docs.length === 0) { messageList.innerHTML = '<p style="text-align:center; color:#999;">Mesaj bulunmuyor.</p>'; return; }
 
             docs.forEach((docSnap) => {
                 const msgData = docSnap.data();
                 const docId = docSnap.id;
 
-                // Rol bazlı filtreleme
                 if (currentUserData.adminYetkisi !== true) {
                     const rol = currentUserData.rol ? currentUserData.rol.toLowerCase() : "";
                     const isRehber = (rol === "rehber");
@@ -1012,14 +906,10 @@
 
                 const isMine = msgData.senderName === currentUserData.adSoyad;
                 const timeStr = msgData.timestamp ? new Date(msgData.timestamp.toDate()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Şimdi';
-                
                 const readByList = msgData.readBy || [];
                 const isRead = readByList.includes(currentUserData.adSoyad);
 
-                // Eğer mesajı açtıysam ve henüz okuyanlar listesinde adim yoksa otomatik okundu olarak kaydet
-                if (!isMine && !isRead) {
-                    markMessageAsRead(docId, msgData);
-                }
+                if (!isMine && !isRead) markMessageAsRead(docId, msgData);
 
                 let readInfoHtml = "";
                 if (isMine && currentUserData.adminYetkisi === true) {
@@ -1028,16 +918,9 @@
 
                 const msgDiv = document.createElement("div");
                 msgDiv.className = `msg-bubble ${isMine ? 'msg-sent' : 'msg-received'}`;
-                msgDiv.innerHTML = `
-                    ${!isMine ? `<span class="msg-sender-name">${msgData.senderName}</span>` : ''}
-                    <p style="margin:0; word-break: break-word;">${msgData.text}</p>
-                    <span class="msg-time">${timeStr}${readInfoHtml}</span>
-                `;
-                
+                msgDiv.innerHTML = `${!isMine ? `<span class="msg-sender-name">${msgData.senderName}</span>` : ''}<p style="margin:0; word-break: break-word;">${msgData.text}</p><span class="msg-time">${timeStr}${readInfoHtml}</span>`;
                 messageList.appendChild(msgDiv);
             });
-
-            // En son mesaja otomatik kaydır
             messageList.scrollTop = messageList.scrollHeight;
         }
 
@@ -1045,68 +928,19 @@
             if (currentUserData && currentUserData.adSoyad) {
                 const readList = msgData.readBy || [];
                 if (!readList.includes(currentUserData.adSoyad)) {
-                    try {
-                        const msgRef = doc(db, 'messages', docId);
-                        await updateDoc(msgRef, {
-                            readBy: arrayUnion(currentUserData.adSoyad)
-                        });
-                    } catch(e) {
-                         console.error("Okundu bilgisi kaydedilemedi", e);
-                    }
+                    try { await updateDoc(doc(db, 'messages', docId), { readBy: arrayUnion(currentUserData.adSoyad) }); } 
+                    catch(e) { }
                 }
             }
-        }
-        function appendMessageToUI(msgData, docId, isRead) {
-            const messageList = document.getElementById("messageList");
-            if (!messageList) return;
-
-            // Rol bazlı filtreleme
-            if (currentUserData.adminYetkisi !== true) {
-                const rol = currentUserData.rol ? currentUserData.rol.toLowerCase() : "";
-                const isRehber = (rol === "rehber");
-                if (isRehber && msgData.target === "teachers") return;
-                if (!isRehber && msgData.target === "counselors") return;
-            }
-
-            const isMine = msgData.senderName === currentUserData.adSoyad;
-            const timeStr = msgData.timestamp ? new Date(msgData.timestamp.toDate()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Şimdi';
-            
-            const readByList = msgData.readBy || [];
-            
-            // Eğer mesajı açtıysam ve henüz okuyanlar listesinde adim yoksa otomatik okundu olarak kaydet
-            if (!isMine && !isRead) {
-                markMessageAsRead(docId, msgData);
-            }
-
-            let readInfoHtml = "";
-            // SADECE mesajı ben gönderdiysem ve idareciysem okuyanlar listesini göster[cite: 15]
-            if (isMine && currentUserData.adminYetkisi === true) {
-                const readTitle = readByList.length > 0 ? "Okuyanlar: " + readByList.join(", ") : "Henüz kimse okumadı";
-                const iconColor = readByList.length > 0 ? "#4CAF50" : "#888";
-                // Tıklanabilir ikon ile okuyanları alert veya tooltip olarak göster
-                readInfoHtml = ` <i class="fas fa-check-double" style="color:${iconColor}; cursor:pointer;" title="${readTitle}" onclick="alert('${readTitle}')"></i>`;
-            }
-
-            const msgDiv = document.createElement("div");
-            msgDiv.className = `p-3 rounded-lg mb-2 max-w-[80%] ${isMine ? 'bg-green-100 ml-auto text-right' : 'bg-gray-100 mr-auto text-left'} ${!isRead && !isMine ? 'border-l-4 border-red-500' : ''}`;
-            
-            msgDiv.innerHTML = `
-                ${!isMine ? `<span class="block text-xs font-bold text-blue-600 mb-1">${msgData.senderName}</span>` : ''}
-                <p style="margin:0; word-break: break-word;" class="text-sm text-slate-800">${msgData.text}</p>
-                <span class="block text-[10px] text-slate-400 mt-1">${timeStr}${readInfoHtml}</span>
-            `;
-            
-            messageList.appendChild(msgDiv);
         }
 
         document.getElementById("sendMsgBtn").addEventListener("click", async () => {
             const text = messageInput.value.trim();
             if (!text) return;
-            
             const targetAudience = "all"; 
             messageInput.value = "";
-            
             try {
+                // Firestore'a kaydet (Mevcut kodunuz)
                 await addDoc(collection(db, "messages"), {
                     text: text,
                     senderUid: currentUser.uid,
@@ -1115,9 +949,21 @@
                     target: targetAudience,
                     readBy: []
                 });
-            } catch (error) {
-                console.error("Mesaj gönderilemedi:", error);
-                alert("Mesaj gönderilemedi.");
+                
+                // YENİ: GAS Web Hook'unu Tetikle
+                const gasWebhookUrl = "https://script.google.com/macros/s/AKfycbxkiTWVbsPIWGh_jqWAyfMSSbtSWmUfdW5VJt-vNoajEXGho8_enEcF27CXHQvH6lo/exec";
+                fetch(gasWebhookUrl, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        title: "Yeni Duyuru: " + currentUserData.adSoyad,
+                        body: text,
+                        target: targetAudience
+                    })
+                }).then(res => res.json()).then(data => console.log("GAS Tetiklendi", data));
+                
+            } catch (error) { 
+                console.error("Hata:", error);
+                alert("Mesaj gönderilemedi."); 
             }
         });
     </script>
