@@ -757,6 +757,11 @@
                   <button class="settings-toggle" id="yazdirBtn"
                     style="border:1px solid #3498db; border-radius:6px; padding:8px 14px; text-decoration:none; color:#3498db; font-weight:600; white-space:nowrap; background:#fff; cursor:pointer; transition: 0.2s; min-height:40px;">🖨️
                     Yazdır / PDF Kaydet</button>
+
+                  <!-- YENİ EKLENEN İNDİRME BUTONU -->
+                  <button class="settings-toggle" id="indirBtn"
+                    style="border:1px solid #2ecc71; border-radius:6px; padding:8px 14px; text-decoration:none; color:#2ecc71; font-weight:600; white-space:nowrap; background:#fff; cursor:pointer; transition: 0.2s; min-height:40px; margin-left: 8px;">💾
+                    Raporu İndir</button>
                 </div>
               </div>
 
@@ -1475,23 +1480,27 @@
       /* KRİTER 17-26: ÖZEL HEDEFLER */
       if (okulTuru.hedefler.ozel) {
         const ozelGruplar = grupÖzelHedefler(parsed.ozel);
+
+        // --- 1. ÖZEL HEDEF ---
         const ozelVar1 = ozelGruplar.length >= 1;
-        body.appendChild(renderOzelVarKriteri(17, "Özel hedefler programda belirtilmiştir.", ozelVar1, 1));
+        let ozel1Orj = ozelVar1 ? esc(stripPrefix(ozelGruplar[0].orijinalMetinler[0])) : "Belirtilmemiş";
+        body.appendChild(renderOzelVarKriteri(17, `1. Özel Hedef (${ozel1Orj}) programda belirtilmiştir.`, ozelVar1, 1));
 
         if (ozelVar1) {
           let ozel1Koku = ozelGruplar[0].koku;
-          if (okulTuru.kitleler.ogrenci) body.appendChild(renderKitleKriteri(18, "1. özel hedefe yönelik öğrenci çalışmasına yer verilmiştir.", parsed, ozel1Koku, "ÖOV", okulTuru.esikOzel.ogrenci, "Öğrenciler"));
-          else body.appendChild(renderGerekYok(18, "1. özel hedefe yönelik öğrenci çalışmasına yer verilmiştir."));
-          if (okulTuru.kitleler.ogretmen) body.appendChild(renderKitleKriteri(19, "1. özel hedefe yönelik öğretmen çalışmasına yer verilmiştir.", parsed, ozel1Koku, "DMÖ", okulTuru.esikOzel.ogretmen, "Öğretmenler"));
-          else body.appendChild(renderGerekYok(19, "1. özel hedefe yönelik öğretmen çalışmasına yer verilmiştir."));
-          if (okulTuru.kitleler.veli) body.appendChild(renderKitleKriteri(20, "1. özel hedefe yönelik veli çalışmasına yer verilmiştir.", parsed, ozel1Koku, "DMV", okulTuru.esikOzel.veli, "Veliler"));
-          else body.appendChild(renderGerekYok(20, "1. özel hedefe yönelik veli çalışmasına yer verilmiştir."));
+          if (okulTuru.kitleler.ogrenci) body.appendChild(renderKitleKriteri(18, `1. Özel Hedefe (${ozel1Orj}) yönelik öğrenci çalışmasına yer verilmiştir.`, parsed, ozel1Koku, "ÖOV", okulTuru.esikOzel.ogrenci, "Öğrenciler"));
+          else body.appendChild(renderGerekYok(18, `1. Özel Hedefe (${ozel1Orj}) yönelik öğrenci çalışmasına yer verilmiştir.`));
+          if (okulTuru.kitleler.ogretmen) body.appendChild(renderKitleKriteri(19, `1. Özel Hedefe (${ozel1Orj}) yönelik öğretmen çalışmasına yer verilmiştir.`, parsed, ozel1Koku, "DMÖ", okulTuru.esikOzel.ogretmen, "Öğretmenler"));
+          else body.appendChild(renderGerekYok(19, `1. Özel Hedefe (${ozel1Orj}) yönelik öğretmen çalışmasına yer verilmiştir.`));
+          if (okulTuru.kitleler.veli) body.appendChild(renderKitleKriteri(20, `1. Özel Hedefe (${ozel1Orj}) yönelik veli çalışmasına yer verilmiştir.`, parsed, ozel1Koku, "DMV", okulTuru.esikOzel.veli, "Veliler"));
+          else body.appendChild(renderGerekYok(20, `1. Özel Hedefe (${ozel1Orj}) yönelik veli çalışmasına yer verilmiştir.`));
         } else {
-          body.appendChild(renderUyumsuzHedef(18, "1. özel hedefe yönelik öğrenci çalışmasına yer verilmiştir.", "Özel hedef bulunamadığı için etkinlikler geçersizdir."));
-          body.appendChild(renderUyumsuzHedef(19, "1. özel hedefe yönelik öğretmen çalışmasına yer verilmiştir.", "Özel hedef bulunamadığı için etkinlikler geçersizdir."));
-          body.appendChild(renderUyumsuzHedef(20, "1. özel hedefe yönelik veli çalışmasına yer verilmiştir.", "Özel hedef bulunamadığı için etkinlikler geçersizdir."));
+          body.appendChild(renderUyumsuzHedef(18, "1. özel hedefe yönelik öğrenci çalışmasına yer verilmiştir.", "1. Özel hedef bulunamadığı için etkinlikler geçersizdir."));
+          body.appendChild(renderUyumsuzHedef(19, "1. özel hedefe yönelik öğretmen çalışmasına yer verilmiştir.", "1. Özel hedef bulunamadığı için etkinlikler geçersizdir."));
+          body.appendChild(renderUyumsuzHedef(20, "1. özel hedefe yönelik veli çalışmasına yer verilmiştir.", "1. Özel hedef bulunamadığı için etkinlikler geçersizdir."));
         }
 
+        // Kriter 21-22 (Farklı çalışmalar kontrolü vb.)
         if (okulTuru.hedefler.genel || okulTuru.hedefler.yerel) {
           let cakisanlar = [];
           let genelV = hedefVaryasyonlariniBul(genelBeklenen);
@@ -1518,17 +1527,19 @@
           body.appendChild(div22);
         }
 
+        // --- 2. ÖZEL HEDEF ---
         const ozelVar2 = ozelGruplar.length >= 2;
-        body.appendChild(renderOzelVarKriteri(23, "2. özel hedef programda belirtilmiştir.", ozelVar2, 2));
+        let ozel2Orj = ozelVar2 ? esc(stripPrefix(ozelGruplar[1].orijinalMetinler[0])) : "Belirtilmemiş";
+        body.appendChild(renderOzelVarKriteri(23, `2. Özel Hedef (${ozel2Orj}) programda belirtilmiştir.`, ozelVar2, 2));
 
         if (ozelVar2) {
           let ozel2Koku = ozelGruplar[1].koku;
-          if (okulTuru.kitleler.ogrenci) body.appendChild(renderKitleKriteri(24, "2. özel hedefe yönelik öğrenci çalışmalarına yer verilmiştir.", parsed, ozel2Koku, "ÖOV", okulTuru.esikOzel.ogrenci, "Öğrenciler"));
-          else body.appendChild(renderGerekYok(24, "2. özel hedefe yönelik öğrenci çalışmalarına yer verilmiştir."));
-          if (okulTuru.kitleler.ogretmen) body.appendChild(renderKitleKriteri(25, "2. özel hedefe yönelik öğretmen çalışmalarına yer verilmiştir.", parsed, ozel2Koku, "DMÖ", okulTuru.esikOzel.ogretmen, "Öğretmenler"));
-          else body.appendChild(renderGerekYok(25, "2. özel hedefe yönelik öğretmen çalışmalarına yer verilmiştir."));
-          if (okulTuru.kitleler.veli) body.appendChild(renderKitleKriteri(26, "2. özel hedefe yönelik veli çalışmalarına yer verilmiştir.", parsed, ozel2Koku, "DMV", okulTuru.esikOzel.veli, "Veliler"));
-          else body.appendChild(renderGerekYok(26, "2. özel hedefe yönelik veli çalışmalarına yer verilmiştir."));
+          if (okulTuru.kitleler.ogrenci) body.appendChild(renderKitleKriteri(24, `2. Özel Hedefe (${ozel2Orj}) yönelik öğrenci çalışmalarına yer verilmiştir.`, parsed, ozel2Koku, "ÖOV", okulTuru.esikOzel.ogrenci, "Öğrenciler"));
+          else body.appendChild(renderGerekYok(24, `2. Özel Hedefe (${ozel2Orj}) yönelik öğrenci çalışmalarına yer verilmiştir.`));
+          if (okulTuru.kitleler.ogretmen) body.appendChild(renderKitleKriteri(25, `2. Özel Hedefe (${ozel2Orj}) yönelik öğretmen çalışmalarına yer verilmiştir.`, parsed, ozel2Koku, "DMÖ", okulTuru.esikOzel.ogretmen, "Öğretmenler"));
+          else body.appendChild(renderGerekYok(25, `2. Özel Hedefe (${ozel2Orj}) yönelik öğretmen çalışmalarına yer verilmiştir.`));
+          if (okulTuru.kitleler.veli) body.appendChild(renderKitleKriteri(26, `2. Özel Hedefe (${ozel2Orj}) yönelik veli çalışmalarına yer verilmiştir.`, parsed, ozel2Koku, "DMV", okulTuru.esikOzel.veli, "Veliler"));
+          else body.appendChild(renderGerekYok(26, `2. Özel Hedefe (${ozel2Orj}) yönelik veli çalışmalarına yer verilmiştir.`));
         } else {
           body.appendChild(renderUyumsuzHedef(24, "2. özel hedefe yönelik öğrenci çalışmasına yer verilmiştir.", "2. Özel hedef bulunamadığı için etkinlikler geçersizdir."));
           body.appendChild(renderUyumsuzHedef(25, "2. özel hedefe yönelik öğretmen çalışmasına yer verilmiştir.", "2. Özel hedef bulunamadığı için etkinlikler geçersizdir."));
@@ -1828,6 +1839,64 @@
         baslikKismi.style.opacity = opaklik >= 0 ? opaklik : 0;
         baslikKismi.style.transform = `translateY(${kaydirmaMiktari * 0.4}px)`;
       }
+    });
+
+    document.getElementById("indirBtn").addEventListener("click", () => {
+      if (!lastParsed) {
+        alert("Lütfen önce bir plan dosyası yükleyin.");
+        return;
+      }
+
+      // Dosya adını okuldaki başlığa göre temizleyip belirliyoruz
+      const schoolName = lastParsed.title.replace(/[\\/:*?"<>|]/g, '').trim();
+      const fileName = schoolName + " - RPD Degerlendirme.html";
+
+      // Raporun stilini bozmamak için sayfadaki aktif CSS'i kopyalıyoruz
+      let css = Array.from(document.styleSheets)
+        .map(sheet => {
+          try { return Array.from(sheet.cssRules).map(rule => rule.cssText).join(''); }
+          catch (e) { return ''; }
+        }).join('');
+
+      // İndirilecek raporun iskeletini oluşturuyoruz
+      let htmlContent = `
+  <!DOCTYPE html>
+  <html lang="tr">
+  <head>
+      <meta charset="utf-8">
+      <title>${schoolName} - Değerlendirme Sonucu</title>
+      <style>
+          ${css}
+          body { background: #f4f7f6; padding: 30px; font-family: 'Poppins', sans-serif; color: #1a2540; }
+          .rpd-app-container { max-width: 1000px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+          .no-print { display: none !important; }
+          .no-screen { display: block !important; }
+          #printBaslik { display: block !important; margin-bottom: 20px; font-weight:bold; }
+          #printImzaBloku { display: block !important; margin-top: 60px; padding-top: 20px; border-top: 2px solid #ccc; }
+          .imza-satiri { display: flex; justify-content: space-between; padding: 0 10px; text-align: center; }
+          .imza-kutu { flex: 1; display: flex; flex-direction: column; align-items: center; }
+          .imza-unvan { font-weight: 600; font-size: 14px; margin-bottom: 60px; }
+          .imza-tarih { font-weight: 600; font-size: 14px; margin-top: 0; }
+      </style>
+  </head>
+  <body>
+      <div class="rpd-app-container">
+          ${document.getElementById("resultsCard").innerHTML}
+      </div>
+  </body>
+  </html>
+  `;
+
+      // Tarayıcı üzerinden dosyayı tetikleyerek indiriyoruz
+      let blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+      let url = URL.createObjectURL(blob);
+      let a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     });
 
   </script>
