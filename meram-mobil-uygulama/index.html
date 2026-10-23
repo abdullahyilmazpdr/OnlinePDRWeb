@@ -244,6 +244,15 @@
             background-color: var(--servis-btn);
         }
 
+        .btn-risk {
+            background-color: #1565C0;
+            background: linear-gradient(135deg, #0d47a1, #1976d2);
+        }
+
+        .btn-risk:hover {
+            background: linear-gradient(135deg, #0a3880, #1565c0);
+        }
+
         .btn-veli {
             background-color: var(--veli-btn);
         }
@@ -603,6 +612,10 @@
                     <i class="fas fa-bus-alt"></i> Servis Takip Sistemi
                 </button>
 
+                <button class="menu-btn btn-risk" id="btnRiskSok">
+                    <i class="fas fa-clipboard-check"></i> Risk Girişi ve ŞÖK
+                </button>
+
                 <button class="menu-btn btn-veli"
                     onclick="openLink('https://www.appsheet.com/start/53ec8dba-c969-47ea-9623-69f9f6344792')">
                     <i class="fas fa-address-book"></i> Veli İletişim Bilgileri (Yetkili Personeller)
@@ -825,6 +838,47 @@
                 const uid = currentUser.uid ? `?uid=${currentUser.uid}` : '';
                 window.open(`https://onlinepdr.com/meram-servis-takip-sistemi.html${uid}${isim}`, "_blank");
             } else { alert("Erişim Engellendi: Bu sisteme giriş yetkiniz bulunmamaktadır.");}
+        });
+
+        async function createSsoSignature(uid, role, ts) {
+            const secret = "meram-oeuo-risk-sso-bridge-key-2026";
+            const message = `${uid}:${role}:${ts}:${secret}`;
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+        }
+
+        document.getElementById("btnRiskSok").addEventListener("click", async () => {
+            if (!currentUser || !currentUserData) {
+                alert("Lütfen önce oturum açınız.");
+                return;
+            }
+
+            const adSoyad = currentUserData.adSoyad ? currentUserData.adSoyad.trim() : "";
+            const email = currentUser.email || "";
+            const uid = currentUser.uid || "";
+            const isAdmin = currentUserData.adminYetkisi === true;
+            const rol = currentUserData.rol ? currentUserData.rol.toLowerCase() : "";
+            const isRehber = (rol === "rehber");
+            const targetRole = (isAdmin || isRehber) ? "admin" : "teacher";
+
+            // Meram Özel Eğitim Uygulama Okulu III. Kademe (MEBBİS Kodu: 752927)
+            const schoolKey = "752927";
+            const ts = Date.now();
+            const sig = await createSsoSignature(uid, targetRole, ts);
+
+            const ssoUrl = `https://risk.onlinepdr.com/sso` +
+                `?schoolKey=${encodeURIComponent(schoolKey)}` +
+                `&name=${encodeURIComponent(adSoyad)}` +
+                `&email=${encodeURIComponent(email)}` +
+                `&role=${encodeURIComponent(targetRole)}` +
+                `&uid=${encodeURIComponent(uid)}` +
+                `&ts=${ts}` +
+                `&sig=${sig}` +
+                `&source=meram-mobil`;
+
+            window.open(ssoUrl, "_blank");
         });
         
         if(btnKasa) {
