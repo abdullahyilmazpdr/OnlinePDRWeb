@@ -11,18 +11,19 @@
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         /* Flexbox ile ekranı yapılandırma */
-        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #f4f6f9; display: flex; flex-direction: column; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background-color: #f5f5f5; display: flex; flex-direction: column; }
         
         /* Üst Menü */
         .app-header { flex-shrink: 0; background-color: #1976d2; color: white; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); position: relative; z-index: 10; }
         .app-header h1 { font-size: 18px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .header-btn { background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 5px; }
+        .header-btn { background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 5px; margin-left: 10px; }
+        .header-actions { display: flex; align-items: center; }
         
-        /* Dinamik İçerik Alanı (Kalan boşluğu doldurur) */
+        /* Dinamik İçerik Alanı */
         .content-area { flex-grow: 1; width: 100%; position: relative; display: flex; flex-direction: column; overflow: hidden; }
         
         /* Giriş Ekranı */
-        #login-screen { flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f4f6f9; padding: 20px; text-align: center; }
+        #login-screen { flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f5f5f5; padding: 20px; text-align: center; }
         .login-box { width: 100%; max-width: 350px; background: #fff; padding: 30px 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .login-box i.fa-bus { font-size: 40px; color: #1976d2; margin-bottom: 15px; }
         .login-box h2 { font-size: 22px; color: #333; margin-bottom: 25px; }
@@ -33,15 +34,27 @@
         .input-group input:focus { border-color: #1976d2; }
         
         .login-btn { width: 100%; padding: 12px; background-color: #1976d2; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .login-btn:active { background-color: #1565c0; }
+        .login-btn:active { background-color: #1565c0; transform: scale(0.98); }
         .error-msg { color: #d32f2f; font-size: 14px; margin-top: 10px; display: none; }
+
+        /* Ana Menü Ekranı */
+        #main-screen { flex-grow: 1; display: none; flex-direction: column; align-items: center; padding: 30px 20px; overflow-y: auto; }
+        .welcome-card { background-color: #e3f2fd; padding: 15px 30px; border-radius: 20px; text-align: center; margin-bottom: 30px; width: 100%; max-width: 400px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .welcome-card .greeting { color: #666; font-size: 14px; }
+        .welcome-card .name { color: #1976D2; font-size: 18px; font-weight: bold; margin-top: 5px; }
+        
+        .menu-buttons { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 15px; }
+        .menu-btn { display: flex; align-items: center; padding: 18px 20px; border-radius: 15px; color: white; font-size: 17px; font-weight: 600; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); cursor: pointer; border: none; width: 100%; transition: transform 0.2s; }
+        .menu-btn:active { transform: scale(0.98); }
+        .menu-btn i { font-size: 24px; width: 40px; text-align: center; margin-right: 10px; }
+        .btn-servis { background-color: #4CAF50; }
         
         /* Iframe Ekranı */
         #app-iframe { flex-grow: 1; width: 100%; border: none; display: none; }
         
         /* Sabit Alt Bilgi (Reklam / Geliştirici İmzası) */
-        .app-footer { flex-shrink: 0; width: 100%; background: #f4f6f9; padding: 12px 20px; display: flex; justify-content: center; align-items: center; border-top: 1px solid #e0e0e0; z-index: 10; }
-        .dev-link-wrapper { text-decoration: none; display: block; width: 100%; max-width: 350px; cursor: pointer; }
+        .app-footer { flex-shrink: 0; width: 100%; background: #f5f5f5; padding: 12px 20px; display: flex; justify-content: center; align-items: center; border-top: 1px solid #e0e0e0; z-index: 10; }
+        .dev-link-wrapper { text-decoration: none; display: block; width: 100%; max-width: 400px; cursor: pointer; }
         .developer-credit { background-color: #dff0ff; border: 1px solid #b3d4ff; border-radius: 12px; padding: 12px 20px; text-align: center; width: 100%; box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: transform 0.2s; }
         .developer-credit:active { transform: scale(0.98); }
         .dev-title { color: #1976d2; font-weight: 700; font-size: 13px; margin-bottom: 4px; letter-spacing: 0.5px; }
@@ -71,13 +84,16 @@
 
     <header class="app-header">
         <h1>Kanuni Servis Takip Sistemi</h1>
-        <div>
+        <div class="header-actions">
+            <!-- Ana Menüye Dönüş Butonu (Sadece Uygulama İçindeyken Görünür) -->
+            <button id="homeBtn" class="header-btn" style="display: none;"><i class="fas fa-home"></i></button>
             <button id="infoBtn" class="header-btn"><i class="fas fa-info-circle"></i></button>
             <button id="logoutBtn" class="header-btn" style="display: none;"><i class="fas fa-sign-out-alt"></i></button>
         </div>
     </header>
 
     <div class="content-area">
+        <!-- 1. GİRİŞ EKRANI -->
         <div id="login-screen">
             <div class="login-box">
                 <i class="fas fa-bus"></i>
@@ -97,10 +113,25 @@
             </div>
         </div>
 
+        <!-- 2. ANA MENÜ EKRANI -->
+        <div id="main-screen">
+            <div class="welcome-card">
+                <div class="greeting">Hoş geldiniz,</div>
+                <div class="name" id="userNameText">Yükleniyor...</div>
+            </div>
+
+            <div class="menu-buttons">
+                <button class="menu-btn btn-servis" id="btnServisTakip">
+                    <i class="fas fa-bus-alt"></i> Servis Takip Sistemi
+                </button>
+            </div>
+        </div>
+
+        <!-- 3. UYGULAMA (IFRAME) EKRANI -->
         <iframe id="app-iframe" allow="geolocation; microphone; camera"></iframe>
     </div>
 
-    <!-- Sabit Geliştirici İmzası Alt Bilgi (Tıklanabilir) -->
+    <!-- Sabit Geliştirici İmzası Alt Bilgi -->
     <footer class="app-footer">
         <a href="https://onlinepdr.com" target="_blank" class="dev-link-wrapper">
             <div class="developer-credit">
@@ -149,44 +180,94 @@
         const auth = getAuth(app);
         const scriptBaseUrl = "https://script.google.com/macros/s/AKfycbyEyFz2EFkUZGGnz5lktE9X8hCOmeCSwNDAmkwxTGPa_S3lON2N5AyCFanCG2xKFb3T6Q/exec";
 
+        // DOM Elementleri
         const loginScreen = document.getElementById('login-screen');
+        const mainScreen = document.getElementById('main-screen');
         const appIframe = document.getElementById('app-iframe');
+        
         const loadingScreen = document.getElementById('loading-screen');
         const infoBtn = document.getElementById('infoBtn');
         const logoutBtn = document.getElementById('logoutBtn');
+        const homeBtn = document.getElementById('homeBtn');
+        
         const loginBtn = document.getElementById('loginBtn');
         const errorMsg = document.getElementById('errorMsg');
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
+        const userNameText = document.getElementById('userNameText');
+        const btnServisTakip = document.getElementById('btnServisTakip');
+
         const infoModal = document.getElementById('infoModal');
         const closeModal = document.getElementById('closeModal');
 
+        // Oturumu aynı cihazda kalıcı yap
         setPersistence(auth, browserLocalPersistence).catch((error) => console.error("Kalıcı oturum hatası:", error));
 
+        // Ekran Yönetim Fonksiyonu
+        function showScreen(screen) {
+            loginScreen.style.display = 'none';
+            mainScreen.style.display = 'none';
+            appIframe.style.display = 'none';
+            
+            infoBtn.style.display = 'none';
+            logoutBtn.style.display = 'none';
+            homeBtn.style.display = 'none';
+
+            if (screen === 'login') {
+                loginScreen.style.display = 'flex';
+                infoBtn.style.display = 'block';
+            } else if (screen === 'main') {
+                mainScreen.style.display = 'flex';
+                logoutBtn.style.display = 'block';
+            } else if (screen === 'iframe') {
+                appIframe.style.display = 'block';
+                homeBtn.style.display = 'block'; // Sadece iframe içindeyken "Ana Sayfa" butonu görünür
+                logoutBtn.style.display = 'block';
+            }
+        }
+
+        // Info Modalı İşlemleri
         infoBtn.addEventListener('click', () => infoModal.style.display = 'flex');
         closeModal.addEventListener('click', () => infoModal.style.display = 'none');
         infoModal.addEventListener('click', (e) => { if (e.target === infoModal) infoModal.style.display = 'none'; });
 
+        let currentUserParams = "";
+
+        // Firebase Auth Durum Kontrolü
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const isim = user.displayName || user.email.split('@')[0];
                 const uid = user.uid;
-                appIframe.src = `${scriptBaseUrl}?isim=${encodeURIComponent(isim)}&uid=${encodeURIComponent(uid)}`;
                 
-                loginScreen.style.display = 'none';
-                appIframe.style.display = 'block';
-                infoBtn.style.display = 'none';
-                logoutBtn.style.display = 'block';
+                userNameText.innerText = isim; // Ana menüdeki Hoş geldiniz kısmına yazdır[cite: 2]
+                currentUserParams = `?isim=${encodeURIComponent(isim)}&uid=${encodeURIComponent(uid)}`;
+                
+                showScreen('main'); // Giriş yapılınca doğrudan Ana Menüye geç
             } else {
                 appIframe.src = "";
-                loginScreen.style.display = 'flex';
-                appIframe.style.display = 'none';
-                infoBtn.style.display = 'block';
-                logoutBtn.style.display = 'none';
+                showScreen('login');
             }
             loadingScreen.style.display = 'none';
         });
 
+        // Menüden Servis Takip Sistemine Tıklama[cite: 2]
+        btnServisTakip.addEventListener('click', () => {
+            loadingScreen.style.display = 'flex';
+            if(!appIframe.src || appIframe.src === window.location.href) {
+                appIframe.src = scriptBaseUrl + currentUserParams;
+            }
+            // Iframe'in yüklenmesi bitince loader'ı gizle
+            appIframe.onload = () => { loadingScreen.style.display = 'none'; };
+            
+            showScreen('iframe');
+        });
+
+        // Ana Sayfa (Menüye Dön) Butonu
+        homeBtn.addEventListener('click', () => {
+            showScreen('main');
+        });
+
+        // Giriş Yap Butonu
         loginBtn.addEventListener('click', () => {
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
@@ -209,6 +290,7 @@
                 });
         });
 
+        // Çıkış Yap Butonu[cite: 2]
         logoutBtn.addEventListener('click', () => {
             loadingScreen.style.display = 'flex';
             signOut(auth).catch((error) => {
