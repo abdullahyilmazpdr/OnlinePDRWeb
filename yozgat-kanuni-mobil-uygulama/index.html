@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Adsense -->
+    <meta name="google-adsense-account" content="ca-pub-6640600529852358">
     <title>Kanuni Servis Takip Sistemi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        /* Flexbox ile ekranı yapılandırma */
         body, html { width: 100%; height: 100%; overflow: hidden; background-color: #f5f5f5; display: flex; flex-direction: column; }
         
         /* Üst Menü */
@@ -49,10 +50,10 @@
         .menu-btn i { font-size: 24px; width: 40px; text-align: center; margin-right: 10px; }
         .btn-servis { background-color: #4CAF50; }
         
-        /* Iframe Ekranı */
-        #app-iframe { flex-grow: 1; width: 100%; border: none; display: none; }
+        /* Dinamik Iframe Konteyneri */
+        #iframe-container { flex-grow: 1; width: 100%; display: none; }
         
-        /* Sabit Alt Bilgi (Reklam / Geliştirici İmzası) */
+        /* Sabit Alt Bilgi */
         .app-footer { flex-shrink: 0; width: 100%; background: #f5f5f5; padding: 12px 20px; display: flex; justify-content: center; align-items: center; border-top: 1px solid #e0e0e0; z-index: 10; }
         .dev-link-wrapper { text-decoration: none; display: block; width: 100%; max-width: 400px; cursor: pointer; }
         .developer-credit { background-color: #dff0ff; border: 1px solid #b3d4ff; border-radius: 12px; padding: 12px 20px; text-align: center; width: 100%; box-shadow: 0 2px 8px rgba(0,0,0,0.02); transition: transform 0.2s; }
@@ -85,7 +86,6 @@
     <header class="app-header">
         <h1>Kanuni Servis Takip Sistemi</h1>
         <div class="header-actions">
-            <!-- Ana Menüye Dönüş Butonu (Sadece Uygulama İçindeyken Görünür) -->
             <button id="homeBtn" class="header-btn" style="display: none;"><i class="fas fa-home"></i></button>
             <button id="infoBtn" class="header-btn"><i class="fas fa-info-circle"></i></button>
             <button id="logoutBtn" class="header-btn" style="display: none;"><i class="fas fa-sign-out-alt"></i></button>
@@ -127,11 +127,11 @@
             </div>
         </div>
 
-        <!-- 3. UYGULAMA (IFRAME) EKRANI -->
-        <iframe id="app-iframe" allow="geolocation; microphone; camera"></iframe>
+        <!-- 3. UYGULAMA (IFRAME) EKRANI (Dinamik Oluşturulacak) -->
+        <div id="iframe-container"></div>
     </div>
 
-    <!-- Sabit Geliştirici İmzası Alt Bilgi -->
+    <!-- Sabit Geliştirici İmzası -->
     <footer class="app-footer">
         <a href="https://onlinepdr.com" target="_blank" class="dev-link-wrapper">
             <div class="developer-credit">
@@ -180,10 +180,9 @@
         const auth = getAuth(app);
         const scriptBaseUrl = "https://script.google.com/macros/s/AKfycbyEyFz2EFkUZGGnz5lktE9X8hCOmeCSwNDAmkwxTGPa_S3lON2N5AyCFanCG2xKFb3T6Q/exec";
 
-        // DOM Elementleri
         const loginScreen = document.getElementById('login-screen');
         const mainScreen = document.getElementById('main-screen');
-        const appIframe = document.getElementById('app-iframe');
+        const iframeContainer = document.getElementById('iframe-container');
         
         const loadingScreen = document.getElementById('loading-screen');
         const infoBtn = document.getElementById('infoBtn');
@@ -200,14 +199,12 @@
         const infoModal = document.getElementById('infoModal');
         const closeModal = document.getElementById('closeModal');
 
-        // Oturumu aynı cihazda kalıcı yap
         setPersistence(auth, browserLocalPersistence).catch((error) => console.error("Kalıcı oturum hatası:", error));
 
-        // Ekran Yönetim Fonksiyonu
         function showScreen(screen) {
             loginScreen.style.display = 'none';
             mainScreen.style.display = 'none';
-            appIframe.style.display = 'none';
+            iframeContainer.style.display = 'none';
             
             infoBtn.style.display = 'none';
             logoutBtn.style.display = 'none';
@@ -220,54 +217,55 @@
                 mainScreen.style.display = 'flex';
                 logoutBtn.style.display = 'block';
             } else if (screen === 'iframe') {
-                appIframe.style.display = 'block';
-                homeBtn.style.display = 'block'; // Sadece iframe içindeyken "Ana Sayfa" butonu görünür
+                iframeContainer.style.display = 'block';
+                homeBtn.style.display = 'block'; 
                 logoutBtn.style.display = 'block';
             }
         }
 
-        // Info Modalı İşlemleri
         infoBtn.addEventListener('click', () => infoModal.style.display = 'flex');
         closeModal.addEventListener('click', () => infoModal.style.display = 'none');
         infoModal.addEventListener('click', (e) => { if (e.target === infoModal) infoModal.style.display = 'none'; });
 
         let currentUserParams = "";
+        let isIframeLoaded = false;
 
-        // Firebase Auth Durum Kontrolü
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const isim = user.displayName || user.email.split('@')[0];
                 const uid = user.uid;
                 
-                userNameText.innerText = isim; // Ana menüdeki Hoş geldiniz kısmına yazdır[cite: 2]
+                userNameText.innerText = isim; 
                 currentUserParams = `?isim=${encodeURIComponent(isim)}&uid=${encodeURIComponent(uid)}`;
                 
-                showScreen('main'); // Giriş yapılınca doğrudan Ana Menüye geç
+                showScreen('main'); 
             } else {
-                appIframe.src = "";
+                iframeContainer.innerHTML = "";
+                isIframeLoaded = false;
                 showScreen('login');
             }
             loadingScreen.style.display = 'none';
         });
 
-        // Menüden Servis Takip Sistemine Tıklama[cite: 2]
+        // JavaScript ile parametreyi yakalayıp exec uzantılı URL'yi iframe içerisine dinamik gömme
         btnServisTakip.addEventListener('click', () => {
-            loadingScreen.style.display = 'flex';
-            if(!appIframe.src || appIframe.src === window.location.href) {
-                appIframe.src = scriptBaseUrl + currentUserParams;
+            if(!isIframeLoaded) {
+                loadingScreen.style.display = 'flex';
+                const finalUrl = scriptBaseUrl + currentUserParams;
+                
+                // İframe DOM'a dinamik olarak ekleniyor
+                iframeContainer.innerHTML = `<iframe src="${finalUrl}" allow="geolocation; microphone; camera" style="width:100%; height:100%; border:none;"></iframe>`;
+                
+                const dynamicIframe = iframeContainer.querySelector("iframe");
+                dynamicIframe.onload = () => { loadingScreen.style.display = 'none'; };
+                
+                isIframeLoaded = true;
             }
-            // Iframe'in yüklenmesi bitince loader'ı gizle
-            appIframe.onload = () => { loadingScreen.style.display = 'none'; };
-            
             showScreen('iframe');
         });
 
-        // Ana Sayfa (Menüye Dön) Butonu
-        homeBtn.addEventListener('click', () => {
-            showScreen('main');
-        });
+        homeBtn.addEventListener('click', () => { showScreen('main'); });
 
-        // Giriş Yap Butonu
         loginBtn.addEventListener('click', () => {
             const email = emailInput.value.trim();
             const password = passwordInput.value.trim();
@@ -282,7 +280,7 @@
                     loginBtn.innerText = "Giriş Yap";
                     loginBtn.disabled = false;
                 })
-                .catch((error) => {
+                .catch(() => {
                     errorMsg.style.display = 'block';
                     errorMsg.innerText = "Hata: E-posta veya şifre yanlış.";
                     loginBtn.innerText = "Giriş Yap";
@@ -290,13 +288,9 @@
                 });
         });
 
-        // Çıkış Yap Butonu[cite: 2]
         logoutBtn.addEventListener('click', () => {
             loadingScreen.style.display = 'flex';
-            signOut(auth).catch((error) => {
-                console.error("Çıkış hatası:", error);
-                loadingScreen.style.display = 'none';
-            });
+            signOut(auth).catch(() => { loadingScreen.style.display = 'none'; });
         });
     </script>
 </body>
