@@ -1,0 +1,22 @@
+{
+  "name": "Kanuni Sultan Süleyman Özel Eğitim",
+  "short_name": "Kanuni Servis",
+  "description": "Servis Takip Sistemi",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f5f5",
+  "theme_color": "#1976d2",
+  "icons": [
+    {
+      "src": "assets/img/logo.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "assets/img/logo.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

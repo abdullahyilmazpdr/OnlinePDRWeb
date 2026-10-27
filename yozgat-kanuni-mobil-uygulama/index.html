@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1976d2">
+
     <!-- Adsense -->
     <meta name="google-adsense-account" content="ca-pub-6640600529852358">
+    
+    <!-- PWA Kurulumu İçin Manifest ve İkonlar -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/jpeg" href="assets/img/logo.jpeg">
+    <link rel="apple-touch-icon" href="assets/img/logo.jpeg">
+    
     <title>Kanuni Servis Takip Sistemi</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     
@@ -16,7 +24,8 @@
         
         /* Üst Menü */
         .app-header { flex-shrink: 0; background-color: #1976d2; color: white; height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); position: relative; z-index: 10; }
-        .app-header h1 { font-size: 18px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .app-header h1 { font-size: 18px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: flex; align-items: center; gap: 10px;}
+        .header-logo { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; border: 1px solid white;}
         .header-btn { background: none; border: none; color: white; font-size: 20px; cursor: pointer; padding: 5px; margin-left: 10px; }
         .header-actions { display: flex; align-items: center; }
         
@@ -26,8 +35,9 @@
         /* Giriş Ekranı */
         #login-screen { flex-grow: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #f5f5f5; padding: 20px; text-align: center; }
         .login-box { width: 100%; max-width: 350px; background: #fff; padding: 30px 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .login-box i.fa-bus { font-size: 40px; color: #1976d2; margin-bottom: 15px; }
-        .login-box h2 { font-size: 22px; color: #333; margin-bottom: 25px; }
+        .login-box img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .login-box h2 { font-size: 22px; color: #333; margin-bottom: 5px; }
+        .login-box p { font-size: 14px; color: #777; margin-bottom: 25px; }
         
         .input-group { margin-bottom: 15px; position: relative; }
         .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #888; }
@@ -80,11 +90,11 @@
 
     <div id="loading-screen">
         <div class="spinner"></div>
-        <p style="color:#666;">Sistem kontrol ediliyor...</p>
+        <p style="color:#666;" id="loading-text">Sistem kontrol ediliyor...</p>
     </div>
 
     <header class="app-header">
-        <h1>Kanuni Servis Takip Sistemi</h1>
+        <h1><img src="assets/img/logo.jpeg" alt="Logo" class="header-logo"> Kanuni Servis</h1>
         <div class="header-actions">
             <button id="homeBtn" class="header-btn" style="display: none;"><i class="fas fa-home"></i></button>
             <button id="infoBtn" class="header-btn"><i class="fas fa-info-circle"></i></button>
@@ -96,8 +106,9 @@
         <!-- 1. GİRİŞ EKRANI -->
         <div id="login-screen">
             <div class="login-box">
-                <i class="fas fa-bus"></i>
+                <img src="assets/img/logo.jpeg" alt="Kanuni Okulu Logo">
                 <h2>Sisteme Giriş</h2>
+                <p>Kanuni Sultan Süleyman Özel Eğitim</p>
                 
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>
@@ -166,6 +177,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyCNeqxCCzNo1fzN96PSvHM69m-fdvNxngo",
@@ -178,6 +190,7 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
         const scriptBaseUrl = "https://script.google.com/macros/s/AKfycbyEyFz2EFkUZGGnz5lktE9X8hCOmeCSwNDAmkwxTGPa_S3lON2N5AyCFanCG2xKFb3T6Q/exec";
 
         const loginScreen = document.getElementById('login-screen');
@@ -185,6 +198,7 @@
         const iframeContainer = document.getElementById('iframe-container');
         
         const loadingScreen = document.getElementById('loading-screen');
+        const loadingText = document.getElementById('loading-text');
         const infoBtn = document.getElementById('infoBtn');
         const logoutBtn = document.getElementById('logoutBtn');
         const homeBtn = document.getElementById('homeBtn');
@@ -230,10 +244,24 @@
         let currentUserParams = "";
         let isIframeLoaded = false;
 
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
-                const isim = user.displayName || user.email.split('@')[0];
+                loadingText.innerText = "Kullanıcı bilgileri alınıyor...";
                 const uid = user.uid;
+                let isim = user.displayName || user.email.split('@')[0]; // Varsayılan isim
+
+                try {
+                    // Firestore'dan gerçek ad soyad bilgisini çek
+                    const userDoc = await getDoc(doc(db, "users", uid));
+                    if (userDoc.exists()) {
+                        const data = userDoc.data();
+                        if (data.adSoyad) {
+                            isim = data.adSoyad;
+                        }
+                    }
+                } catch (error) {
+                    console.error("Firestore veri çekme hatası:", error);
+                }
                 
                 userNameText.innerText = isim; 
                 currentUserParams = `?isim=${encodeURIComponent(isim)}&uid=${encodeURIComponent(uid)}`;
@@ -245,19 +273,24 @@
                 showScreen('login');
             }
             loadingScreen.style.display = 'none';
+            loadingText.innerText = "Sistem kontrol ediliyor...";
         });
 
         // JavaScript ile parametreyi yakalayıp exec uzantılı URL'yi iframe içerisine dinamik gömme
         btnServisTakip.addEventListener('click', () => {
             if(!isIframeLoaded) {
                 loadingScreen.style.display = 'flex';
+                loadingText.innerText = "Uygulama yükleniyor...";
                 const finalUrl = scriptBaseUrl + currentUserParams;
                 
                 // İframe DOM'a dinamik olarak ekleniyor
                 iframeContainer.innerHTML = `<iframe src="${finalUrl}" allow="geolocation; microphone; camera" style="width:100%; height:100%; border:none;"></iframe>`;
                 
                 const dynamicIframe = iframeContainer.querySelector("iframe");
-                dynamicIframe.onload = () => { loadingScreen.style.display = 'none'; };
+                dynamicIframe.onload = () => { 
+                    loadingScreen.style.display = 'none'; 
+                    loadingText.innerText = "Sistem kontrol ediliyor...";
+                };
                 
                 isIframeLoaded = true;
             }
@@ -294,4 +327,4 @@
         });
     </script>
 </body>
-</html>
+</html> 
