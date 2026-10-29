@@ -215,7 +215,11 @@
 
         setPersistence(auth, browserLocalPersistence).catch((error) => console.error("Kalıcı oturum hatası:", error));
 
+        // EKRAN YÖNETİMİ VE HEADER/FOOTER GİZLEME MANTIĞI
         function showScreen(screen) {
+            const appHeader = document.querySelector('.app-header');
+            const appFooter = document.querySelector('.app-footer');
+            
             loginScreen.style.display = 'none';
             mainScreen.style.display = 'none';
             iframeContainer.style.display = 'none';
@@ -225,15 +229,20 @@
             homeBtn.style.display = 'none';
 
             if (screen === 'login') {
+                appHeader.style.display = 'flex';
+                appFooter.style.display = 'flex';
                 loginScreen.style.display = 'flex';
                 infoBtn.style.display = 'block';
             } else if (screen === 'main') {
+                appHeader.style.display = 'flex';
+                appFooter.style.display = 'flex';
                 mainScreen.style.display = 'flex';
                 logoutBtn.style.display = 'block';
             } else if (screen === 'iframe') {
+                // İframe (uygulama) içine girildiğinde header ve footer kaybolur
+                appHeader.style.display = 'none';
+                appFooter.style.display = 'none';
                 iframeContainer.style.display = 'block';
-                homeBtn.style.display = 'block'; 
-                logoutBtn.style.display = 'block';
             }
         }
 
@@ -248,10 +257,9 @@
             if (user) {
                 loadingText.innerText = "Kullanıcı bilgileri alınıyor...";
                 const uid = user.uid;
-                let isim = user.displayName || user.email.split('@')[0]; // Varsayılan isim
+                let isim = user.displayName || user.email.split('@')[0];
 
                 try {
-                    // Firestore'dan gerçek ad soyad bilgisini çek
                     const userDoc = await getDoc(doc(db, "users", uid));
                     if (userDoc.exists()) {
                         const data = userDoc.data();
@@ -276,14 +284,12 @@
             loadingText.innerText = "Sistem kontrol ediliyor...";
         });
 
-        // JavaScript ile parametreyi yakalayıp exec uzantılı URL'yi iframe içerisine dinamik gömme
         btnServisTakip.addEventListener('click', () => {
             if(!isIframeLoaded) {
                 loadingScreen.style.display = 'flex';
                 loadingText.innerText = "Uygulama yükleniyor...";
                 const finalUrl = scriptBaseUrl + currentUserParams;
                 
-                // İframe DOM'a dinamik olarak ekleniyor
                 iframeContainer.innerHTML = `<iframe src="${finalUrl}" allow="geolocation; microphone; camera" style="width:100%; height:100%; border:none;"></iframe>`;
                 
                 const dynamicIframe = iframeContainer.querySelector("iframe");
@@ -327,4 +333,4 @@
         });
     </script>
 </body>
-</html> 
+</html>
