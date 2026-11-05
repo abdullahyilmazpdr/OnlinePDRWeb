@@ -378,17 +378,7 @@ iframe-wrapper {
     }
   });
 </script>
-
-  <script>
-window.addEventListener('message', function(e) {
-    if (e.data && (e.data.bep_iframe_resize || e.data.type === 'bep_resize')) {
-        var ifr = document.querySelector('iframe'); // veya iframe id'niz (örn: document.getElementById('bepIframe'))
-        if (ifr && e.data.height) {
-            ifr.style.height = e.data.height + 'px';
-        }
-    }
-});
-</script>
+  
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
