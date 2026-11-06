@@ -108,6 +108,33 @@
             font-size: 18px;
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 50;
+        }
+
+        /* Önbellek Sıfırlama / Yenileme (Ctrl+F5) Butonu */
+        .reset-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #e3f2fd;
+            color: #1976D2;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: none;
+            z-index: 50;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .reset-btn:active {
+            transform: scale(0.92);
+            background: #bbdefb;
         }
 
         /* ================= GİRİŞ EKRANI STİLLERİ ================= */
@@ -544,6 +571,11 @@
 
     <div class="container">
 
+        <!-- Önbellek Temizleme / Tam Yenileme (Ctrl+F5) İkon Butonu -->
+        <button type="button" class="reset-btn" id="hardRefreshBtn" title="Önbelleği Temizle ve Güncelle (Ctrl+F5)">
+            <i class="fas fa-sync-alt" id="hardRefreshIcon"></i>
+        </button>
+
         <!-- Info Butonu (Sadece Ana Menüde Görünecek) -->
         <div class="info-btn" id="infoBtn" style="display:none;" onclick="toggleModal(true)">
             <i class="fas fa-info"></i>
@@ -840,16 +872,112 @@
             } else { alert("Erişim Engellendi: Bu sisteme giriş yetkiniz bulunmamaktadır.");}
         });
 
-        async function createSsoSignature(uid, role, ts) {
-            const secret = "meram-oeuo-risk-sso-bridge-key-2026";
-            const message = `${uid}:${role}:${ts}:${secret}`;
-            const msgBuffer = new TextEncoder().encode(message);
-            const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, "0")).join("");
+        // Senkron SHA-256 (iPhone / iOS Safari'de async/await sonrası window.open engellemesini önlemek için)
+        function sha256Sync(ascii) {
+            function rightRotate(value, amount) {
+                return (value >>> amount) | (value << (32 - amount));
+            }
+            const utf8 = unescape(encodeURIComponent(ascii));
+            const mathPow = Math.pow;
+            const maxWord = mathPow(2, 32);
+            const lengthProperty = "length";
+            let i, j;
+            let result = "";
+            const words = [];
+            const asciiBitLength = utf8[lengthProperty] * 8;
+            let hash = [];
+            const k = [];
+            let primeCounter = 0;
+            const isComposite = {};
+            for (let candidate = 2; primeCounter < 64; candidate++) {
+                if (!isComposite[candidate]) {
+                    for (i = 0; i < 313; i += candidate) {
+                        isComposite[i] = candidate;
+                    }
+                    hash[primeCounter] = (mathPow(candidate, 0.5) * maxWord) | 0;
+                    k[primeCounter++] = (mathPow(candidate, 1 / 3) * maxWord) | 0;
+                }
+            }
+            let str = utf8 + "\x80";
+            while ((str[lengthProperty] % 64) - 56) str += "\x00";
+            for (i = 0; i < str[lengthProperty]; i++) {
+                j = str.charCodeAt(i);
+                words[i >> 2] |= j << (((3 - i) % 4) * 8);
+            }
+            words[words[lengthProperty]] = (asciiBitLength / maxWord) | 0;
+            words[words[lengthProperty]] = asciiBitLength;
+            for (j = 0; j < words[lengthProperty]; ) {
+                const w = words.slice(j, (j += 16));
+                const oldHash = hash.slice(0);
+                for (i = 0; i < 64; i++) {
+                    const w15 = w[i - 15], w2 = w[i - 2];
+                    const a = hash[0], e = hash[4];
+                    const temp1 =
+                        hash[7] +
+                        (rightRotate(e, 6) ^ rightRotate(e, 11) ^ rightRotate(e, 25)) +
+                        ((e & hash[5]) ^ (~e & hash[6])) +
+                        k[i] +
+                        (w[i] =
+                            i < 16
+                                ? w[i]
+                                : (w[i - 16] +
+                                      (rightRotate(w15, 7) ^ rightRotate(w15, 18) ^ (w15 >>> 3)) +
+                                      w[i - 7] +
+                                      (rightRotate(w2, 17) ^ rightRotate(w2, 19) ^ (w2 >>> 10))) |
+                                  0);
+                    const temp2 =
+                        (rightRotate(a, 2) ^ rightRotate(a, 13) ^ rightRotate(a, 22)) +
+                        ((a & hash[1]) ^ (a & hash[2]) ^ (hash[1] & hash[2]));
+                    hash = [(temp1 + temp2) | 0].concat(hash);
+                    hash[4] = (hash[4] + temp1) | 0;
+                    hash.pop();
+                }
+                for (i = 0; i < 8; i++) {
+                    hash[i] = (hash[i] + oldHash[i]) | 0;
+                }
+            }
+            for (i = 0; i < 8; i++) {
+                for (j = 3; j + 1; j--) {
+                    const b = (hash[i] >> (j * 8)) & 255;
+                    result += (b < 16 ? "0" : "") + b.toString(16);
+                }
+            }
+            return result;
         }
 
-        document.getElementById("btnRiskSok").addEventListener("click", async () => {
+        function createSsoSignatureSync(uid, role, ts) {
+            const secret = "meram-oeuo-risk-sso-bridge-key-2026";
+            const message = `${uid}:${role}:${ts}:${secret}`;
+            return sha256Sync(message);
+        }
+
+        // Ctrl+F5 Görevi Yapan Tam Önbellek Sıfırlama ve Yenileme Butonu
+        const hardRefreshBtn = document.getElementById("hardRefreshBtn");
+        if (hardRefreshBtn) {
+            hardRefreshBtn.addEventListener("click", async () => {
+                const icon = document.getElementById("hardRefreshIcon");
+                if (icon) icon.classList.add("fa-spin");
+                showNotification("Önbellek temizleniyor ve uygulama güncelleniyor...");
+                try {
+                    if ("serviceWorker" in navigator) {
+                        const registrations = await navigator.serviceWorker.getRegistrations();
+                        for (const reg of registrations) {
+                            await reg.unregister();
+                        }
+                    }
+                    if ("caches" in window) {
+                        const cacheNames = await caches.keys();
+                        await Promise.all(cacheNames.map(name => caches.delete(name)));
+                    }
+                } catch (err) {
+                    console.warn("Önbellek temizleme uyarısı:", err);
+                }
+                const cleanUrl = window.location.origin + window.location.pathname + "?v=" + Date.now();
+                window.location.replace(cleanUrl);
+            });
+        }
+
+        document.getElementById("btnRiskSok").addEventListener("click", () => {
             if (!currentUser || !currentUserData) {
                 alert("Lütfen önce oturum açınız.");
                 return;
@@ -866,7 +994,7 @@
             // Meram Özel Eğitim Uygulama Okulu III. Kademe (MEBBİS Kodu: 752927)
             const schoolKey = "752927";
             const ts = Date.now();
-            const sig = await createSsoSignature(uid, targetRole, ts);
+            const sig = createSsoSignatureSync(uid, targetRole, ts);
 
             const ssoUrl = `https://risk.onlinepdr.com/sso` +
                 `?schoolKey=${encodeURIComponent(schoolKey)}` +
@@ -878,7 +1006,20 @@
                 `&sig=${sig}` +
                 `&source=meram-mobil`;
 
-            window.open(ssoUrl, "_blank");
+            // iPhone Safari ve iOS Ana Ekran (PWA) uyumlu yönlendirme
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+            const isStandalone = window.matchMedia("(display-mode: standalone)").matches ||
+                window.navigator.standalone === true;
+
+            if (isIOS || isStandalone) {
+                window.location.href = ssoUrl;
+            } else {
+                const newWin = window.open(ssoUrl, "_blank");
+                if (!newWin || newWin.closed || typeof newWin.closed === "undefined") {
+                    window.location.href = ssoUrl;
+                }
+            }
         });
         
         if(btnKasa) {
