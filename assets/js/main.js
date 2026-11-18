@@ -6,6 +6,21 @@
 * License: https://bootstrapmade.com/license/
 */
 
+/**
+* OnlinePDR Akıllı Asistan (PDRON) Yükleyici
+*/
+(function() {
+  if (typeof window === 'undefined' || window.__pdronAssistantLoaded) return;
+  try {
+    var cur = document.currentScript;
+    var base = cur && cur.src ? cur.src.replace(/main\.js(?:\?.*)?$/, '') : '/assets/js/';
+    var s = document.createElement('script');
+    s.src = base + 'pdron-assistant.js';
+    s.defer = true;
+    (document.head || document.body || document.documentElement).appendChild(s);
+  } catch (e) {}
+})();
+
 (function() {
   "use strict";
 
