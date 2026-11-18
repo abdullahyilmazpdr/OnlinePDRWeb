@@ -7,6 +7,7 @@
 - **Okul Risk Haritası ve ŞÖK Sistemi:** https://risk.onlinepdr.com — MEB standartlarında 36 risk faktörlü sınıf/okul risk haritası ve ŞÖK otomasyonu. Teacher/PDR şifreleri ve Google Drive E-Tablo altyapısı riba.onlinepdr.com ile ortak çalışır.
 
 ## Öne Çıkan Rehberlik & Planlama Sayfaları
+- **RİBA Nedir, Nasıl Uygulanır ve Hesaplanır? (MEB Kapsamlı Rehber):** https://onlinepdr.com/riba-nedir-nasil-uygulanir.html
 - **Online RİBA Rehberi ve Girişi:** https://onlinepdr.com/riba/
 - **Genel, Yerel ve Özel Hedef Rehberi:** https://onlinepdr.com/genel-yerel-ozel-hedef.html
 - **2026-2027 Genel Hedefi (Selamlaşma):** https://onlinepdr.com/selamlasma-genel-hedefi.html

@@ -43,7 +43,7 @@
       ],
       answer:
         '**OnlinePDR MEB RİBA Otomasyonu:**\n' +
-        '• **Platform:** [riba.onlinepdr.com](https://riba.onlinepdr.com) | Tanıtım: [onlinepdr.com/riba](https://onlinepdr.com/riba/)\n' +
+        '• **Platform:** [riba.onlinepdr.com](https://riba.onlinepdr.com) | Tanıtım: [onlinepdr.com/riba](https://onlinepdr.com/riba/) | Rehber: [RİBA Nedir & Nasıl Uygulanır?](https://onlinepdr.com/riba-nedir-nasil-uygulanir.html)\n' +
         '• **Otomatik Kademe Kuralları:** Okul Öncesi (27 hedef, yalnızca Veli+Öğretmen), İlkokul 1-2. sınıf (Öğrenci gizlenir), İlkokul 3-4. sınıf (Öğrenci+Veli+Öğretmen), Ortaokul (39 hedef), Lise (40 hedef) ve Özel Eğitim I./II./III. Kademe desteklidir.\n' +
         '• **Hesaplama & Çıktı:** ASP ve T-puanları MEB ağırlıklarına göre anlık hesaplanır; 2 Özel Hedef seçilerek Sınıf ve Okul Excel çizelgeleri tek tıkla indirilir.\n' +
         '• **Ortak Giriş:** Risk Haritası öğretmen şifreleriniz RİBA sisteminde de doğrudan geçerlidir.',
