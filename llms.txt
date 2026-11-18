@@ -1,0 +1,17 @@
+# OnlinePDR — Rehberlik, Psikolojik Danışma ve Özel Eğitim Ekosistemi
+
+> OnlinePDR (https://onlinepdr.com); okul psikolojik danışmanları, rehber öğretmenler, sınıf öğretmenleri, özel eğitim öğretmenleri, öğrenciler ve veliler için MEB ÖRGM mevzuatına tam uyumlu dijital araçlar ve başucu rehberleri sunar.
+
+## Ana Uygulamalarımız (Subdomainler)
+- **Online RİBA Sistemi:** https://riba.onlinepdr.com — MEB RİBA (Rehberlik İhtiyacı Belirleme Anketi) Okul Öncesi, İlkokul (3.-4. sınıflar Öğrenci; tümü Veli/Öğretmen), Ortaokul ve Lise formlarını otomatik üreten, öğrenci-veli-öğretmen bağlantılarını karıştırmadan dağıtan ve Sınıf/Okul Sonuç Çizelgelerini (.xlsx) hazırlayan Google Drive tabanlı sistem.
+- **Okul Risk Haritası ve ŞÖK Sistemi:** https://risk.onlinepdr.com — MEB standartlarında 36 risk faktörlü sınıf/okul risk haritası ve ŞÖK otomasyonu. Teacher/PDR şifreleri ve Google Drive E-Tablo altyapısı riba.onlinepdr.com ile ortak çalışır.
+
+## Öne Çıkan Rehberlik & Planlama Sayfaları
+- **Online RİBA Rehberi ve Girişi:** https://onlinepdr.com/riba/
+- **Genel, Yerel ve Özel Hedef Rehberi:** https://onlinepdr.com/genel-yerel-ozel-hedef.html
+- **2026-2027 Genel Hedefi (Selamlaşma):** https://onlinepdr.com/selamlasma-genel-hedefi.html
+- **2026-2027 Türkiye Yerel Hedefler Haritası:** https://onlinepdr.com/yerel-hedefler-2026-2027.html
+- **Sınıf ve Okul Risk Haritası Rehberi:** https://onlinepdr.com/sinif-ve-okul-risk-haritasi.html
+- **MEB Mesleki Rehberlik Envanterleri:** https://onlinepdr.com/meb-mesleki-rehberlik-envanterleri.html
+- **YÖK Atlas ve Tercih Robotu:** https://onlinepdr.com/yok-atlas-kullanim-rehberi.html
+- **Okul Kayıt Yaşı Hesaplama Aracı:** https://onlinepdr.com/okul-kayit-yasi-hesaplama.html
